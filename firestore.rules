@@ -22,6 +22,10 @@ service cloud.firestore {
       allow update, delete: if false;
     }
 
+    match /wishlists/{email} {
+      allow read, write: if request.auth != null && request.auth.token.email == email;
+    }
+
     match /invites/{token} {
       allow read: if request.auth != null;
       // Client may mark an invite as used (set usedBy + usedAt only)

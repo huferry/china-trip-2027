@@ -164,10 +164,45 @@ body {
 /* Tabs */
 .tab-bar {
   display: flex;
-  gap: 4px;
+  align-items: center;
+  justify-content: space-between;
   padding: 12px 0;
   border-bottom: 1px solid var(--border);
   margin-bottom: 24px;
+}
+
+.tab-cities {
+  display: flex;
+  gap: 4px;
+}
+
+.tab-filter {
+  display: flex;
+  gap: 4px;
+}
+
+.filter-btn {
+  background: none;
+  border: 1px solid transparent;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-family: var(--font);
+  padding: 5px 14px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+
+.filter-btn:hover {
+  color: var(--text);
+  border-color: var(--border);
+}
+
+.filter-btn.active {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-dim);
+  font-weight: 600;
 }
 
 .tab-btn {
@@ -299,6 +334,47 @@ body {
   max-width: 260px;
   font-size: 0.82rem;
   color: #c0956f;
+}
+
+/* Vote button */
+.col-vote {
+  width: 110px;
+  white-space: nowrap;
+}
+
+.want-btn {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  font-family: var(--font);
+  padding: 3px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+  white-space: nowrap;
+  margin-top: 8px;
+}
+
+.want-btn:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.want-btn--active {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-dim);
+  font-weight: 600;
+}
+
+/* Selected row highlight */
+.row--selected td {
+  background: #242424;
+}
+
+.places-table tr.row--selected:hover td {
+  background: #2a2a2a;
 }
 
 a.place-link {

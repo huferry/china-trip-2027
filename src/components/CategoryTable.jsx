@@ -26,13 +26,30 @@ function NameCell({ place }) {
   return <span>{name}</span>;
 }
 
-function PlaceRow({ place }) {
+function WantToGoBtn({ placeId, wishlist, onToggle }) {
+  const active = wishlist?.has(placeId);
   return (
-    <tr>
+    <button
+      className={`want-btn${active ? ' want-btn--active' : ''}`}
+      onClick={() => onToggle(placeId)}
+      title={active ? 'Remove from my list' : 'Add to my list'}
+    >
+      {active ? '★ Going' : '☆ Want to go'}
+    </button>
+  );
+}
+
+function PlaceRow({ place, wishlist, onToggleWishlist }) {
+  const active = wishlist?.has(place.id);
+  return (
+    <tr className={active ? 'row--selected' : ''}>
       <td className="col-name"><NameCell place={place} /></td>
       <td className="col-rating"><Stars rating={place.rating} /></td>
       <td className="col-desc" data-label="Description">{place.description || ''}</td>
       <td className="col-practical" data-label="Practical">{place.practical || ''}</td>
+      <td className="col-vote">
+        <WantToGoBtn placeId={place.id} wishlist={wishlist} onToggle={onToggleWishlist} />
+      </td>
     </tr>
   );
 }
@@ -49,7 +66,7 @@ function RestaurantRow({ place }) {
   );
 }
 
-function CategoryTable({ category, places }) {
+function CategoryTable({ category, places, wishlist, onToggleWishlist }) {
   const isRestaurant = places.some(p => p.type === 'restaurant');
 
   return (
@@ -67,7 +84,10 @@ function CategoryTable({ category, places }) {
                 <th className="col-watch">Watch out</th>
               </>
             ) : (
-              <th className="col-practical">Practical</th>
+              <>
+                <th className="col-practical">Practical</th>
+                <th className="col-vote"></th>
+              </>
             )}
           </tr>
         </thead>
@@ -75,7 +95,7 @@ function CategoryTable({ category, places }) {
           {places.map(place =>
             isRestaurant
               ? <RestaurantRow key={place.id} place={place} />
-              : <PlaceRow key={place.id} place={place} />
+              : <PlaceRow key={place.id} place={place} wishlist={wishlist} onToggleWishlist={onToggleWishlist} />
           )}
         </tbody>
       </table>
