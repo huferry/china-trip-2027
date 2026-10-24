@@ -9,8 +9,13 @@ function Stars({ rating }) {
 }
 
 function NameCell({ place }) {
-  const url = place.links?.source || place.links?.google_maps || null;
-  const name = place.name;
+  const url = place.links?.photos || null;
+  const name = (
+    <>
+      {place.name}
+      {place.name_zh && <div className="name-zh">{place.name_zh}</div>}
+    </>
+  );
   if (url) {
     return (
       <a className="place-link" href={url} target="_blank" rel="noopener noreferrer">
@@ -25,10 +30,9 @@ function PlaceRow({ place }) {
   return (
     <tr>
       <td className="col-name"><NameCell place={place} /></td>
-      <td className="col-zh">{place.name_zh || ''}</td>
       <td className="col-rating"><Stars rating={place.rating} /></td>
-      <td className="col-desc">{place.description || ''}</td>
-      <td className="col-practical">{place.practical || ''}</td>
+      <td className="col-desc" data-label="Description">{place.description || ''}</td>
+      <td className="col-practical" data-label="Practical">{place.practical || ''}</td>
     </tr>
   );
 }
@@ -37,17 +41,15 @@ function RestaurantRow({ place }) {
   return (
     <tr>
       <td className="col-name"><NameCell place={place} /></td>
-      <td className="col-zh">{place.name_zh || ''}</td>
       <td className="col-rating"><Stars rating={place.rating} /></td>
-      <td className="col-desc">{place.description || ''}</td>
-      <td className="col-price">{place.price_per_person || ''}</td>
-      <td className="col-watch">{place.watch_out || ''}</td>
+      <td className="col-desc" data-label="Description">{place.description || ''}</td>
+      <td className="col-price" data-label="Price/person">{place.price_per_person || ''}</td>
+      <td className="col-watch" data-label="Watch out">{place.watch_out || ''}</td>
     </tr>
   );
 }
 
 function CategoryTable({ category, places }) {
-  // Determine if this category is restaurants (has restaurant type entries)
   const isRestaurant = places.some(p => p.type === 'restaurant');
 
   return (
@@ -57,7 +59,6 @@ function CategoryTable({ category, places }) {
         <thead>
           <tr>
             <th className="col-name">Name</th>
-            <th className="col-zh">中文</th>
             <th className="col-rating">★</th>
             <th className="col-desc">Description</th>
             {isRestaurant ? (

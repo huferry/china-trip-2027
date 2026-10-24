@@ -1,13 +1,14 @@
 {
   "name": "china-trip-new",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "create-invite-url": "node scripts/create-invite.mjs"
   },
   "dependencies": {
     "firebase": "^13.1.0",
@@ -20,6 +21,7 @@
     "@vitejs/plugin-react": "^6.1.2",
     "firebase-admin": "^14.5.0",
     "oxlint": "^1.88.0",
+    "qrcode": "^1.5.4",
     "vite": "^8.3.4"
   }
 }

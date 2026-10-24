@@ -28,6 +28,111 @@ body {
   min-height: 100vh;
 }
 
+/* Login page */
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.login-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 48px 40px;
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+}
+
+.login-card h1 {
+  margin: 0 0 8px;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.login-subtitle {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin: 0 0 32px;
+}
+
+.login-hint {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin: 0 0 24px;
+}
+
+.login-invite {
+  color: var(--accent);
+  margin: 0 0 4px;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.login-error {
+  color: #e05050;
+  margin: 0 0 12px;
+  font-size: 0.95rem;
+}
+
+.google-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  color: #333;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 24px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.google-btn:hover {
+  background: #f0f0f0;
+}
+
+/* Header user area */
+.header-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-email {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.signout-btn {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-family: var(--font);
+  padding: 4px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.signout-btn:hover {
+  color: var(--text);
+  border-color: var(--text-muted);
+}
+
 /* App layout */
 .app {
   max-width: 1400px;
@@ -158,10 +263,11 @@ body {
   font-weight: 500;
 }
 
-.col-zh {
-  min-width: 100px;
+.name-zh {
   color: var(--text-muted);
-  font-size: 0.85rem;
+  font-size: 0.8rem;
+  font-weight: 400;
+  margin-top: 2px;
 }
 
 .col-rating {
@@ -207,14 +313,106 @@ a.place-link:hover {
   text-decoration-color: var(--accent);
 }
 
-@media (max-width: 768px) {
-  .app {
-    padding: 0 8px 32px;
-  }
-  .places-table th, .places-table td {
-    padding: 6px 6px;
-  }
-  .col-zh, .col-practical, .col-watch {
+/* Tablet: tighten spacing, hide least-important columns */
+@media (max-width: 900px) {
+  .col-watch {
     display: none;
+  }
+}
+
+/* Mobile: card layout */
+@media (max-width: 600px) {
+  .app {
+    padding: 0 12px 32px;
+  }
+
+  .app-header h1 {
+    font-size: 1.4rem;
+  }
+
+  .tab-bar {
+    gap: 6px;
+  }
+
+  .tab-btn {
+    flex: 1;
+    padding: 8px 8px;
+    font-size: 0.9rem;
+    text-align: center;
+  }
+
+  /* Switch table to card layout */
+  .places-table thead {
+    display: none;
+  }
+
+  .places-table,
+  .places-table tbody,
+  .places-table tr,
+  .places-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .places-table tr {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 10px;
+    padding: 12px;
+  }
+
+  .places-table tr:hover td {
+    background: none;
+  }
+
+  .places-table td {
+    padding: 0;
+    border: none;
+  }
+
+  /* Name + rating row */
+  .col-name {
+    min-width: unset;
+    max-width: unset;
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+  }
+
+  .col-rating {
+    width: auto;
+    margin-bottom: 6px;
+    font-size: 0.8rem;
+  }
+
+  /* Labelled detail rows */
+  .col-desc,
+  .col-practical,
+  .col-price,
+  .col-watch {
+    display: block;
+    font-size: 0.82rem;
+    margin-top: 5px;
+    padding-top: 5px;
+    border-top: 1px solid var(--border);
+    max-width: unset;
+  }
+
+  .col-watch {
+    display: block; /* re-show on mobile cards */
+  }
+
+  .col-desc::before,
+  .col-practical::before,
+  .col-price::before,
+  .col-watch::before {
+    content: attr(data-label) ": ";
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: 2px;
   }
 }

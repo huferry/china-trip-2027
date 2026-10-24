@@ -1,17 +1,21 @@
 import { useState, useEffect } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from './firebase';
+import { useAuth } from './auth';
 import CityTab from './components/CityTab';
+import LoginPage from './components/LoginPage';
 
 const CITIES = ['Shenzhen', 'Guangzhou', 'Foshan'];
 
 function App() {
+  const { user, status, signOut } = useAuth();
   const [places, setPlaces] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [activeCity, setActiveCity] = useState('Shenzhen');
 
   useEffect(() => {
+    if (status !== 'allowed') return;
     async function fetchPlaces() {
       try {
         const snapshot = await getDocs(collection(db, 'places'));
@@ -24,15 +28,26 @@ function App() {
       }
     }
     fetchPlaces();
-  }, []);
+  }, [status]);
+
+  if (status === 'loading') return <div className="loading">Loading…</div>;
+  if (status !== 'allowed') return <LoginPage status={status} />;
 
   const cityPlaces = places.filter(p => p.city === activeCity);
 
   return (
     <div className="app">
       <header className="app-header">
-        <h1>China Trip 2027</h1>
-        <p className="subtitle">Shenzhen · Guangzhou · Foshan &nbsp;|&nbsp; Jan 2027</p>
+        <div className="header-main">
+          <div>
+            <h1>China Trip 2027</h1>
+            <p className="subtitle">Shenzhen · Guangzhou · Foshan &nbsp;|&nbsp; Jan 2027</p>
+          </div>
+          <div className="header-user">
+            <span className="user-email">{user.email}</span>
+            <button className="signout-btn" onClick={signOut}>Sign out</button>
+          </div>
+        </div>
       </header>
 
       <nav className="tab-bar">
