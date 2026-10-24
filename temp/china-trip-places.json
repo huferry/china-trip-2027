@@ -1,0 +1,1578 @@
+{
+  "title": "China Trip 2027 – Places to See",
+  "exported": "2026-10-24",
+  "trip": {
+    "Shenzhen": "1–5 Jan 2027",
+    "Guangzhou": "5–15 Jan 2027",
+    "Foshan": "day trips from Guangzhou"
+  },
+  "notes": "Ratings 1–5 are fit to the trip criteria. Prices in RMB; 'approximate' marks estimates.",
+  "places": [
+    {
+      "id": "sz-001",
+      "city": "Shenzhen",
+      "category": "Iconic buildings & viewpoints",
+      "type": "place",
+      "name": "Ping An Finance Centre – Free Sky 116F",
+      "name_zh": "平安金融中心云际观光",
+      "area": null,
+      "rating": 5,
+      "description": "360° deck at ~548 m on the 116th floor; on clear days you see toward Hong Kong",
+      "practical": "Paid ticket (the name “Free Sky” is branding). One listing gives 10:00–19:15. Go before sunset for day + night views",
+      "links": {
+        "source": "https://www.wanderinchina.com/destinations/shenzhen/ping-an-finance-centre/",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Ping+An+Finance+Center+Shenzhen&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "sz-002",
+      "city": "Shenzhen",
+      "category": "Iconic buildings & viewpoints",
+      "type": "place",
+      "name": "Civic Center & central axis",
+      "name_zh": "市民中心",
+      "area": null,
+      "rating": 4,
+      "description": "Golden wave-roofed civic building on the green axis up to Lianhuashan; drone shows are sometimes staged on the plaza",
+      "practical": "Next to your hotel; best at dusk",
+      "links": {
+        "source": "https://www.secretflying.com/guides/shenzhen/things-to-do/",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Shenzhen+Civic+Center&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "sz-003",
+      "city": "Shenzhen",
+      "category": "Iconic buildings & viewpoints",
+      "type": "place",
+      "name": "Shenzhen Bay & “Spring Bamboo” tower",
+      "name_zh": "深圳湾 / 华润大厦春笋",
+      "area": null,
+      "rating": 4,
+      "description": "Sleek super-HQ district by the water; pair with MixC Shenzhen Bay and the bay park",
+      "practical": "Metro Houhai",
+      "links": {
+        "source": "https://www.travelofchina.com/shenzhen-shopping-area/",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=China+Resources+Headquarters+Shenzhen&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "sz-004",
+      "city": "Shenzhen",
+      "category": "Iconic buildings & viewpoints",
+      "type": "place",
+      "name": "Shenzhen Library & Concert Hall",
+      "name_zh": "深圳图书馆",
+      "area": null,
+      "rating": 3,
+      "description": "Striking public buildings on the Civic Center axis; nice quiet interior",
+      "practical": "Next to your hotel; quick stop",
+      "links": {
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Shenzhen+Library&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "sz-005",
+      "city": "Shenzhen",
+      "category": "Museums & culture",
+      "type": "place",
+      "name": "Shenzhen Natural History Museum",
+      "name_zh": "深圳自然博物馆",
+      "area": null,
+      "rating": 5,
+      "description": "Opened 28 Jul 2026; South China's largest, 8 halls from cosmos to dinosaurs to local ecology; striking river-delta architecture with a roof park",
+      "practical": "80 RMB. Book via WeChat account “深圳自然博物馆” with passport name. Pingshan (far east): Metro Line 16 to Shaba, Exit D. Allow a half day+; expect families",
+      "links": {
+        "source": "https://www.sz.gov.cn/en_szgov/news/latest/content/post_12932404.html",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Shenzhen+Natural+History+Museum&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "sz-006",
+      "city": "Shenzhen",
+      "category": "Museums & culture",
+      "type": "place",
+      "name": "OCT Loft Creative Culture Park",
+      "name_zh": "华侨城创意文化园",
+      "area": null,
+      "rating": 4,
+      "description": "Old factories turned galleries, design shops, bookshops, cafés; very adult and photogenic",
+      "practical": "Metro Qiaocheng North. Combine with coconut-chicken lunch on the 4F terrace there (see Restaurants)",
+      "links": {
+        "source": "https://www.secretflying.com/guides/shenzhen/things-to-do/",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=OCT+Loft+Shenzhen&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "sz-007",
+      "city": "Shenzhen",
+      "category": "Museums & culture",
+      "type": "place",
+      "name": "Shenzhen Museum",
+      "name_zh": "深圳博物馆",
+      "area": "Civic Center",
+      "rating": 3,
+      "description": "Good story of the city's rise from fishing villages to tech hub",
+      "practical": "At the Civic Center, next to your hotel; its popular animal specimens moved to the new Natural History Museum",
+      "links": {
+        "source": "https://www.secretflying.com/guides/shenzhen/things-to-do/",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Shenzhen+Museum&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "sz-008",
+      "city": "Shenzhen",
+      "category": "Museums & culture",
+      "type": "place",
+      "name": "Nantou Ancient City",
+      "name_zh": "南头古城",
+      "area": "Nanshan",
+      "rating": 4,
+      "description": "Shenzhen's historic walled town: old gate, temples and Lingnan houses, now with small free museums, cafés and craft shops. Google 4.3 (~170 reviews)",
+      "practical": "Free. 5 min walk from its metro station; plan ~2 h. Crowded and commercial at weekends: go on a weekday morning",
+      "links": {
+        "google_maps": "https://www.google.com/maps/search/?api=1&query=%E5%8D%97%E5%A4%B4%E5%8F%A4%E5%9F%8E&query_place_id=ChIJw2diWHDuAzQRavo8LibbvhI",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Nantou+Ancient+City&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "sz-009",
+      "city": "Shenzhen",
+      "category": "Museums & culture",
+      "type": "place",
+      "name": "Hehu Hakka Walled House",
+      "name_zh": "鹤湖新居",
+      "area": "Longgang",
+      "rating": 4,
+      "description": "One of Shenzhen's largest Hakka walled villages, palace-like, housing the Longgang Hakka Culture Museum (most displays in English). Google 4.9 (7 reviews); museum 4.2 (29)",
+      "practical": "Free or ~10 RMB (reviews differ). Plan 2–3 h. Far east in Longgang, roughly 1 h+ from the hotel (approximate); quiet on weekdays",
+      "links": {
+        "google_maps": "https://www.google.com/maps/search/?api=1&query=%E9%B9%A4%E6%B9%96%E6%96%B0%E5%B1%85&query_place_id=ChIJ1dVTgehwBDQRipt6NggN0co",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Hehu+Xinju&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "sz-010",
+      "city": "Shenzhen",
+      "category": "Museums & culture",
+      "type": "place",
+      "name": "Dawan Ancestral House",
+      "name_zh": "大万世居",
+      "area": "Pingshan",
+      "rating": 3,
+      "description": "Large, quiet Qing-era Hakka castle-style compound: 400+ rooms, corner watchtowers. Google 4.6 (9 reviews)",
+      "practical": "Far east in Pingshan; combine with the Natural History Museum. Taxi recommended (approximate)",
+      "links": {
+        "google_maps": "https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E4%B8%87%E4%B8%96%E5%B1%85&query_place_id=ChIJ-R2oxBhuBDQRN7rmslHmlHg",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Dawan+Shiju&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "sz-011",
+      "city": "Shenzhen",
+      "category": "Parks & nature (≤ 2 h from the hotel)",
+      "type": "place",
+      "name": "Shenzhen Bay Park + mangrove boardwalks",
+      "name_zh": "深圳湾公园 / 红树林",
+      "area": null,
+      "rating": 5,
+      "description": "15 km seaside greenway (walk or rent a bike); the mangrove reserve is a major stop for migratory birds",
+      "practical": "Short metro/taxi ride; free",
+      "links": {
+        "source": "https://www.nomadotravel.app/en/guides/shenzhen-parks-guide",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Shenzhen+Bay+Park&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "sz-012",
+      "city": "Shenzhen",
+      "category": "Parks & nature (≤ 2 h from the hotel)",
+      "type": "place",
+      "name": "Lianhuashan Park",
+      "name_zh": "莲花山公园",
+      "area": null,
+      "rating": 4,
+      "description": "~150 ha hilltop park with skyline views over the CBD",
+      "practical": "Walk up the central axis from your hotel; free",
+      "links": {
+        "source": "https://www.nomadotravel.app/en/guides/shenzhen-parks-guide",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Lianhuashan+Park&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "sz-013",
+      "city": "Shenzhen",
+      "category": "Parks & nature (≤ 2 h from the hotel)",
+      "type": "place",
+      "name": "Hongqiao (Red Bridge) Park",
+      "name_zh": "光明红桥公园",
+      "area": null,
+      "rating": 4,
+      "description": "4 km red elevated walkway (5 m wide, ~8 m high) curving over lakes and forest; award-winning design, very photogenic",
+      "practical": "Guangming District: Metro Line 6 to Fenghuang Town (凤凰城站), Exit B; roughly 1 h (approximate). Park 6:00–22:00; free",
+      "links": {
+        "source": "https://www.sz.gov.cn/en_szgov/news/infocus/park/csgy/content/post_11886627.html",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Hongqiao+Park+Guangming+Shenzhen&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "sz-014",
+      "city": "Shenzhen",
+      "category": "Parks & nature (≤ 2 h from the hotel)",
+      "type": "place",
+      "name": "Fairy Lake Botanical Garden",
+      "name_zh": "仙湖植物园",
+      "area": null,
+      "rating": 4,
+      "description": "Proper trails, lakes and temples; quieter than Lianhuashan",
+      "practical": "East Luohu, taxi; half a day",
+      "links": {
+        "source": "https://www.nomadotravel.app/en/guides/shenzhen-hiking-guide",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Fairy+Lake+Botanical+Garden+Shenzhen&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "sz-015",
+      "city": "Shenzhen",
+      "category": "Parks & nature (≤ 2 h from the hotel)",
+      "type": "place",
+      "name": "Wutong Mountain",
+      "name_zh": "梧桐山",
+      "area": null,
+      "rating": 4,
+      "description": "Highest peak in Shenzhen (944 m); 4–5 h return hike, big views",
+      "practical": "East Luohu; free. For fit walkers only",
+      "links": {
+        "source": "https://www.nomadotravel.app/en/guides/shenzhen-hiking-guide",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Wutong+Mountain+Shenzhen&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "sz-016",
+      "city": "Shenzhen",
+      "category": "Parks & nature (≤ 2 h from the hotel)",
+      "type": "place",
+      "name": "Dapeng Fortress + Xichong beach",
+      "name_zh": "大鹏所城 / 西涌",
+      "area": null,
+      "rating": 4,
+      "description": "1394 Ming garrison town with old lanes and temples; Xichong has the clearest water near Shenzhen and a coastal trail",
+      "practical": "Car 60–90 min (Xichong 75–100 min). By bus 2.5–3 h — too long, take Didi",
+      "links": {
+        "source": "https://www.nomadotravel.app/en/places/dapeng",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Dapeng+Fortress&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "sz-017",
+      "city": "Shenzhen",
+      "category": "Parks & nature (≤ 2 h from the hotel)",
+      "type": "place",
+      "name": "Dameisha & Yantian seaside boardwalk",
+      "name_zh": "大梅沙 / 盐田海滨栈道",
+      "area": null,
+      "rating": 3,
+      "description": "Free beach and a long coastal promenade; a walk, not swimming weather in January",
+      "practical": "Taxi ~1 h (approximate)",
+      "links": {
+        "source": "https://www.sz.gov.cn/en_szgov/aboutsz/whatson/content/post_7851410.html",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Dameisha&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "sz-018",
+      "city": "Shenzhen",
+      "category": "Parks & nature (≤ 2 h from the hotel)",
+      "type": "place",
+      "name": "Tanglang Mountain",
+      "name_zh": "塘朗山",
+      "area": null,
+      "rating": 3,
+      "description": "Easier forest trail with city views from the ridge",
+      "practical": "Nanshan, metro; free",
+      "links": {
+        "source": "https://www.nomadotravel.app/en/guides/shenzhen-hiking-guide",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Tanglang+Mountain+Shenzhen&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "sz-019",
+      "city": "Shenzhen",
+      "category": "Markets & shopping",
+      "type": "place",
+      "name": "Huaqiangbei",
+      "name_zh": "华强北",
+      "area": null,
+      "rating": 5,
+      "description": "One of the world's largest electronics markets: floors of components, gadgets, phone gear; SEG Plaza and Huaqiang Electronics World",
+      "practical": "Metro Huaqiangbei. Bring a specific list; bargain in stalls; parts sell open fakes",
+      "links": {
+        "source": "https://www.nomadotravel.app/en/guides/shopping-in-shenzhen",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Huaqiangbei&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "sz-020",
+      "city": "Shenzhen",
+      "category": "Markets & shopping",
+      "type": "place",
+      "name": "MixC Shenzhen Bay",
+      "name_zh": "深圳湾万象城",
+      "area": null,
+      "rating": 5,
+      "description": "Luxury retail mixed with art installations and a MixC Arts space, beside the Spring Bamboo tower",
+      "practical": "Metro Houhai, Exit G. Try the egg tarts at Yu Lian Tea House",
+      "links": {
+        "source": "https://www.travelofchina.com/shenzhen-shopping-area/",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=MixC+Shenzhen+Bay&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "sz-021",
+      "city": "Shenzhen",
+      "category": "Markets & shopping",
+      "type": "place",
+      "name": "Dafen Oil Painting Village",
+      "name_zh": "大芬油画村",
+      "area": null,
+      "rating": 4,
+      "description": "Lanes of studios painting to order; one of the best places in the world to buy a painting",
+      "practical": "Line 3 to Dafen, Exit A1; 09:30–17:30, closed Mondays; bargain",
+      "links": {
+        "source": "https://www.wanderlustmagazine.com/?p=49687",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Dafen+Oil+Painting+Village&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "sz-022",
+      "city": "Shenzhen",
+      "category": "Markets & shopping",
+      "type": "place",
+      "name": "MixC World",
+      "name_zh": "万象天地, Nanshan",
+      "area": null,
+      "rating": 4,
+      "description": "Open-air design-led lifestyle mall, trendy shops and food",
+      "practical": "Metro High-Tech Park area",
+      "links": {
+        "source": "https://www.eastchinatrip.com/shenzhen-mixc-world-guide/",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=MixC+World+Shenzhen&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "sz-023",
+      "city": "Shenzhen",
+      "category": "Markets & shopping",
+      "type": "place",
+      "name": "COCO Park",
+      "name_zh": "福田COCO Park",
+      "area": null,
+      "rating": 3,
+      "description": "Big Futian mall with international brands and lots of restaurants (incl. a Seasons coconut-chicken branch, L3); lively bar street in the evening. Convenient rather than epic",
+      "practical": "268 Fuhua 3rd Rd, close to your hotel; Metro Convention & Exhibition Center. Handy for an easy dinner",
+      "links": {
+        "source": "https://www.nomadotravel.app/en/guides/shopping-in-shenzhen",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=COCO+Park+Shenzhen&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "sz-024",
+      "city": "Shenzhen",
+      "category": "Markets & shopping",
+      "type": "place",
+      "name": "Dongmen Pedestrian Street",
+      "name_zh": "东门步行街",
+      "area": null,
+      "rating": 3,
+      "description": "Oldest shopping street: cheap streetwear, malls, snack alleys, busy local buzz",
+      "practical": "Metro Laojie. Crowded and less polished; bargain",
+      "links": {
+        "source": "https://www.nomadotravel.app/en/guides/shopping-in-shenzhen",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Dongmen+Shenzhen&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "sz-025",
+      "city": "Shenzhen",
+      "category": "Markets & shopping",
+      "type": "place",
+      "name": "Sea World, Shekou",
+      "name_zh": "蛇口海上世界",
+      "area": null,
+      "rating": 3,
+      "description": "Waterfront plaza with international restaurants and bars; nice evening",
+      "practical": "Metro Sea World",
+      "links": {
+        "source": "https://www.nomadotravel.app/en/guides/shopping-in-shenzhen",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Sea+World+Shekou&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "sz-026",
+      "city": "Shenzhen",
+      "category": "Markets & shopping",
+      "type": "place",
+      "name": "Upperhills",
+      "name_zh": "深业上城",
+      "area": null,
+      "rating": 4,
+      "description": "Village-style open-air mall on a raised plaza by Lianhuashan: low-rise lanes of cafés, design shops and restaurants",
+      "practical": "~10 min from the hotel (approximate); free",
+      "links": {
+        "google_maps": "https://www.google.com/maps/search/?api=1&query=%E6%B7%B1%E4%B8%9A%E4%B8%8A%E5%9F%8E",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Upperhills+Shenzhen&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "sz-027",
+      "city": "Shenzhen",
+      "category": "Markets & shopping",
+      "type": "place",
+      "name": "OCT Harbour",
+      "name_zh": "欢乐港湾",
+      "area": null,
+      "rating": 3,
+      "description": "Open-air waterfront shopping and dining around a lake and the Bay Area Eye Ferris wheel in Bao'an; nicest at sunset",
+      "practical": "~45 min by metro (approximate); free",
+      "links": {
+        "google_maps": "https://www.google.com/maps/search/?api=1&query=%E6%AC%A2%E4%B9%90%E6%B8%AF%E6%B9%BE",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=OCT+Harbour+Shenzhen&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "sz-028",
+      "city": "Shenzhen",
+      "category": "Markets & shopping",
+      "type": "place",
+      "name": "One Avenue",
+      "name_zh": "卓悦中心",
+      "area": null,
+      "rating": 3,
+      "description": "Upscale Futian mall with international and Chinese designer brands and lots of food",
+      "practical": "Close to the hotel; free",
+      "links": {
+        "google_maps": "https://www.google.com/maps/search/?api=1&query=%E5%8D%93%E6%82%A6%E4%B8%AD%E5%BF%83",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=One+Avenue+Shenzhen&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "sz-029",
+      "city": "Shenzhen",
+      "category": "Markets & shopping",
+      "type": "place",
+      "name": "Luohu Commercial City",
+      "name_zh": "罗湖商业城",
+      "area": null,
+      "rating": 2,
+      "description": "Tailors, bags, watches; mostly knock-offs and hard-sell",
+      "practical": "Only if you want tailoring",
+      "links": {
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Luohu+Commercial+City&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "sz-030",
+      "city": "Shenzhen",
+      "category": "Restaurants",
+      "type": "restaurant",
+      "name": "The Bay by Chef Fei",
+      "name_zh": null,
+      "area": null,
+      "rating": 5,
+      "description": "Michelin 2★ refined Cantonese by the chef of Guangzhou's Jiang",
+      "price_per_person": "~800–1,500 RMB (≈ €100–190) (approximate)",
+      "watch_out": "Book well ahead; set menus",
+      "links": {}
+    },
+    {
+      "id": "sz-031",
+      "city": "Shenzhen",
+      "category": "Restaurants",
+      "type": "restaurant",
+      "name": "Yun Jing",
+      "name_zh": "云璟",
+      "area": null,
+      "rating": 5,
+      "description": "Michelin 2★ Cantonese",
+      "price_per_person": "~800–1,500 RMB (≈ €100–190) (approximate)",
+      "watch_out": "Book well ahead",
+      "links": {}
+    },
+    {
+      "id": "sz-032",
+      "city": "Shenzhen",
+      "category": "Restaurants",
+      "type": "restaurant",
+      "name": "Chao Shang Chao",
+      "name_zh": "潮上潮",
+      "area": null,
+      "rating": 4,
+      "description": "Michelin 1★ Chaozhou cuisine",
+      "price_per_person": "~500–1,000 RMB (≈ €60–125) (approximate)",
+      "watch_out": "Chaozhou braised platters can include offal: order à la carte",
+      "links": {}
+    },
+    {
+      "id": "sz-033",
+      "city": "Shenzhen",
+      "category": "Restaurants",
+      "type": "restaurant",
+      "name": "Xin Rong Ji",
+      "name_zh": "新荣记",
+      "area": null,
+      "rating": 4,
+      "description": "Michelin 1★ Taizhou seafood",
+      "price_per_person": "~800–1,500 RMB (≈ €100–190) (approximate)",
+      "watch_out": "Book ahead; a Hong Kong branch review mentions pushy upselling",
+      "links": {}
+    },
+    {
+      "id": "sz-034",
+      "city": "Shenzhen",
+      "category": "Restaurants",
+      "type": "restaurant",
+      "name": "Runyuan Four Seasons Coconut Chicken",
+      "name_zh": "润园四季椰子鸡",
+      "area": null,
+      "rating": 5,
+      "description": "Free-range chicken cooked in fresh coconut water; claypot rice",
+      "price_per_person": "~100 RMB (≈ €12)",
+      "watch_out": "OCT Loft branch: 4F OCT East Market, open-air terrace",
+      "links": {
+        "source": "https://www.eyeshenzhen.com/content/2025-07/09/content_31585367.htm"
+      }
+    },
+    {
+      "id": "sz-035",
+      "city": "Shenzhen",
+      "category": "Restaurants",
+      "type": "restaurant",
+      "name": "Chaoshan beef hot pot – Chaofa or Baheli Haiji",
+      "name_zh": "潮发潮汕牛肉店 / 八合里海记",
+      "area": null,
+      "rating": 5,
+      "description": "Same-day fresh beef sliced to order in clear broth; beef balls",
+      "price_per_person": "~100 RMB (≈ €12) (approximate)",
+      "watch_out": "Menus also list tongue, heart, tendon and tripe: order the plain sliced cuts",
+      "links": {
+        "source": "https://www.tatlerasia.com/dining/food/5-dishes-shenzhen"
+      }
+    },
+    {
+      "id": "sz-036",
+      "city": "Shenzhen",
+      "category": "Restaurants",
+      "type": "restaurant",
+      "name": "Fan Lou",
+      "name_zh": "蘩楼",
+      "area": "Futian / Nanshan",
+      "rating": 5,
+      "description": "Handmade dim sum; 4.8 on Dianping from ~9,000 reviews",
+      "price_per_person": "~80–90 RMB (≈ €11)",
+      "watch_out": "On weekends take a queue number 1–2 h ahead",
+      "links": {
+        "source": "https://www.sina.cn/news/article/nikerin8492464.html"
+      }
+    },
+    {
+      "id": "sz-037",
+      "city": "Shenzhen",
+      "category": "Restaurants",
+      "type": "restaurant",
+      "name": "Jin Yue Xuan",
+      "name_zh": "金悦轩",
+      "area": "Futian",
+      "rating": 4,
+      "description": "Polished dim sum (8:00–14:00), seafood dinners",
+      "price_per_person": "~113 RMB (≈ €14)",
+      "watch_out": "6013 Shennan Ave, near your hotel",
+      "links": {
+        "source": "https://www.chinahighlights.com/shenzhen/restaurants.htm"
+      }
+    },
+    {
+      "id": "sz-038",
+      "city": "Shenzhen",
+      "category": "Restaurants",
+      "type": "restaurant",
+      "name": "Dian Dou De",
+      "name_zh": "点都德",
+      "area": null,
+      "rating": 4,
+      "description": "Shrimp dumplings, siu mai, char siu bao, rice rolls",
+      "price_per_person": "~40–75 RMB (≈ €5–9)",
+      "watch_out": "Skip chicken feet and tripe; several branches",
+      "links": {
+        "source": "https://thenanyan.com/2018/09/27/restaurant-review-dian-dou-de-%E7%82%B9%E9%83%BD%E5%BE%97/"
+      }
+    },
+    {
+      "id": "sz-039",
+      "city": "Shenzhen",
+      "category": "Restaurants",
+      "type": "restaurant",
+      "name": "Chuxianglou",
+      "name_zh": "储香楼",
+      "area": "Dongmen",
+      "rating": 4,
+      "description": "Old-name teahouse, 100% handmade dim sum",
+      "price_per_person": "~60–80 RMB (≈ €8–10)",
+      "watch_out": "Metro Laojie Exit C; pair with Dongmen",
+      "links": {
+        "source": "https://global.hk01.com/旅游/60268880/深圳早茶11间-点心-5-免茶位-近罗湖福田口岸-1间本地人力推"
+      }
+    },
+    {
+      "id": "sz-040",
+      "city": "Shenzhen",
+      "category": "Restaurants",
+      "type": "restaurant",
+      "name": "Fenghuang Lou",
+      "name_zh": "凤凰楼",
+      "area": "Huaqiangbei",
+      "rating": 4,
+      "description": "Classic Shenzhen yum cha since 1989",
+      "price_per_person": "Not checked",
+      "watch_out": "Good before Huaqiangbei shopping",
+      "links": {
+        "source": "https://m.bendibao.com/show718917.html"
+      }
+    },
+    {
+      "id": "sz-041",
+      "city": "Shenzhen",
+      "category": "Restaurants",
+      "type": "restaurant",
+      "name": "Dimlar",
+      "name_zh": "鼎Dimlar",
+      "area": "Shenzhen Bay",
+      "rating": 4,
+      "description": "Steamed-to-order dim sum, char siu pastry, shrimp wonton noodles",
+      "price_per_person": "~55 RMB (≈ €7)",
+      "watch_out": "Pair with Shenzhen Bay Park / MixC",
+      "links": {
+        "source": "https://global.hk01.com/旅游/60332594/深圳湾饮茶8大推介-人均-55-点心即叫即蒸-必试叉烧酥-虾饺王"
+      }
+    },
+    {
+      "id": "sz-042",
+      "city": "Shenzhen",
+      "category": "Restaurants",
+      "type": "restaurant",
+      "name": "Yu Lian Tea House egg tarts",
+      "name_zh": null,
+      "area": null,
+      "rating": 4,
+      "description": "Locals call them the city's best egg tarts",
+      "price_per_person": "Snack",
+      "watch_out": "Inside MixC World / MixC Shenzhen Bay",
+      "links": {
+        "source": "https://nz.trip.com/moments/poi-da-ge-fan-90681125"
+      }
+    },
+    {
+      "id": "sz-043",
+      "city": "Shenzhen",
+      "category": "Restaurants",
+      "type": "restaurant",
+      "name": "Xin Dou Ji",
+      "name_zh": "新斗记",
+      "area": "Futian",
+      "rating": 3,
+      "description": "Hong Kong-style yum cha",
+      "price_per_person": "~70–80 RMB (≈ €9–10)",
+      "watch_out": "Close to your hotel",
+      "links": {
+        "source": "https://sina.cn/detail/niktusq9214796"
+      }
+    },
+    {
+      "id": "sz-044",
+      "city": "Shenzhen",
+      "category": "Restaurants",
+      "type": "restaurant",
+      "name": "Chun Man Yuan",
+      "name_zh": "春满园",
+      "area": null,
+      "rating": 3,
+      "description": "Reliable Cantonese dim sum chain",
+      "price_per_person": "~50–80 RMB (≈ €6–10)",
+      "watch_out": "Several branches",
+      "links": {
+        "source": "https://global.hk01.com/旅游/60268880/深圳早茶11间-点心-5-免茶位-近罗湖福田口岸-1间本地人力推"
+      }
+    },
+    {
+      "id": "sz-045",
+      "city": "Shenzhen",
+      "category": "Day trip: Zhuhai (珠海)",
+      "type": "place",
+      "name": "Lovers' Road + Fisher Girl statue",
+      "name_zh": "情侣路 / 珠海渔女",
+      "area": null,
+      "rating": 4,
+      "description": "28+ km palm-lined seaside promenade past the city's icons, incl. the Love Post Office and lighthouse; the statue is lit up at night",
+      "practical": "The core of the day; walk or rent a bike; free",
+      "links": {
+        "source": "https://www.cathaypacific.com/cx/en_CN/inspiration/travel/weekend-guide-zhuhai.html",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Fisher+Girl+Zhuhai&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "sz-046",
+      "city": "Shenzhen",
+      "category": "Day trip: Zhuhai (珠海)",
+      "type": "place",
+      "name": "Zhuhai Grand Theatre",
+      "name_zh": "珠海大剧院, “Sun & Moon Shells”",
+      "area": null,
+      "rating": 4,
+      "description": "Shell-shaped opera house on Yeli Island, right on the water",
+      "practical": "Next to Lovers' Road; best photographed at dusk",
+      "links": {
+        "source": "https://www.cathaypacific.com/cx/en_JP/inspiration/travel/business-travel-guide-zhuhai.html",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Zhuhai+Grand+Theatre&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "sz-047",
+      "city": "Shenzhen",
+      "category": "Day trip: Zhuhai (珠海)",
+      "type": "place",
+      "name": "Jingshan Park cable car",
+      "name_zh": "石景山公园",
+      "area": null,
+      "rating": 3,
+      "description": "Cable car up for panoramic coastline views",
+      "practical": "Near the centre; short stop",
+      "links": {
+        "source": "https://www.cathaypacific.com/cx/en_CN/inspiration/travel/weekend-guide-zhuhai.html",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Jingshan+Park+Zhuhai&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "sz-048",
+      "city": "Shenzhen",
+      "category": "Day trip: Zhuhai (珠海)",
+      "type": "place",
+      "name": "Jinwan Civic Art Center",
+      "name_zh": "金湾市民艺术中心",
+      "area": null,
+      "rating": 2,
+      "description": "Zaha Hadid building on an artificial lake",
+      "practical": "Far southwest in Jinwan district; only for architecture fans",
+      "links": {
+        "source": "https://www.cathaypacific.com/cx/en_CN/inspiration/travel/weekend-guide-zhuhai.html",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Jinwan+Civic+Art+Centre&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "gz-001",
+      "city": "Guangzhou",
+      "category": "Iconic buildings & viewpoints",
+      "type": "place",
+      "name": "Canton Tower",
+      "name_zh": "广州塔",
+      "area": null,
+      "rating": 5,
+      "description": "600 m twisted tower; the open-air top deck looks over the whole river city",
+      "practical": "Indoor decks ~135 RMB; open-air deck a separate ~228 RMB ticket. Open to 22:30, last entry 22:00; lights on ~19:00. Metro Canton Tower. Near: Tianhe",
+      "links": {
+        "source": "https://chinafortravelers.com/cities/guangzhou/",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Canton+Tower&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "gz-002",
+      "city": "Guangzhou",
+      "category": "Iconic buildings & viewpoints",
+      "type": "place",
+      "name": "Pearl River night cruise",
+      "name_zh": "珠江夜游",
+      "area": null,
+      "rating": 5,
+      "description": "~70 min past the lit-up skyline, Canton Tower and old bund",
+      "practical": "From Tianzi Pier (天字码头), ~10 min walk from the Canton Hotel. 18:00–22:30; adult 98 RMB (1F) to 198 RMB (open deck). Near: Old town",
+      "links": {
+        "source": "https://www.dahepiao.com/lvyounews1/20250711520763.html",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Pearl+River+night+cruise+Guangzhou&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "gz-003",
+      "city": "Guangzhou",
+      "category": "Iconic buildings & viewpoints",
+      "type": "place",
+      "name": "Huacheng Square & Zhujiang New Town",
+      "name_zh": "花城广场 / 珠江新城",
+      "area": null,
+      "rating": 5,
+      "description": "Green central axis between skyscrapers, with the Canton Tower across the river; spectacular lit up",
+      "practical": "Free. Metro Huacheng Avenue / Zhujiang New Town. Walking distance from your Tianhe hotel. Near: Tianhe",
+      "links": {
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Huacheng+Square+Guangzhou&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "gz-004",
+      "city": "Guangzhou",
+      "category": "Iconic buildings & viewpoints",
+      "type": "place",
+      "name": "Guangzhou Opera House",
+      "name_zh": "广州大剧院",
+      "area": null,
+      "rating": 4,
+      "description": "Zaha Hadid's \"pebbles\" on the river bank",
+      "practical": "Exterior free; combine with Huacheng Square. Near: Tianhe",
+      "links": {
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Guangzhou+Opera+House&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "gz-005",
+      "city": "Guangzhou",
+      "category": "Iconic buildings & viewpoints",
+      "type": "place",
+      "name": "Sacred Heart Cathedral",
+      "name_zh": "石室圣心大教堂",
+      "area": null,
+      "rating": 4,
+      "description": "19th-century all-granite Gothic cathedral in the old town",
+      "practical": "Free; open to visitors at set hours only (check the board at the gate). ~15 min walk from the Canton Hotel. Near: Old town",
+      "links": {
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Sacred+Heart+Cathedral+Guangzhou&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "gz-006",
+      "city": "Guangzhou",
+      "category": "Iconic buildings & viewpoints",
+      "type": "place",
+      "name": "Haixinsha Island",
+      "name_zh": "海心沙",
+      "area": null,
+      "rating": 3,
+      "description": "River island at the foot of Huacheng Square: closest straight-on view of the tower",
+      "practical": "Free; 15 min add-on to Huacheng Square. Near: Tianhe",
+      "links": {
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Haixinsha+Guangzhou&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "gz-007",
+      "city": "Guangzhou",
+      "category": "Museums & culture",
+      "type": "place",
+      "name": "Chen Clan Academy",
+      "name_zh": "陈家祠",
+      "area": null,
+      "rating": 5,
+      "description": "1890s clan hall covered in carved wood, brick, stone and ceramic roof figures; also the Folk Arts Museum",
+      "practical": "~10 RMB, bring passport. 09:00–17:30, ticket office to 17:00. Metro Chen Clan Academy (Line 1/8), Exit D. Near: Old town",
+      "links": {
+        "source": "https://intotravelchina.com/articles/1776910297125519049.html",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Chen+Clan+Academy&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "gz-008",
+      "city": "Guangzhou",
+      "category": "Museums & culture",
+      "type": "place",
+      "name": "Shamian Island",
+      "name_zh": "沙面岛",
+      "area": null,
+      "rating": 5,
+      "description": "Quiet former foreign concession: banyan avenues, colonial villas, churches, riverside cafés",
+      "practical": "Free. Metro Huangsha (Line 1/6). Good for a slow morning or golden hour. Near: Old town",
+      "links": {
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Shamian+Island&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "gz-009",
+      "city": "Guangzhou",
+      "category": "Museums & culture",
+      "type": "place",
+      "name": "Guangdong Museum",
+      "name_zh": "广东省博物馆",
+      "area": null,
+      "rating": 5,
+      "description": "Lacquer-box building on Huacheng Square; strong Chaozhou woodcarving, ceramics and Cantonese crafts halls",
+      "practical": "Free but real-name booking required: WeChat mini program 广东省博物馆预约, slots open 22:00, up to 7 days ahead. Tue–Sun 09:00–17:00, closed Mon. Near: Tianhe",
+      "links": {
+        "source": "https://m.gz.bendibao.com/tour/jingdianbangdan/1350.shtml",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Guangdong+Museum&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "gz-010",
+      "city": "Guangzhou",
+      "category": "Museums & culture",
+      "type": "place",
+      "name": "Nanyue King Mausoleum",
+      "name_zh": "南越王博物院·王墓展区",
+      "area": null,
+      "rating": 4,
+      "description": "2,100-year-old royal tomb you walk into; jade burial suit and a famous ceramic pillow collection",
+      "practical": "~10 RMB, book via WeChat 南越王博物院. Tue–Sun 09:00–17:30, closed Mon. Metro Yuexiu Park, Exit E. Near: Old town",
+      "links": {
+        "source": "https://www.etripchina.com/china-guide/museum-of-the-nanyue-king-guangzhou.htm",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Museum+of+the+Mausoleum+of+the+Nanyue+King&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "gz-011",
+      "city": "Guangzhou",
+      "category": "Museums & culture",
+      "type": "place",
+      "name": "Yongqing Fang",
+      "name_zh": "永庆坊",
+      "area": "Liwan",
+      "rating": 4,
+      "description": "Restored Xiguan lanes and arcade houses, Cantonese opera museum next door, Bruce Lee's ancestral home",
+      "practical": "Free to wander. Metro Huangsha or Changshou Lu. Combine with Shamian. Near: Old town",
+      "links": {
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Yongqingfang+Guangzhou&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "gz-012",
+      "city": "Guangzhou",
+      "category": "Museums & culture",
+      "type": "place",
+      "name": "Temple of the Six Banyan Trees",
+      "name_zh": "六榕寺",
+      "area": null,
+      "rating": 3,
+      "description": "1,400-year-old temple with a 57 m painted Flower Pagoda",
+      "practical": "Small fee or free (approximate). Metro Gongyuanqian / Ximenkou. 15 min from the Canton Hotel. Near: Old town",
+      "links": {
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Temple+of+the+Six+Banyan+Trees&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "gz-013",
+      "city": "Guangzhou",
+      "category": "Parks & nature (≤ 2 h from the hotel)",
+      "type": "place",
+      "name": "Baiyun Mountain",
+      "name_zh": "白云山",
+      "area": null,
+      "rating": 5,
+      "description": "Forested hills over the city; Moxing Ridge (摩星岭) summit view, sunset from the top",
+      "practical": "Entry ~5 RMB (+5 RMB summit). Cable car ~25 up / 20 down. A new escalator and sightseeing cars also go up (2026). Metro Line 3, Meihuayuan. Half a day",
+      "links": {
+        "source": "https://citiesinsider.com/country/china/guangzhou/parks-and-green-spaces/en",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Baiyun+Mountain&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "gz-014",
+      "city": "Guangzhou",
+      "category": "Parks & nature (≤ 2 h from the hotel)",
+      "type": "place",
+      "name": "Yuexiu Park",
+      "name_zh": "越秀公园",
+      "area": null,
+      "rating": 4,
+      "description": "Big downtown park with the Five Rams statue, Ming-era Zhenhai Tower (Guangzhou Museum, 10 RMB) and lakes",
+      "practical": "Free, 06:00–21:00. Metro Yuexiu Park, Exit B1. Pair with the Nanyue King Mausoleum. Near: Old town",
+      "links": {
+        "source": "https://citiesinsider.com/country/china/guangzhou/parks-and-green-spaces/en",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Yuexiu+Park&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "gz-015",
+      "city": "Guangzhou",
+      "category": "Parks & nature (≤ 2 h from the hotel)",
+      "type": "place",
+      "name": "Haizhu Wetland Park",
+      "name_zh": "海珠湿地",
+      "area": null,
+      "rating": 4,
+      "description": "Huge city-centre wetland of orchards, canals and boardwalks; birds in winter",
+      "practical": "~20 RMB, book via WeChat 海珠湿地. Free Haizhu Lake next to it (Metro Datang, Exit B). Near: Tianhe",
+      "links": {
+        "source": "https://citiesinsider.com/country/china/guangzhou/parks-and-green-spaces/en",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Haizhu+National+Wetland+Park&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "gz-016",
+      "city": "Guangzhou",
+      "category": "Parks & nature (≤ 2 h from the hotel)",
+      "type": "place",
+      "name": "Lychee Bay canal",
+      "name_zh": "荔枝湾涌",
+      "area": "Liwan",
+      "rating": 3,
+      "description": "Restored old-Xiguan canal lined with arcades, bridges and snack shops",
+      "practical": "Free. Walk from Yongqing Fang. Near: Old town",
+      "links": {
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Lizhiwan+Guangzhou&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "gz-017",
+      "city": "Guangzhou",
+      "category": "Parks & nature (≤ 2 h from the hotel)",
+      "type": "place",
+      "name": "Huolushan Forest Park",
+      "name_zh": "火炉山森林公园",
+      "area": null,
+      "rating": 3,
+      "description": "Easy wooded hill walk in Tianhe, quieter than Baiyun",
+      "practical": "Free (approximate). Taxi ~20 min from the Tianhe hotel. Near: Tianhe",
+      "links": {
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Huolushan+Forest+Park&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "gz-018",
+      "city": "Guangzhou",
+      "category": "Markets & shopping",
+      "type": "place",
+      "name": "Beijing Road",
+      "name_zh": "北京路",
+      "area": null,
+      "rating": 4,
+      "description": "The city's oldest shopping street, with glass panels showing 1,000 years of road layers underfoot",
+      "practical": "Your first hotel is on it. Liveliest after 18:00. Near: Old town",
+      "links": {
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Beijing+Road+Guangzhou&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "gz-019",
+      "city": "Guangzhou",
+      "category": "Markets & shopping",
+      "type": "place",
+      "name": "Fangcun Tea Market",
+      "name_zh": "芳村茶叶市场",
+      "area": null,
+      "rating": 4,
+      "description": "One of Asia's largest tea markets: streets of tea shops offering tastings of pu'er, oolong and more",
+      "practical": "Free; morning to late afternoon (approximate). Metro Kengkou / Fangcun area (approximate). Near: Old town",
+      "links": {
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Fangcun+Tea+Market&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "gz-020",
+      "city": "Guangzhou",
+      "category": "Markets & shopping",
+      "type": "place",
+      "name": "Hualin Jade Street",
+      "name_zh": "华林玉器街",
+      "area": null,
+      "rating": 4,
+      "description": "Billed as China's largest jade market; fascinating even just to look",
+      "practical": "Quality and prices vary wildly; buy only small things unless you know jade. Near Shangxiajiu. Near: Old town",
+      "links": {
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Hualin+Jade+Market&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "gz-021",
+      "city": "Guangzhou",
+      "category": "Markets & shopping",
+      "type": "place",
+      "name": "Shangxiajiu Pedestrian Street",
+      "name_zh": "上下九",
+      "area": null,
+      "rating": 3,
+      "description": "Arcade shophouses with Cantonese snacks, herbal shops and local clothing; calmer than Beijing Road",
+      "practical": "Combine with Hualin Jade Street and Yongqing Fang. Near: Old town",
+      "links": {
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Shangxiajiu+Pedestrian+Street&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "gz-022",
+      "city": "Guangzhou",
+      "category": "Markets & shopping",
+      "type": "place",
+      "name": "Taikoo Hui",
+      "name_zh": "太古汇",
+      "area": null,
+      "rating": 4,
+      "description": "The upscale Tianhe mall: luxury brands and a strong food floor",
+      "practical": "~10:00–22:00. Linked to Metro Shipaiqiao, next to your second hotel. Near: Tianhe",
+      "links": {
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Taikoo+Hui+Guangzhou&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "gz-023",
+      "city": "Guangzhou",
+      "category": "Markets & shopping",
+      "type": "place",
+      "name": "Yide Road dried-goods market",
+      "name_zh": "一德路",
+      "area": null,
+      "rating": 3,
+      "description": "Street of dried seafood, mushrooms, sweets and Cantonese pantry goods",
+      "practical": "Busiest 08:00–early afternoon. ~10 min walk from the Canton Hotel. Near: Old town",
+      "links": {
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Yide+Road+Guangzhou&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "gz-024",
+      "city": "Guangzhou",
+      "category": "Markets & shopping",
+      "type": "place",
+      "name": "Parc Central",
+      "name_zh": "天环广场",
+      "area": null,
+      "rating": 4,
+      "description": "Tianhe mall built around a sunken garden park, with open-air terraces, trendy brands and restaurants",
+      "practical": "Free. Next to Tianhe Sports Center. Near: Tianhe",
+      "links": {
+        "google_maps": "https://www.google.com/maps/search/?api=1&query=%E5%A4%A9%E7%8E%AF%E5%B9%BF%E5%9C%BA",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Parc+Central+Guangzhou&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "gz-025",
+      "city": "Guangzhou",
+      "category": "Markets & shopping",
+      "type": "place",
+      "name": "K11 Art Mall",
+      "name_zh": "K11购物艺术中心",
+      "area": null,
+      "rating": 4,
+      "description": "Art mall in Zhujiang New Town mixing shopping with exhibitions, plus a basement food market",
+      "practical": "Free. Short walk from Huacheng Square. Near: Tianhe",
+      "links": {
+        "google_maps": "https://www.google.com/maps/search/?api=1&query=K11%E8%B4%AD%E7%89%A9%E8%89%BA%E6%9C%AF%E4%B8%AD%E5%BF%83%20%E5%B9%BF%E5%B7%9E",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=K11+Guangzhou&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "gz-026",
+      "city": "Guangzhou",
+      "category": "Markets & shopping",
+      "type": "place",
+      "name": "Dongshankou",
+      "name_zh": "东山口",
+      "area": null,
+      "rating": 4,
+      "description": "Leafy 1920s red-brick villa district turned trendy: independent boutiques, concept stores, cafés, galleries",
+      "practical": "Free to wander. Near: Old town",
+      "links": {
+        "google_maps": "https://www.google.com/maps/search/?api=1&query=%E4%B8%9C%E5%B1%B1%E5%8F%A3",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Dongshankou+Guangzhou&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "gz-027",
+      "city": "Guangzhou",
+      "category": "Markets & shopping",
+      "type": "place",
+      "name": "Grandview Mall & Teemall",
+      "name_zh": "天河城 / 天汇广场",
+      "area": null,
+      "rating": 2,
+      "description": "Big mid-range malls with Chinese brands and food courts; convenient rather than epic",
+      "practical": "Walk from Tianhe hotel. Near: Tianhe",
+      "links": {
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Grandview+Mall+Guangzhou&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "gz-028",
+      "city": "Guangzhou",
+      "category": "Restaurants",
+      "type": "restaurant",
+      "name": "Jiang by Chef Fei",
+      "name_zh": "江",
+      "area": "Mandarin Oriental, 389 Tianhe Rd",
+      "rating": 5,
+      "description": "Michelin 2★: roast goose, Wenchang chicken with flaxseed, dim sum at lunch",
+      "price_per_person": "~800–1,500 RMB (≈ €100–190) (approximate)",
+      "watch_out": "Near your Tianhe hotel; book ahead. Some reviews mention uneven service",
+      "links": {
+        "google_maps": "https://www.google.com/maps/search/?api=1&query=Jiang%20by%20Chef%20Fei&query_place_id=ChIJCTuG6f_-AjQRd1vNj2O3Y4s"
+      }
+    },
+    {
+      "id": "gz-029",
+      "city": "Guangzhou",
+      "category": "Restaurants",
+      "type": "restaurant",
+      "name": "Imperial Treasure Fine Chinese Cuisine",
+      "name_zh": "御宝轩",
+      "area": "IGC Tianhe",
+      "rating": 4,
+      "description": "Michelin 2★ Cantonese; dim sum at lunch",
+      "price_per_person": "~400–800 RMB (≈ €50–100) (approximate)",
+      "watch_out": "A reviewer calls it the best value of the three 2★; no English menu",
+      "links": {
+        "google_maps": "https://www.google.com/maps/search/?api=1&query=%E5%BE%A1%E5%AE%9D%E8%BD%A9%20IGC&query_place_id=ChIJy-3Czwv_AjQRCrY_2JWXxzQ"
+      }
+    },
+    {
+      "id": "gz-030",
+      "city": "Guangzhou",
+      "category": "Restaurants",
+      "type": "restaurant",
+      "name": "BingSheng Mansion",
+      "name_zh": "炳胜公馆",
+      "area": "2 Xiancun Rd, Tianhe",
+      "rating": 5,
+      "description": "Michelin 1★: roast goose, crispy char siu, pineapple bun, claypot chicken",
+      "price_per_person": "~300–500 RMB (≈ €40–60) (approximate)",
+      "watch_out": "Grand dining room; Google 4.2. Order goose and char siu early, they sell out",
+      "links": {
+        "google_maps": "https://www.google.com/maps/search/?api=1&query=%E7%82%B3%E8%83%9C%E5%85%AC%E9%A6%86&query_place_id=ChIJIxoo2g7_AjQRH5khVM6gVQs"
+      }
+    },
+    {
+      "id": "gz-031",
+      "city": "Guangzhou",
+      "category": "Restaurants",
+      "type": "restaurant",
+      "name": "Lei Garden",
+      "name_zh": "利苑",
+      "area": "Dongshan, Yuexiu",
+      "rating": 4,
+      "description": "Michelin 1★ classic Cantonese: crispy roast pork, double-boiled soups, claypot rice",
+      "price_per_person": "~400–700 RMB (≈ €50–90) (approximate)",
+      "watch_out": "Near Dongshankou; skip the roast pigeon",
+      "links": {
+        "google_maps": "https://www.google.com/maps/search/?api=1&query=%E4%B8%9C%E5%B1%B1%E5%88%A9%E8%8B%91&query_place_id=ChIJ1xfObdP4AjQR7UBoZq_MAlA"
+      }
+    },
+    {
+      "id": "gz-032",
+      "city": "Guangzhou",
+      "category": "Restaurants",
+      "type": "restaurant",
+      "name": "Wisca",
+      "name_zh": "惠食佳",
+      "area": "172 Binjiang W Rd, Haizhu",
+      "rating": 4,
+      "description": "Michelin 1★: sizzling claypot (啶啶煲) chicken, beef, vegetables",
+      "price_per_person": "~200–350 RMB (≈ €25–45) (approximate)",
+      "watch_out": "Many claypots use offal (goose intestine, liver): order the chicken, beef and vegetable ones",
+      "links": {
+        "google_maps": "https://www.google.com/maps/search/?api=1&query=%E6%83%A0%E9%A3%9F%E4%BD%B3&query_place_id=ChIJdwhbBZn4AjQRTrAhQhLjPnI"
+      }
+    },
+    {
+      "id": "gz-033",
+      "city": "Guangzhou",
+      "category": "Restaurants",
+      "type": "restaurant",
+      "name": "Yu Yue Heen",
+      "name_zh": "愉粤轩",
+      "area": "Four Seasons 71F",
+      "rating": 3,
+      "description": "Michelin 1★ Cantonese with a sky-high view over Zhujiang New Town",
+      "price_per_person": "~600–1,200 RMB (≈ €75–150) (approximate)",
+      "watch_out": "Reviews split: great view and service, food mixed",
+      "links": {
+        "google_maps": "https://www.google.com/maps/search/?api=1&query=%E6%84%89%E7%B2%A4%E8%BD%A9&query_place_id=ChIJK--19w3_AjQRExdg4mrKSKQ"
+      }
+    },
+    {
+      "id": "gz-034",
+      "city": "Guangzhou",
+      "category": "Restaurants",
+      "type": "restaurant",
+      "name": "Hongtu Hall, White Swan Hotel",
+      "name_zh": "白天鹅宏图府",
+      "area": "Shamian",
+      "rating": 4,
+      "description": "Michelin 1★ refined dim sum with Pearl River views",
+      "price_per_person": "~150–250 RMB (≈ €20–30)",
+      "watch_out": "08:00–14:30; book, or queue from ~07:30",
+      "links": {
+        "source": "https://www.chinavigators.com/dim-sum-in-guangzhou/"
+      }
+    },
+    {
+      "id": "gz-035",
+      "city": "Guangzhou",
+      "category": "Restaurants",
+      "type": "restaurant",
+      "name": "Guangzhou Restaurant",
+      "name_zh": "广州酒家",
+      "area": "2 Wenchang S Rd",
+      "rating": 4,
+      "description": "The city's most famous Cantonese restaurant since 1935",
+      "price_per_person": "~180–250 RMB (≈ €22–30)",
+      "watch_out": "Book or arrive early at weekends",
+      "links": {
+        "source": "https://www.nomadotravel.app/en/guides/dim-sum-guide-guangzhou"
+      }
+    },
+    {
+      "id": "gz-036",
+      "city": "Guangzhou",
+      "category": "Restaurants",
+      "type": "restaurant",
+      "name": "Tao Tao Ju",
+      "name_zh": "陶陶居",
+      "area": "20 Dishifu Rd, Liwan",
+      "rating": 5,
+      "description": "Century-old teahouse: har gow, char siu bao, wife cakes (老婆饼)",
+      "price_per_person": "~80–150 RMB (≈ €10–19)",
+      "watch_out": "Weekend queues from before 09:00. Skip chicken feet and tripe",
+      "links": {
+        "source": "https://www.nomadotravel.app/en/guides/dim-sum-guide-guangzhou"
+      }
+    },
+    {
+      "id": "gz-037",
+      "city": "Guangzhou",
+      "category": "Restaurants",
+      "type": "restaurant",
+      "name": "Panxi Restaurant",
+      "name_zh": "泮溪酒家",
+      "area": "Liwan Lake",
+      "rating": 4,
+      "description": "Elaborate dim sum in a lakeside garden",
+      "price_per_person": "~80–150 RMB (≈ €10–19)",
+      "watch_out": "Weekday 08:00–10:00 is calm; near Chen Clan Academy",
+      "links": {
+        "source": "https://www.chinavigators.com/dim-sum-in-guangzhou/"
+      }
+    },
+    {
+      "id": "gz-038",
+      "city": "Guangzhou",
+      "category": "Restaurants",
+      "type": "restaurant",
+      "name": "Fa Sing Garden",
+      "name_zh": null,
+      "area": "Jinsui Rd, Tianhe",
+      "rating": 4,
+      "description": "Michelin Bib Gourmand Cantonese",
+      "price_per_person": "~100–150 RMB (≈ €12–19) (approximate)",
+      "watch_out": "Close to your Tianhe hotel; check the menu for offal",
+      "links": {
+        "source": "https://joinpearl.co/lists/michelin-guide-guangzhou-shenzhen-2026"
+      }
+    },
+    {
+      "id": "gz-039",
+      "city": "Guangzhou",
+      "category": "Restaurants",
+      "type": "restaurant",
+      "name": "Dian Dou De",
+      "name_zh": "点都德",
+      "area": null,
+      "rating": 4,
+      "description": "All-day dim sum; red rice rolls with crispy shrimp",
+      "price_per_person": "~60–100 RMB (≈ €8–12) (approximate)",
+      "watch_out": "English picture menu; Huacheng Ave branch near your Tianhe hotel",
+      "links": {
+        "source": "https://www.chinavigators.com/dim-sum-in-guangzhou/"
+      }
+    },
+    {
+      "id": "gz-040",
+      "city": "Guangzhou",
+      "category": "Restaurants",
+      "type": "restaurant",
+      "name": "E Qian Ya Hou",
+      "name_zh": "鹅前鸭后",
+      "area": null,
+      "rating": 4,
+      "description": "Michelin Bib Gourmand: white-cut goose and duck",
+      "price_per_person": "~50–100 RMB (≈ €6–12) (approximate)",
+      "watch_out": "Skip giblet dishes",
+      "links": {}
+    },
+    {
+      "id": "gz-041",
+      "city": "Guangzhou",
+      "category": "Restaurants",
+      "type": "restaurant",
+      "name": "Yin Ji Rice Rolls",
+      "name_zh": "银记肠粉",
+      "area": null,
+      "rating": 4,
+      "description": "Silky rice rolls with shrimp, beef or egg; congee",
+      "price_per_person": "~20–40 RMB (≈ €3–5) (approximate)",
+      "watch_out": "Good breakfast near Shangxiajiu",
+      "links": {}
+    },
+    {
+      "id": "gz-042",
+      "city": "Guangzhou",
+      "category": "Restaurants",
+      "type": "restaurant",
+      "name": "Nanxin Milk Desserts",
+      "name_zh": "南信牛奶甜品专家",
+      "area": "Shangxiajiu",
+      "rating": 4,
+      "description": "Double-skin milk, ginger milk curd, egg custard",
+      "price_per_person": "~15–30 RMB (≈ €2–4) (approximate)",
+      "watch_out": "Dessert stop on a Liwan walk",
+      "links": {}
+    },
+    {
+      "id": "gz-043",
+      "city": "Guangzhou",
+      "category": "Day trips",
+      "type": "place",
+      "name": "Kaiping Diaolou",
+      "name_zh": "开平碉楼",
+      "area": null,
+      "rating": 3,
+      "description": "UNESCO-listed fortified watchtower villages among rice fields",
+      "practical": "~2–2.5 h each way (approximate): over your 2-hour rule, only by Didi or a tour",
+      "links": {
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Kaiping+Diaolou&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "fs-001",
+      "city": "Foshan",
+      "category": "Kung fu & temples",
+      "type": "place",
+      "name": "Foshan Ancestral Temple",
+      "name_zh": "佛山祖庙",
+      "area": "Chancheng",
+      "rating": 5,
+      "description": "Ornate temple with the Ip Man Hall (Wing Chun, wooden-dummy room); lion dance daily at 10:00, 14:15 and 15:30; Cantonese opera Sat/Sun 14:00–15:30",
+      "practical": "20 RMB, real-name booking on WeChat the day before. 08:30–17:45. Metro Zumiao (Guangfo Line). Shows cancelled in rain. The Wong Fei-hung hall here is closed for building work",
+      "links": {
+        "google_maps": "https://www.google.com/maps/search/?api=1&query=%E4%BD%9B%E5%B1%B1%E7%A5%96%E5%BA%99&query_place_id=ChIJo49Um-NbAjQR7TtMMpFXvPc",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Foshan+Ancestral+Temple&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "fs-002",
+      "city": "Foshan",
+      "category": "Kung fu & temples",
+      "type": "place",
+      "name": "Wong Fei-hung Lion Dance & Martial Arts Hall",
+      "name_zh": "黄飞鸿狮艺武术馆",
+      "area": "Xiqiao",
+      "rating": 3,
+      "description": "Museum in Wong Fei-hung's birthplace village, Luzhou",
+      "practical": "Free, 09:00–17:00. Its lion dance shows moved to Tianhu Park on Xiqiao Mountain (11:00, 14:00, 15:30). Combine with Xiqiao Mountain",
+      "links": {
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Wong+Fei-hung+Xiqiao&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "fs-003",
+      "city": "Foshan",
+      "category": "Kung fu & temples",
+      "type": "place",
+      "name": "Bruce Lee Paradise + ancestral home",
+      "name_zh": "李小龙乐园 / 祖居",
+      "area": "Junan",
+      "rating": 3,
+      "description": "Giant statue and memorial hall, plus the small house his grandfather built (Bruce Lee never lived there). Google 4.5 (22 reviews)",
+      "practical": "Paradise free since Sep 2026, 09:00–17:30; memorial hall may be under renovation; the park also has rides. Far south in Shunde: by car or a long bus ride. Easier alternative: his father's house in Guangzhou's Yongqing Fang",
+      "links": {
+        "google_maps": "https://www.google.com/maps/search/?api=1&query=%E6%9D%8E%E5%B0%8F%E9%BE%99%E4%B9%90%E5%9B%AD&query_place_id=ChIJayZJ4uM4AjQRBMU7AOeJo2E",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Bruce+Lee+Paradise+Shunde&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "fs-004",
+      "city": "Foshan",
+      "category": "Old towns, gardens & crafts",
+      "type": "place",
+      "name": "Lingnan Tiandi",
+      "name_zh": "岭南天地",
+      "area": "Chancheng",
+      "rating": 4,
+      "description": "Restored Lingnan lanes next to the Ancestral Temple: craft shops, cafés, restaurants, an old opera house. Google 4.5 (340 reviews)",
+      "practical": "Free. Good for dinner after the temple; busy at weekends",
+      "links": {
+        "google_maps": "https://www.google.com/maps/search/?api=1&query=%E5%B2%AD%E5%8D%97%E5%A4%A9%E5%9C%B0&query_place_id=ChIJHxa9UOFbAjQRmhvLm0waPyI",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Lingnan+Tiandi+Foshan&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "fs-005",
+      "city": "Foshan",
+      "category": "Old towns, gardens & crafts",
+      "type": "place",
+      "name": "Nanfeng Ancient Kiln",
+      "name_zh": "南风古灶",
+      "area": "Shiwan",
+      "rating": 4,
+      "description": "Dragon kilns from 1506, still firing pottery; old lanes of ceramic studios and shops. Google 4.5 (54 reviews)",
+      "practical": "~25 RMB (per a review). Metro Shiwan, 10 min walk; English booklet at the visitor centre. Plan 1–2 h",
+      "links": {
+        "google_maps": "https://www.google.com/maps/search/?api=1&query=%E5%8D%97%E9%A3%8E%E5%8F%A4%E7%81%B6&query_place_id=ChIJF7hjG2ZcAjQR9xAZ-jvzWC8",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Nanfeng+Ancient+Kiln&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "fs-006",
+      "city": "Foshan",
+      "category": "Old towns, gardens & crafts",
+      "type": "place",
+      "name": "Qinghui Garden",
+      "name_zh": "清晖园",
+      "area": "Shunde",
+      "rating": 4,
+      "description": "One of Guangdong's four famous classical gardens: ponds, pavilions, coloured-glass windows. Google 4.3 (211 reviews)",
+      "practical": "~15 RMB (per a review), pay via WeChat. ~1 h visit. Next to Huagai Road food street",
+      "links": {
+        "google_maps": "https://www.google.com/maps/search/?api=1&query=%E6%B8%85%E6%99%96%E5%9B%AD&query_place_id=ChIJhRWrys1OAjQRCjuZKT2uAM4",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Qinghui+Garden&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "fs-007",
+      "city": "Foshan",
+      "category": "Old towns, gardens & crafts",
+      "type": "place",
+      "name": "Fengjian Water Village",
+      "name_zh": "逢简水乡",
+      "area": "Shunde",
+      "rating": 3,
+      "description": "Canal village of red-sandstone banks, old bridges and snack shops; boat rides. Google 3.9 (110 reviews)",
+      "practical": "Free to wander. Reviewers say don't expect Venice; nice on a dry day",
+      "links": {
+        "google_maps": "https://www.google.com/maps/search/?api=1&query=%E9%80%A2%E7%AE%80%E6%B0%B4%E4%B9%A1&query_place_id=ChIJr-PNklpGAjQRWilxoRwXhGY",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Fengjian+Shunde&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "fs-008",
+      "city": "Foshan",
+      "category": "Nature (≤ 2 h from the hotel)",
+      "type": "place",
+      "name": "Xiqiao Mountain",
+      "name_zh": "西樵山",
+      "area": "Nanhai",
+      "rating": 4,
+      "description": "Forested volcanic hills with a giant seated bronze Guanyin statue and peaceful temples. Google 4.6 (37 reviews)",
+      "practical": "Take the round-trip tram up. Cold in winter: bring a jacket. ~1.5 h from Tianhe (approximate). Ticket price not checked",
+      "links": {
+        "google_maps": "https://www.google.com/maps/search/?api=1&query=%E8%A5%BF%E6%A8%B5%E5%B1%B1&query_place_id=ChIJi3KU4HFoAjQRkWVbAF3CoZg",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Xiqiao+Mountain&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "fs-009",
+      "city": "Foshan",
+      "category": "Food",
+      "type": "restaurant",
+      "name": "Huagai Road food street",
+      "name_zh": "华盖路",
+      "area": "Daliang, Shunde",
+      "rating": 4,
+      "description": "Double-skin milk, ginger milk curd, Shunde snacks; good for an early dinner",
+      "price_per_person": "~30–100 RMB (≈ €4–12) (approximate)",
+      "practical": "Next to Qinghui Garden. Check fish and meat dishes for offal before ordering",
+      "links": {
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Double+skin+milk&title=Special:MediaSearch&type=image"
+      }
+    }
+  ]
+}
