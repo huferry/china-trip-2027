@@ -8,7 +8,8 @@ service cloud.firestore {
 
     match /places/{document} {
       allow read: if isAllowed();
-      allow write: if false;
+      allow create: if isAllowed();
+      allow update, delete: if false;
     }
 
     match /allowedUsers/{email} {

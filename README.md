@@ -6,6 +6,13 @@ A private trip-planning web app for our China trip in January 2027 — Shenzhen,
 
 ## Release Notes
 
+### v1.3.0
+- Phase 4: "Make suggestion" button on each category using Claude AI chat dialog
+- Claude uses tool use to write directly to Firestore when user confirms a suggestion
+- Toast notifications when a new place is added (real-time for online users, on next open for offline)
+- Toast is clickable — navigates to the newly added place
+- Markdown rendering in chat bubbles
+
 ### v1.2.0
 - Phase 3: "I want to go" voting per place (non-restaurant rows only)
 - Votes are saved per user in Firestore

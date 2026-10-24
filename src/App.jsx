@@ -3,8 +3,10 @@ import { collection, getDocs } from 'firebase/firestore';
 import { db } from './firebase';
 import { useAuth } from './auth';
 import { useWishlist } from './hooks/useWishlist';
+import { useToasts } from './hooks/useToasts';
 import CityTab from './components/CityTab';
 import LoginPage from './components/LoginPage';
+import ToastContainer from './components/ToastContainer';
 
 const CITIES = ['Shenzhen', 'Guangzhou', 'Foshan'];
 
@@ -16,6 +18,14 @@ function App() {
   const [activeCity, setActiveCity] = useState('Shenzhen');
   const [filter, setFilter] = useState('all');
   const { items: wishlist, toggle: toggleWishlist } = useWishlist(user?.email);
+  const { toasts, dismiss: dismissToast } = useToasts(user?.email);
+
+  function navigateToPlace(place) {
+    setActiveCity(place.city);
+    setTimeout(() => {
+      document.getElementById(`place-${place.id}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 100);
+  }
 
   useEffect(() => {
     if (status !== 'allowed') return;
@@ -86,8 +96,17 @@ function App() {
       <main className="content">
         {loading && <p className="loading">Loading…</p>}
         {error && <p className="error">Error: {error}</p>}
-        {!loading && !error && <CityTab places={cityPlaces} city={activeCity} wishlist={wishlist} onToggleWishlist={toggleWishlist} />}
+        {!loading && !error && (
+          <CityTab
+            places={cityPlaces}
+            city={activeCity}
+            wishlist={wishlist}
+            onToggleWishlist={toggleWishlist}
+            onPlaceAdded={place => setPlaces(prev => [...prev, place])}
+          />
+        )}
       </main>
+      <ToastContainer toasts={toasts} onDismiss={dismissToast} onNavigate={navigateToPlace} />
     </div>
   );
 }

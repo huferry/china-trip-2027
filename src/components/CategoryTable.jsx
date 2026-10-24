@@ -1,3 +1,6 @@
+import { useState } from 'react';
+import SuggestionDialog from './SuggestionDialog';
+
 function Stars({ rating }) {
   const max = 5;
   const filled = Math.round(rating || 0);
@@ -42,7 +45,7 @@ function WantToGoBtn({ placeId, wishlist, onToggle }) {
 function PlaceRow({ place, wishlist, onToggleWishlist }) {
   const active = wishlist?.has(place.id);
   return (
-    <tr className={active ? 'row--selected' : ''}>
+    <tr id={`place-${place.id}`} className={active ? 'row--selected' : ''}>
       <td className="col-name"><NameCell place={place} /></td>
       <td className="col-rating"><Stars rating={place.rating} /></td>
       <td className="col-desc" data-label="Description">{place.description || ''}</td>
@@ -66,12 +69,25 @@ function RestaurantRow({ place }) {
   );
 }
 
-function CategoryTable({ category, places, wishlist, onToggleWishlist }) {
+function CategoryTable({ category, places, city, wishlist, onToggleWishlist, onPlaceAdded }) {
+  const [showDialog, setShowDialog] = useState(false);
   const isRestaurant = places.some(p => p.type === 'restaurant');
 
   return (
     <section className="category-section">
-      <h3>{category}</h3>
+      <div className="category-header">
+        <h3>{category}</h3>
+        <button className="suggest-btn" onClick={() => setShowDialog(true)}>+ Make suggestion</button>
+      </div>
+      {showDialog && (
+        <SuggestionDialog
+          city={city}
+          category={category}
+          existingPlaces={places}
+          onClose={() => setShowDialog(false)}
+          onPlaceAdded={onPlaceAdded}
+        />
+      )}
       <table className="places-table">
         <thead>
           <tr>

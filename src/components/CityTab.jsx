@@ -23,7 +23,7 @@ function getCategoryOrder(cat) {
   return 99;
 }
 
-function CityTab({ places, city, wishlist, onToggleWishlist }) {
+function CityTab({ places, city, wishlist, onToggleWishlist, onPlaceAdded }) {
   if (!places || places.length === 0) {
     return <p className="loading">No places found for {city}.</p>;
   }
@@ -48,8 +48,10 @@ function CityTab({ places, city, wishlist, onToggleWishlist }) {
           key={cat}
           category={cat}
           places={categoryMap[cat]}
+          city={city}
           wishlist={wishlist}
           onToggleWishlist={onToggleWishlist}
+          onPlaceAdded={onPlaceAdded}
         />
       ))}
     </div>
