@@ -6,6 +6,10 @@ A private trip-planning web app for our China trip in January 2027 — Shenzhen,
 
 ## Release Notes
 
+### v1.3.1
+- Rotated Firebase API key (old key was exposed in git history)
+- Firebase config moved to environment variables
+
 ### v1.3.0
 - Phase 4: "Make suggestion" button on each category using Claude AI chat dialog
 - Claude uses tool use to write directly to Firestore when user confirms a suggestion
