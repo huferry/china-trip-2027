@@ -25,10 +25,12 @@ const ADD_PLACE_TOOL = {
       links: {
         type: 'object',
         properties: {
-          source: { type: 'string', description: 'Source URL' },
-          photos: { type: 'string', description: 'Wikimedia Commons search URL for photos' },
+          source:  { type: 'string',        description: 'TripAdvisor URL for this place, or best available source URL' },
+          tripcom: { type: ['string','null'], description: 'Trip.com attraction or restaurant page URL, or null if not found' },
+          maps:    { type: ['string','null'], description: 'Google Maps URL using https://maps.google.com/?q=lat,lng format with verified coordinates, or null if not found' },
+          photos:  { type: 'string',        description: 'Wikimedia Commons search URL for photos' },
         },
-        required: ['source', 'photos'],
+        required: ['source', 'tripcom', 'maps', 'photos'],
       },
     },
     required: ['name', 'name_zh', 'city', 'category', 'type', 'rating', 'description', 'practical', 'links'],
@@ -50,7 +52,12 @@ Your task:
 5. If yes — call the add_place tool to save it. If no — ask them to clarify and try again.
 6. Refuse to add a place already on the list above.
 7. Keep replies concise and friendly.
-8. For the photos link, construct a Wikimedia Commons URL: https://commons.wikimedia.org/w/index.php?search=Place+Name+City&title=Special:MediaSearch&type=image`;
+8. For the links object, use your knowledge to populate:
+   - source: TripAdvisor URL (e.g. https://www.tripadvisor.com/Attraction_Review-...) or best authoritative source
+   - tripcom: Trip.com attraction page (https://www.trip.com/travel-guide/attraction/city/slug-id/) or restaurant page (https://www.trip.com/restaurant/china/city/detail/slug-id/), null if unknown
+   - maps: Google Maps URL as https://maps.google.com/?q=LAT,LNG using the place's precise coordinates, null if unsure
+   - photos: Wikimedia Commons search URL: https://commons.wikimedia.org/w/index.php?search=Place+Name+City&title=Special:MediaSearch&type=image
+   Only include URLs you are confident about. Use null for tripcom/maps when unsure.`;
 }
 
 function Message({ msg }) {

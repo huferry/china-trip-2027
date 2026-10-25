@@ -6,6 +6,12 @@ A private trip-planning web app for our China trip in January 2027 — Shenzhen,
 
 ## Release Notes
 
+### v1.3.5
+- Mobile: link icons are 2× larger for easier tapping
+- Fix: selected "Going" row now highlights evenly (no background gaps between cells)
+- Fix: price column text now wraps on mobile
+- Suggestions now include TripAdvisor, Trip.com, and Google Maps links automatically
+
 ### v1.3.4
 - Added Google Maps links for 85 places across all three cities
 - Each place now shows up to 3 icons: source (TripAdvisor/Wikipedia/Michelin), Trip.com, Google Maps

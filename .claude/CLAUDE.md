@@ -64,6 +64,24 @@ As a superadmin, it has these features that the other users do not have:
 ### Add 1
 On the very bottom, display the version number and date of release (yyyy-mm-dd)
 
+### Add 2
+The names are now clickable. I want the item to have multiple links.
+Instead of making the name clickable, add icon(s) under the Chinese name.
+Find the icons for Wikipedia, Trip.com, TripAdvisor.com, etc.
+When an item has more than 1 links, all should be shown.
+
+### Add 3
+When resultion is mobile, make the link-icons twice the width and twice the height, because
+it's now too small to tap.
+
+### Fix 4
+- When an item is marked 'Going', the element highlighted is not even
+the original background color is still seen between the texts.
+- The text on price column on restaurants, doesn't flow to new line.
+
+### Add 5
+When adding a new suggestion, try to add the links from: TripAdvisor.com, Trip.Com, Google Maps
+
 ## Deployment
 Application should be deployed on Firebase as a web host.
 The data will be stored in the Firstore from the same project.

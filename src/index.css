@@ -527,7 +527,6 @@ body {
 }
 
 .col-price {
-  white-space: nowrap;
   max-width: 160px;
   font-size: 0.82rem;
   color: var(--text-muted);
@@ -701,24 +700,44 @@ body {
 }
 
 /* Selected row highlight */
-.row--selected td {
+.places-table tr.row--selected,
+.places-table tr.row--selected td {
   background: #242424;
 }
 
+.places-table tr.row--selected:hover,
 .places-table tr.row--selected:hover td {
   background: #2a2a2a;
 }
 
-a.place-link {
-  color: var(--text);
-  text-decoration: underline;
-  text-decoration-color: var(--border);
-  text-underline-offset: 2px;
+.place-icons {
+  display: flex;
+  gap: 5px;
+  margin-top: 5px;
 }
 
-a.place-link:hover {
-  color: var(--accent);
-  text-decoration-color: var(--accent);
+.place-icon-link img {
+  display: block;
+  opacity: 0.55;
+  border-radius: 2px;
+  transition: opacity 0.15s;
+}
+
+.place-icon-link:hover img {
+  opacity: 1;
+}
+
+/* Mobile: larger tap targets for link icons */
+@media (max-width: 600px) {
+  .place-icons {
+    gap: 8px;
+    margin-top: 6px;
+  }
+
+  .place-icon-link img {
+    width: 28px !important;
+    height: 28px !important;
+  }
 }
 
 /* Tablet: tighten spacing, hide least-important columns */
@@ -784,12 +803,12 @@ a.place-link:hover {
     min-width: unset;
     max-width: unset;
     font-size: 0.95rem;
-    margin-bottom: 4px;
+    padding-bottom: 4px;
   }
 
   .col-rating {
     width: auto;
-    margin-bottom: 6px;
+    padding-bottom: 6px;
     font-size: 0.8rem;
   }
 
