@@ -41,8 +41,10 @@ export function useToasts(userEmail) {
             scheduleToast(place, userEmail);
           }
         } else {
-          // Real-time new addition — always show
-          scheduleToast(place, userEmail);
+          // Real-time new addition — show only if not already seen/dismissed
+          if (!getSeen(userEmail).has(id)) {
+            scheduleToast(place, userEmail);
+          }
         }
       });
       isInitialLoad = false;
