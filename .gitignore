@@ -4,3 +4,4 @@ dist/
 *.local
 invitations/
 service-account.json
+.firebase/
