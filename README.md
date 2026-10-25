@@ -6,6 +6,10 @@ A private trip-planning web app for our China trip in January 2027 — Shenzhen,
 
 ## Release Notes
 
+### v1.3.4
+- Added Google Maps links for 85 places across all three cities
+- Each place now shows up to 3 icons: source (TripAdvisor/Wikipedia/Michelin), Trip.com, Google Maps
+
 ### v1.3.3
 - Phase 5 Add 2: favicon icons below Chinese name for each place (Wikipedia, TripAdvisor, Michelin, Trip.com, etc.)
 - Added Trip.com links for 77 places across Shenzhen, Guangzhou, and Foshan
