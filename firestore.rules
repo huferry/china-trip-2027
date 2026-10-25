@@ -6,10 +6,17 @@ service cloud.firestore {
         exists(/databases/$(database)/documents/allowedUsers/$(request.auth.token.email));
     }
 
+    // Superadmin is identified by email (configurable via VITE_SUPERADMIN_EMAIL in the app;
+    // hardcoded here because Firestore rules don't support environment variables)
+    function isAdmin() {
+      return request.auth != null && request.auth.token.email == 'huferry@gmail.com';
+    }
+
     match /places/{document} {
       allow read: if isAllowed();
       allow create: if isAllowed();
-      allow update, delete: if false;
+      allow delete: if isAdmin();
+      allow update: if false;
     }
 
     match /allowedUsers/{email} {
@@ -20,11 +27,14 @@ service cloud.firestore {
         && exists(/databases/$(database)/documents/invites/$(request.resource.data.inviteToken))
         && get(/databases/$(database)/documents/invites/$(request.resource.data.inviteToken)).data.usedBy == null
         && get(/databases/$(database)/documents/invites/$(request.resource.data.inviteToken)).data.expiresAt > request.time;
-      allow update, delete: if false;
+      // Users may update their own doc to store displayName
+      allow update: if request.auth != null && request.auth.token.email == email;
+      allow delete: if false;
     }
 
     match /wishlists/{email} {
-      allow read, write: if request.auth != null && request.auth.token.email == email;
+      allow read: if (request.auth != null && request.auth.token.email == email) || isAdmin();
+      allow write: if request.auth != null && request.auth.token.email == email;
     }
 
     match /invites/{token} {

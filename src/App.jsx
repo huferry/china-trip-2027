@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import { db } from './firebase';
 import { useAuth } from './auth';
 import { useWishlist } from './hooks/useWishlist';
 import { useToasts } from './hooks/useToasts';
+import { useAllWishlists } from './hooks/useAllWishlists';
 import CityTab from './components/CityTab';
 import LoginPage from './components/LoginPage';
 import ToastContainer from './components/ToastContainer';
@@ -17,8 +18,15 @@ function App() {
   const [error, setError] = useState(null);
   const [activeCity, setActiveCity] = useState('Shenzhen');
   const [filter, setFilter] = useState('all');
+  const isAdmin = user?.email === import.meta.env.VITE_SUPERADMIN_EMAIL;
   const { items: wishlist, toggle: toggleWishlist } = useWishlist(user?.email);
   const { toasts, dismiss: dismissToast } = useToasts(user?.email);
+  const votersByPlace = useAllWishlists(isAdmin);
+
+  async function deletePlace(id) {
+    await deleteDoc(doc(db, 'places', id));
+    setPlaces(prev => prev.filter(p => p.id !== id));
+  }
 
   function navigateToPlace(place) {
     setActiveCity(place.city);
@@ -103,10 +111,16 @@ function App() {
             wishlist={wishlist}
             onToggleWishlist={toggleWishlist}
             onPlaceAdded={place => setPlaces(prev => [...prev, place])}
+            isAdmin={isAdmin}
+            onDeletePlace={deletePlace}
+            votersByPlace={votersByPlace}
           />
         )}
       </main>
       <ToastContainer toasts={toasts} onDismiss={dismissToast} onNavigate={navigateToPlace} />
+      <footer className="app-footer">
+        v{__APP_VERSION__} &nbsp;·&nbsp; {__BUILD_DATE__}
+      </footer>
     </div>
   );
 }

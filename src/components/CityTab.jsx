@@ -23,7 +23,7 @@ function getCategoryOrder(cat) {
   return 99;
 }
 
-function CityTab({ places, city, wishlist, onToggleWishlist, onPlaceAdded }) {
+function CityTab({ places, city, wishlist, onToggleWishlist, onPlaceAdded, isAdmin, onDeletePlace, votersByPlace }) {
   if (!places || places.length === 0) {
     return <p className="loading">No places found for {city}.</p>;
   }
@@ -52,6 +52,9 @@ function CityTab({ places, city, wishlist, onToggleWishlist, onPlaceAdded }) {
           wishlist={wishlist}
           onToggleWishlist={onToggleWishlist}
           onPlaceAdded={onPlaceAdded}
+          isAdmin={isAdmin}
+          onDeletePlace={onDeletePlace}
+          votersByPlace={votersByPlace}
         />
       ))}
     </div>

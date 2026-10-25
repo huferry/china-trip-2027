@@ -42,7 +42,22 @@ function WantToGoBtn({ placeId, wishlist, onToggle }) {
   );
 }
 
-function PlaceRow({ place, wishlist, onToggleWishlist }) {
+function DeleteBtn({ onDelete }) {
+  const [confirm, setConfirm] = useState(false);
+  if (confirm) {
+    return (
+      <span className="delete-confirm">
+        <button className="delete-yes-btn" onClick={onDelete}>✓</button>
+        <button className="delete-no-btn" onClick={() => setConfirm(false)}>✗</button>
+      </span>
+    );
+  }
+  return (
+    <button className="delete-btn" onClick={() => setConfirm(true)} title="Delete">🗑</button>
+  );
+}
+
+function PlaceRow({ place, wishlist, onToggleWishlist, isAdmin, onDelete, voters }) {
   const active = wishlist?.has(place.id);
   return (
     <tr id={`place-${place.id}`} className={active ? 'row--selected' : ''}>
@@ -52,12 +67,20 @@ function PlaceRow({ place, wishlist, onToggleWishlist }) {
       <td className="col-practical" data-label="Practical">{place.practical || ''}</td>
       <td className="col-vote">
         <WantToGoBtn placeId={place.id} wishlist={wishlist} onToggle={onToggleWishlist} />
+        {isAdmin && voters?.length > 0 && (
+          <div className="voters">{voters.join(', ')}</div>
+        )}
       </td>
+      {isAdmin && (
+        <td className="col-admin">
+          <DeleteBtn onDelete={() => onDelete(place.id)} />
+        </td>
+      )}
     </tr>
   );
 }
 
-function RestaurantRow({ place }) {
+function RestaurantRow({ place, isAdmin, onDelete }) {
   return (
     <tr>
       <td className="col-name"><NameCell place={place} /></td>
@@ -65,11 +88,16 @@ function RestaurantRow({ place }) {
       <td className="col-desc" data-label="Description">{place.description || ''}</td>
       <td className="col-price" data-label="Price/person">{place.price_per_person || ''}</td>
       <td className="col-watch" data-label="Watch out">{place.watch_out || ''}</td>
+      {isAdmin && (
+        <td className="col-admin">
+          <DeleteBtn onDelete={() => onDelete(place.id)} />
+        </td>
+      )}
     </tr>
   );
 }
 
-function CategoryTable({ category, places, city, wishlist, onToggleWishlist, onPlaceAdded }) {
+function CategoryTable({ category, places, city, wishlist, onToggleWishlist, onPlaceAdded, isAdmin, onDeletePlace, votersByPlace }) {
   const [showDialog, setShowDialog] = useState(false);
   const isRestaurant = places.some(p => p.type === 'restaurant');
 
@@ -102,16 +130,25 @@ function CategoryTable({ category, places, city, wishlist, onToggleWishlist, onP
             ) : (
               <>
                 <th className="col-practical">Practical</th>
-                <th className="col-vote"></th>
+                <th className="col-vote">Going</th>
               </>
             )}
+            {isAdmin && <th className="col-admin"></th>}
           </tr>
         </thead>
         <tbody>
           {places.map(place =>
             isRestaurant
-              ? <RestaurantRow key={place.id} place={place} />
-              : <PlaceRow key={place.id} place={place} wishlist={wishlist} onToggleWishlist={onToggleWishlist} />
+              ? <RestaurantRow key={place.id} place={place} isAdmin={isAdmin} onDelete={onDeletePlace} />
+              : <PlaceRow
+                  key={place.id}
+                  place={place}
+                  wishlist={wishlist}
+                  onToggleWishlist={onToggleWishlist}
+                  isAdmin={isAdmin}
+                  onDelete={onDeletePlace}
+                  voters={votersByPlace?.get(place.id)}
+                />
           )}
         </tbody>
       </table>

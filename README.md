@@ -6,6 +6,12 @@ A private trip-planning web app for our China trip in January 2027 — Shenzhen,
 
 ## Release Notes
 
+### v1.3.2
+- Phase 5: Superadmin features (configurable via env var, not committed to git)
+  - Delete button per place (two-step confirm, no JS dialogs)
+  - "Going" column shows voter first names for the admin
+- Version number and release date shown in app footer (stamped at build time)
+
 ### v1.3.1
 - Rotated Firebase API key (old key was exposed in git history)
 - Firebase config moved to environment variables

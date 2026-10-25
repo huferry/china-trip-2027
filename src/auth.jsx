@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { onAuthStateChanged, signInWithPopup, signOut as firebaseSignOut } from 'firebase/auth';
-import { doc, getDoc, setDoc, Timestamp } from 'firebase/firestore';
+import { doc, getDoc, setDoc, updateDoc, Timestamp } from 'firebase/firestore';
 import { auth, db, googleProvider } from './firebase';
 
 // status: 'loading' | 'unauthenticated' | 'allowed' | 'denied' | 'invalid-invite'
@@ -46,6 +46,10 @@ export function AuthProvider({ children }) {
       try {
         const userSnap = await getDoc(doc(db, 'allowedUsers', firebaseUser.email));
         if (userSnap.exists()) {
+          // Store/update display name for admin voter view
+          if (firebaseUser.displayName) {
+            updateDoc(doc(db, 'allowedUsers', firebaseUser.email), { displayName: firebaseUser.displayName }).catch(() => {});
+          }
           setStatus('allowed');
           return;
         }
