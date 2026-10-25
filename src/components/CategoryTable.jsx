@@ -11,22 +11,48 @@ function Stars({ rating }) {
   );
 }
 
+function LinkIcon({ url }) {
+  if (!url) return null;
+  let domain;
+  try { domain = new URL(url).hostname.replace(/^www\./, ''); } catch { return null; }
+  const labels = {
+    'tripadvisor.com': 'TripAdvisor',
+    'en.wikipedia.org': 'Wikipedia',
+    'trip.com': 'Trip.com',
+    'guide.michelin.com': 'Michelin',
+  };
+  const label = labels[domain] ?? domain;
+  return (
+    <a
+      className="place-icon-link"
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      title={label}
+    >
+      <img
+        src={`https://www.google.com/s2/favicons?domain=${domain}&sz=16`}
+        alt={label}
+        width="14"
+        height="14"
+      />
+    </a>
+  );
+}
+
 function NameCell({ place }) {
-  const url = place.links?.photos || null;
-  const name = (
-    <>
+  const urls = [place.links?.source, place.links?.tripcom].filter(Boolean);
+  return (
+    <span>
       {place.name}
       {place.name_zh && <div className="name-zh">{place.name_zh}</div>}
-    </>
+      {urls.length > 0 && (
+        <div className="place-icons">
+          {urls.map(url => <LinkIcon key={url} url={url} />)}
+        </div>
+      )}
+    </span>
   );
-  if (url) {
-    return (
-      <a className="place-link" href={url} target="_blank" rel="noopener noreferrer">
-        {name}
-      </a>
-    );
-  }
-  return <span>{name}</span>;
 }
 
 function WantToGoBtn({ placeId, wishlist, onToggle }) {

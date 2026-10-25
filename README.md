@@ -6,6 +6,10 @@ A private trip-planning web app for our China trip in January 2027 — Shenzhen,
 
 ## Release Notes
 
+### v1.3.3
+- Phase 5 Add 2: favicon icons below Chinese name for each place (Wikipedia, TripAdvisor, Michelin, Trip.com, etc.)
+- Added Trip.com links for 77 places across Shenzhen, Guangzhou, and Foshan
+
 ### v1.3.2
 - Phase 5: Superadmin features (configurable via env var, not committed to git)
   - Delete button per place (two-step confirm, no JS dialogs)
