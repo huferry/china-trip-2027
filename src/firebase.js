@@ -3,12 +3,12 @@ import { getFirestore } from 'firebase/firestore';
 import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 
 const firebaseConfig = {
-  projectId: "huferry-china-trip",
-  appId: "1:157681395253:web:886c4c6a779ca2b3c8f37c",
-  storageBucket: "huferry-china-trip.firebasestorage.app",
-  apiKey: "AIzaSyD5wdDDzCVt9ttTMd3nD7PieNMvCPCPSSQ",
-  authDomain: "huferry-china-trip.firebaseapp.com",
-  messagingSenderId: "157681395253",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
 };
 
 const app = initializeApp(firebaseConfig);
