@@ -15,6 +15,7 @@ import { getFirestore, Timestamp } from 'firebase-admin/firestore';
 import { randomBytes } from 'crypto';
 import { mkdir, readFile } from 'fs/promises';
 import { existsSync } from 'fs';
+import { execSync } from 'child_process';
 import QRCode from 'qrcode';
 
 const SERVICE_ACCOUNT_PATH = './service-account.json';
@@ -54,5 +55,10 @@ await mkdir('./invitations', { recursive: true });
 const filename = `./invitations/chinatrip-${dateStr}.png`;
 await QRCode.toFile(filename, inviteUrl, { width: 400, margin: 2 });
 
-console.log(`\nInvite URL (valid until ${expiresAt.toDateString()}):\n${inviteUrl}\n`);
+try {
+  execSync(`echo -n ${JSON.stringify(inviteUrl)} | pbcopy`);
+  console.log(`\nInvite URL (valid until ${expiresAt.toDateString()}) — copied to clipboard:\n${inviteUrl}\n`);
+} catch {
+  console.log(`\nInvite URL (valid until ${expiresAt.toDateString()}):\n${inviteUrl}\n`);
+}
 console.log(`QR code saved to: ${filename}`);
