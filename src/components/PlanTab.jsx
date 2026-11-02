@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
 import Anthropic from '@anthropic-ai/sdk';
 import Markdown from 'react-markdown';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../firebase';
 import { usePlan } from '../hooks/usePlan';
 
 const SAVE_PLAN_TOOL = {
@@ -15,7 +17,7 @@ const SAVE_PLAN_TOOL = {
   },
 };
 
-function buildSystemPrompt(places, votersByPlace) {
+function buildSystemPrompt(places, votersByPlace, hotels) {
   const votedPlaces = places
     .filter(p => votersByPlace.has(p.id) && p.type !== 'restaurant')
     .sort((a, b) => (votersByPlace.get(b.id)?.length || 0) - (votersByPlace.get(a.id)?.length || 0))
@@ -28,7 +30,17 @@ function buildSystemPrompt(places, votersByPlace) {
     .filter(p => p.type === 'restaurant')
     .map(p => `- ${p.name} (${p.city}): ${p.description || ''} | Price/person: ${p.price_per_person || 'unknown'}`);
 
+  const hotelLines = hotels
+    .sort((a, b) => a.checkIn.localeCompare(b.checkIn))
+    .map(h => `- ${h.checkIn} to ${h.checkOut}: ${h.name} (${h.city}) — ${h.currency} ${h.cost}`);
+
   return `You are a travel planner creating a detailed day-by-day itinerary for a group China trip (Shenzhen, Guangzhou, Foshan) in January 2027. Group size: 6 people.
+
+TRIP DATES: 2 January 2027 (arrival day, no sightseeing) through 15 January 2027 (departure). Plan sightseeing for Jan 3–14.
+
+HOTEL BOOKINGS (plan activities near each hotel's city/area each day):
+${hotelLines.join('\n') || 'No hotels saved yet'}
+Note: the hotel location constrains which places are practical on which days. Start and end each day at the hotel where you're sleeping that night.
 
 VOTED PLACES TO VISIT (sorted by votes, prioritize these):
 ${votedPlaces.join('\n') || 'None yet'}
@@ -67,14 +79,21 @@ function ChatMessage({ msg }) {
 
 function AdminChat({ places, votersByPlace, onPlanSaved }) {
   const [displayMessages, setDisplayMessages] = useState([
-    { role: 'assistant', content: 'I can create or refine the trip plan. Tell me what you need — for example: "Create a 7-day plan" or "Adjust day 3 to include more time at Canton Tower".' },
+    { role: 'assistant', content: 'I can create or refine the trip plan. Tell me what you need — for example: "Create the plan" or "Adjust day 3 to include more time at Canton Tower".' },
   ]);
   const [apiMessages, setApiMessages] = useState([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [hotels, setHotels] = useState([]);
   const bottomRef = useRef(null);
   const inputRef = useRef(null);
+
+  useEffect(() => {
+    getDocs(collection(db, 'hotels'))
+      .then(snap => setHotels(snap.docs.map(d => d.data())))
+      .catch(() => {});
+  }, []);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -106,7 +125,7 @@ function AdminChat({ places, votersByPlace, onPlanSaved }) {
     const response = await client.messages.create({
       model: 'claude-opus-4-6',
       max_tokens: 8096,
-      system: buildSystemPrompt(places, votersByPlace),
+      system: buildSystemPrompt(places, votersByPlace, hotels),
       tools: [SAVE_PLAN_TOOL],
       messages,
     });
