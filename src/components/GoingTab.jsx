@@ -16,7 +16,7 @@ function LinkIcon({ url }) {
   };
   const label = labels[domain] ?? domain;
   return (
-    <a className="place-icon-link" href={url} title={label} onClick={e => { e.preventDefault(); openUrl(url); }}>
+    <a className="place-icon-link" href={url} title={label} onClick={e => { e.preventDefault(); const popup = window.open(url, '_blank', 'popup,width=1100,height=800'); if (!popup) openUrl(url); }}>
       <img src={`https://www.google.com/s2/favicons?domain=${domain}&sz=16`} alt={label} width="14" height="14" />
     </a>
   );

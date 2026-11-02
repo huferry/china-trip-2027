@@ -6,6 +6,9 @@ A private trip-planning web app for our China trip in January 2027 — Shenzhen,
 
 ## Release Notes
 
+### v1.3.6
+- Fix: place links now open in a popup window instead of an embedded iframe (external sites block iframe embedding)
+
 ### v1.3.5
 - Mobile: link icons are 2× larger for easier tapping
 - Fix: selected "Going" row now highlights evenly (no background gaps between cells)
