@@ -53,14 +53,14 @@ export function useToasts(userEmail) {
     return () => unsub();
   }, [userEmail]);
 
-  function scheduleToast(place) {
-    markSeen(userEmail, place.id);
-    setToasts(prev => [...prev, place]);
-    setTimeout(() => dismiss(place.id), TOAST_DURATION);
+  function dismiss(id) {
+    markSeen(userEmail, id);
+    setToasts(prev => prev.filter(t => t.id !== id));
   }
 
-  function dismiss(id) {
-    setToasts(prev => prev.filter(t => t.id !== id));
+  function scheduleToast(place) {
+    setToasts(prev => [...prev, place]);
+    setTimeout(() => dismiss(place.id), TOAST_DURATION);
   }
 
   return { toasts, dismiss };
