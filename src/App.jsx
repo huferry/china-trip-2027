@@ -6,6 +6,7 @@ import { useWishlist } from './hooks/useWishlist';
 import { useToasts } from './hooks/useToasts';
 import { useAllWishlists } from './hooks/useAllWishlists';
 import CityTab from './components/CityTab';
+import PlanMode from './components/PlanMode';
 import LoginPage from './components/LoginPage';
 import ToastContainer from './components/ToastContainer';
 
@@ -18,10 +19,11 @@ function App() {
   const [error, setError] = useState(null);
   const [activeCity, setActiveCity] = useState('Shenzhen');
   const [filter, setFilter] = useState('all');
+  const [appMode, setAppMode] = useState('info');
   const isAdmin = user?.email === import.meta.env.VITE_SUPERADMIN_EMAIL;
   const { items: wishlist, toggle: toggleWishlist } = useWishlist(user?.email);
   const { toasts, dismiss: dismissToast } = useToasts(user?.email);
-  const votersByPlace = useAllWishlists(isAdmin);
+  const votersByPlace = useAllWishlists(status === 'allowed');
 
   async function deletePlace(id) {
     await deleteDoc(doc(db, 'places', id));
@@ -66,45 +68,55 @@ function App() {
             <h1>China Trip 2027</h1>
             <p className="subtitle">Shenzhen · Guangzhou · Foshan &nbsp;|&nbsp; Jan 2027</p>
           </div>
-          <div className="header-user">
-            <span className="user-email">{user.email}</span>
-            <button className="signout-btn" onClick={signOut}>Sign out</button>
+          <div className="header-right">
+            <button
+              className="mode-switch-btn"
+              onClick={() => setAppMode(m => m === 'info' ? 'plan' : 'info')}
+            >
+              {appMode === 'info' ? '🗺️ Switch to Plan mode' : '📋 Switch to Info mode'}
+            </button>
+            <div className="header-user">
+              <span className="user-email">{user.email}</span>
+              <button className="signout-btn" onClick={signOut}>Sign out</button>
+            </div>
           </div>
         </div>
       </header>
 
-      <nav className="tab-bar">
-        <div className="tab-cities">
-          {CITIES.map(city => (
+      {appMode === 'info' && (
+        <nav className="tab-bar">
+          <div className="tab-cities">
+            {CITIES.map(city => (
+              <button
+                key={city}
+                className={`tab-btn${activeCity === city ? ' active' : ''}`}
+                onClick={() => setActiveCity(city)}
+              >
+                {city}
+              </button>
+            ))}
+          </div>
+          <div className="tab-filter">
             <button
-              key={city}
-              className={`tab-btn${activeCity === city ? ' active' : ''}`}
-              onClick={() => setActiveCity(city)}
+              className={`filter-btn${filter === 'all' ? ' active' : ''}`}
+              onClick={() => setFilter('all')}
             >
-              {city}
+              All
             </button>
-          ))}
-        </div>
-        <div className="tab-filter">
-          <button
-            className={`filter-btn${filter === 'all' ? ' active' : ''}`}
-            onClick={() => setFilter('all')}
-          >
-            All
-          </button>
-          <button
-            className={`filter-btn${filter === 'going' ? ' active' : ''}`}
-            onClick={() => setFilter('going')}
-          >
-            ★ Going
-          </button>
-        </div>
-      </nav>
+            <button
+              className={`filter-btn${filter === 'going' ? ' active' : ''}`}
+              onClick={() => setFilter('going')}
+            >
+              ★ Going
+            </button>
+          </div>
+        </nav>
+      )}
 
       <main className="content">
         {loading && <p className="loading">Loading…</p>}
         {error && <p className="error">Error: {error}</p>}
-        {!loading && !error && (
+        {!loading && !error && appMode === 'info' && (
           <CityTab
             places={cityPlaces}
             city={activeCity}
@@ -114,6 +126,14 @@ function App() {
             isAdmin={isAdmin}
             onDeletePlace={deletePlace}
             votersByPlace={votersByPlace}
+          />
+        )}
+        {!loading && !error && appMode === 'plan' && (
+          <PlanMode
+            places={places}
+            votersByPlace={votersByPlace}
+            isAdmin={isAdmin}
+            user={user}
           />
         )}
       </main>

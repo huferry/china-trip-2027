@@ -33,8 +33,13 @@ service cloud.firestore {
     }
 
     match /wishlists/{email} {
-      allow read: if (request.auth != null && request.auth.token.email == email) || isAdmin();
+      allow read: if isAllowed();
       allow write: if request.auth != null && request.auth.token.email == email;
+    }
+
+    match /plans/{document} {
+      allow read: if isAllowed();
+      allow write: if isAdmin();
     }
 
     match /invites/{token} {
