@@ -3,7 +3,7 @@ import GoingTab from './GoingTab';
 import PlanTab from './PlanTab';
 
 export default function PlanMode({ places, votersByPlace, isAdmin, user }) {
-  const [tab, setTab] = useState('going');
+  const [tab, setTab] = useState('plan');
 
   return (
     <div className="plan-mode">

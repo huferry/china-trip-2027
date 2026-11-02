@@ -19,7 +19,7 @@ function App() {
   const [error, setError] = useState(null);
   const [activeCity, setActiveCity] = useState('Shenzhen');
   const [filter, setFilter] = useState('all');
-  const [appMode, setAppMode] = useState('info');
+  const [appMode, setAppMode] = useState('plan');
   const isAdmin = user?.email === import.meta.env.VITE_SUPERADMIN_EMAIL;
   const { items: wishlist, toggle: toggleWishlist } = useWishlist(user?.email);
   const { toasts, dismiss: dismissToast } = useToasts(user?.email);
