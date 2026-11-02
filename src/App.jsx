@@ -20,7 +20,7 @@ function App() {
   const [error, setError] = useState(null);
   const [activeCity, setActiveCity] = useState('Shenzhen');
   const [filter, setFilter] = useState('all');
-  const [appMode, setAppMode] = useState('plan');
+  const [appMode, setAppMode] = useState('info');
   const isAdmin = user?.email === import.meta.env.VITE_SUPERADMIN_EMAIL;
   const { items: wishlist, toggle: toggleWishlist } = useWishlist(user?.email);
   const { toasts, dismiss: dismissToast } = useToasts(user?.email);
@@ -70,12 +70,14 @@ function App() {
             <p className="subtitle">Shenzhen · Guangzhou · Foshan &nbsp;|&nbsp; Jan 2027</p>
           </div>
           <div className="header-right">
-            <button
-              className="mode-switch-btn"
-              onClick={() => setAppMode(m => m === 'info' ? 'plan' : 'info')}
-            >
-              {appMode === 'info' ? '🗺️ Switch to Plan mode' : '📋 Switch to Info mode'}
-            </button>
+            {isAdmin && (
+              <button
+                className="mode-switch-btn"
+                onClick={() => setAppMode(m => m === 'info' ? 'plan' : 'info')}
+              >
+                {appMode === 'info' ? '🗺️ Switch to Plan mode' : '📋 Switch to Info mode'}
+              </button>
+            )}
             <div className="header-user">
               <span className="user-email">{user.email}</span>
               <button className="signout-btn" onClick={signOut}>Sign out</button>
