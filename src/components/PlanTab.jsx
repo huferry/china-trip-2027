@@ -50,13 +50,15 @@ SUGGESTED RESTAURANTS IN THE LIST (prioritize for meal suggestions):
 ${restaurants.join('\n') || 'None yet'}
 
 PLANNING RULES:
-- Start each day at 09:00
-- Format the itinerary using markdown tables with columns: Time | Place | Note | How to Get There
+- Jan 1 is arrival only — no sightseeing or planned activities on that day
+- Start each sightseeing day at 09:00
+- Format each day as ONE continuous markdown table with columns: Time | Place | Note | How to Get There
+  CRITICAL: Do NOT break the table mid-day. The entire day's schedule must be ONE unbroken table. Do not insert headings, sub-tables, or any other block elements inside a day's table.
 - Note column: brief description of the place + entrance ticket price if any + whether reservation is required
-- How to Get There column: give 2 alternatives: (1) Metro route with estimated price for 6 people, (2) Didi (taxi/rideshare) with estimated price for 6 people
+- How to Get There column: give 2 alternatives: (1) Metro route with estimated price for 6 people, (2) Didi with estimated price for 6 people
 - Walking to/from a metro station: always add 10 extra minutes to compensate for navigation
 - Walking through food/market/shopping areas: use slow walk pace (1.5 km/h ≈ ~40 min/km)
-- For lunch (around 12:00) and dinner (around 18:30): suggest 5 nearby restaurants. Prioritize restaurants from the suggested list above. Keep price mix — at most 2 options above $30/person.
+- Lunch (~12:00) and dinner (~18:30): in the Note cell for that time slot, list 5 nearby restaurant options as plain text (1. Name – style – price. 2. ...). Do NOT create a sub-table for restaurants.
 - Group days by city when possible to minimize travel between cities.
 - Be realistic about timing — don't over-schedule.
 

@@ -84,14 +84,16 @@ SUGGESTED RESTAURANTS (prioritize for meal suggestions):
 ${restaurants.join('\n') || 'None yet'}
 
 PLANNING RULES:
-- Start each day at 09:00
-- Format the itinerary using markdown tables with columns: Time | Place | Note | How to Get There
+- Jan 1 is arrival only — no sightseeing or planned activities whatsoever on that day
+- Start each sightseeing day at 09:00
+- Format each day as ONE continuous markdown table with columns: Time | Place | Note | How to Get There
+  CRITICAL: Do NOT break the table mid-day. The entire day's schedule (including lunch and dinner slots) must be ONE unbroken table. Do not insert headings, sub-tables, or any other block elements inside a day's table.
 - Note column: brief description + entrance ticket price if any + reservation required if any
 - How to Get There: give 2 alternatives: (1) Metro route with price for 6 people, (2) Didi (taxi) with price for 6 people
   EXCEPTION: For Foshan days, the group rents a car — state "Rental car" instead of metro/Didi for Foshan activities
 - Walking to/from metro station: add 10 extra minutes to compensate for navigation
 - Walking through food/market/shopping areas: slow pace (1.5 km/h ≈ 40 min/km)
-- Lunch (~12:00) and dinner (~18:30): suggest 5 nearby restaurants; prioritize the list above; at most 2 above $30/person
+- Lunch (~12:00) and dinner (~18:30): in the Note cell for that time slot, list 5 nearby restaurant options as a plain text numbered list (1. Name – style – price. 2. ...). Do NOT create a sub-table for restaurants.
 - Group Foshan day(s) together since a car is rented for that
 - Be realistic — don't over-schedule
 
