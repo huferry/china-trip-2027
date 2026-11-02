@@ -95,10 +95,20 @@ PLANNING RULES:
 - Group Foshan day(s) together since a car is rented for that
 - Be realistic — don't over-schedule
 
-When the user asks you to create the plan, call the save_plan tool with the complete markdown.`;
+Output the itinerary as clean markdown only. Do not output any tool calls, XML tags, or meta-commentary.`;
 
 // ── Call Claude (streaming, no tool use — capture full text) ──
 console.log('Calling Claude…\n');
+
+function cleanMarkdown(text) {
+  // Strip <antlr>…</antlr>, <thinking>…</thinking>, <tool_call>…</tool_call> blocks and any remaining XML-like tags
+  return text
+    .replace(/<antlr>[\s\S]*?<\/antlr>/gi, '')
+    .replace(/<thinking>[\s\S]*?<\/thinking>/gi, '')
+    .replace(/<tool_call>[\s\S]*?<\/tool_call>/gi, '')
+    .replace(/<[^>]+>/g, '')
+    .trim();
+}
 
 async function generate(messages) {
   let fullText = '';
@@ -116,7 +126,7 @@ async function generate(messages) {
 
   await stream.finalMessage();
   console.log('\n');
-  return fullText.trim();
+  return cleanMarkdown(fullText);
 }
 
 // Step 1: get outline
