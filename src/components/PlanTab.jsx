@@ -96,7 +96,7 @@ function AdminChat({ places, votersByPlace, onPlanSaved }) {
   useEffect(() => {
     getDocs(collection(db, 'hotels'))
       .then(snap => setHotels(snap.docs.map(d => d.data())))
-      .catch(() => {});
+      .catch(err => console.warn('Could not load hotels:', err.message));
   }, []);
 
   useEffect(() => {
