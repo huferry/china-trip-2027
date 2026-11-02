@@ -56,9 +56,13 @@ PLANNING RULES:
 - Walking to/from a metro station: always add 10 extra minutes to compensate for navigation
 - Walking through food/market/shopping areas: use slow walk pace (1.5 km/h ≈ ~40 min/km)
 - For lunch (around 12:00) and dinner (around 18:30): suggest 5 nearby restaurants. Prioritize restaurants from the suggested list above. Keep price mix — at most 2 options above $30/person.
-- When creating or updating the plan, always call the save_plan tool with the full updated plan markdown.
 - Group days by city when possible to minimize travel between cities.
-- Be realistic about timing — don't over-schedule.`;
+- Be realistic about timing — don't over-schedule.
+
+WORKFLOW — follow this strictly:
+1. When asked to create or update the plan, first describe your intended approach in a short summary: which places on which days, rough day structure, any trade-offs you are making. Ask: "Does this look good? Should I proceed?"
+2. Only call save_plan AFTER the user explicitly confirms (e.g. "yes", "go ahead", "looks good").
+3. For refinements to an existing plan, briefly state what you will change and confirm before saving.`;
 }
 
 const client = new Anthropic({
