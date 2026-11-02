@@ -1,6 +1,9 @@
+import { useInWindow } from '../contexts/InWindowContext';
+
 const CITY_ORDER = ['Shenzhen', 'Guangzhou', 'Foshan'];
 
 function LinkIcon({ url }) {
+  const { openUrl } = useInWindow();
   if (!url) return null;
   let domain;
   try { domain = new URL(url).hostname.replace(/^www\./, ''); } catch { return null; }
@@ -13,7 +16,7 @@ function LinkIcon({ url }) {
   };
   const label = labels[domain] ?? domain;
   return (
-    <a className="place-icon-link" href={url} target="_blank" rel="noopener noreferrer" title={label}>
+    <a className="place-icon-link" href={url} title={label} onClick={e => { e.preventDefault(); openUrl(url); }}>
       <img src={`https://www.google.com/s2/favicons?domain=${domain}&sz=16`} alt={label} width="14" height="14" />
     </a>
   );

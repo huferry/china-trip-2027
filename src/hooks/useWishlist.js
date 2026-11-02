@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { doc, getDoc, setDoc, arrayUnion, arrayRemove } from 'firebase/firestore';
+import { doc, onSnapshot, setDoc, arrayUnion, arrayRemove } from 'firebase/firestore';
 import { db } from '../firebase';
 
 export function useWishlist(userEmail) {
@@ -7,9 +7,10 @@ export function useWishlist(userEmail) {
 
   useEffect(() => {
     if (!userEmail) return;
-    getDoc(doc(db, 'wishlists', userEmail)).then(snap => {
-      if (snap.exists()) setItems(new Set(snap.data().items ?? []));
+    const unsub = onSnapshot(doc(db, 'wishlists', userEmail), snap => {
+      setItems(new Set(snap.exists() ? (snap.data().items ?? []) : []));
     });
+    return () => unsub();
   }, [userEmail]);
 
   async function toggle(placeId) {

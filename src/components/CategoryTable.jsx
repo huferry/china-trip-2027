@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import SuggestionDialog from './SuggestionDialog';
+import { useInWindow } from '../contexts/InWindowContext';
 
 function Stars({ rating }) {
   const max = 5;
@@ -12,6 +13,7 @@ function Stars({ rating }) {
 }
 
 function LinkIcon({ url }) {
+  const { openUrl } = useInWindow();
   if (!url) return null;
   let domain;
   try { domain = new URL(url).hostname.replace(/^www\./, ''); } catch { return null; }
@@ -27,9 +29,8 @@ function LinkIcon({ url }) {
     <a
       className="place-icon-link"
       href={url}
-      target="_blank"
-      rel="noopener noreferrer"
       title={label}
+      onClick={e => { e.preventDefault(); openUrl(url); }}
     >
       <img
         src={`https://www.google.com/s2/favicons?domain=${domain}&sz=16`}

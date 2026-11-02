@@ -7,6 +7,7 @@ import { useToasts } from './hooks/useToasts';
 import { useAllWishlists } from './hooks/useAllWishlists';
 import CityTab from './components/CityTab';
 import PlanMode from './components/PlanMode';
+import InWindowViewer from './components/InWindowViewer';
 import LoginPage from './components/LoginPage';
 import ToastContainer from './components/ToastContainer';
 
@@ -138,6 +139,7 @@ function App() {
         )}
       </main>
       <ToastContainer toasts={toasts} onDismiss={dismissToast} onNavigate={navigateToPlace} />
+      <InWindowViewer />
       <footer className="app-footer">
         v{__APP_VERSION__} &nbsp;·&nbsp; {__BUILD_DATE__}
       </footer>
