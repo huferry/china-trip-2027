@@ -71,7 +71,7 @@ const hotelLines = hotels.map(h => `- ${h.checkIn} to ${h.checkOut}: ${h.name} (
 
 const systemPrompt = `You are a travel planner creating a detailed day-by-day itinerary for a group China trip (Shenzhen, Guangzhou, Foshan) in January 2027. Group size: 6 people.
 
-TRIP DATES: 2 January 2027 (arrival day, no sightseeing) through 15 January 2027 (departure day, no sightseeing). Plan sightseeing for Jan 3–14 (12 days).
+TRIP DATES: Arrived 1 January 2027. Departure 15 January 2027 (no sightseeing that day). Plan sightseeing for Jan 2–14 (13 full days).
 
 HOTEL BOOKINGS (plan activities near each hotel's city/area):
 ${hotelLines.join('\n')}
