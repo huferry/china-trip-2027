@@ -113,6 +113,17 @@ General requirements for the plan:
 The toast notification for new places should be dismissed for each user when the user click on the close button.
 Right now, each time I logged in the toast notifications appear, even if I have dismissed it in the previous session.
 
+## Phase 7 - In Window view
+On the 'Info' mode, when the user click the link, it should open in a window-in-window so that the user can 
+close it. The user doesn't have to switch browser tab, or close browser tab. 
+
+### Fix 1 - Vote are not shown at first time
+When I just logged in then the votes aren't shown. I need to refreshed the page. 
+Votes are to be shown from the first time.
+
 ## Deployment
 Application should be deployed on Firebase as a web host.
 The data will be stored in the Firstore from the same project.
+
+**IMPORTANT:** Never run `/make-release` automatically at the end of a task.
+Only invoke it when the user explicitly asks to release or deploy.
