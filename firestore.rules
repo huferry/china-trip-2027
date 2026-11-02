@@ -42,6 +42,11 @@ service cloud.firestore {
       allow write: if isAdmin();
     }
 
+    match /hotels/{document} {
+      allow read: if isAllowed();
+      allow write: if isAdmin();
+    }
+
     match /invites/{token} {
       allow read: if request.auth != null;
       // Client may mark an invite as used (set usedBy + usedAt only)
