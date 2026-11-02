@@ -82,6 +82,37 @@ the original background color is still seen between the texts.
 ### Add 5
 When adding a new suggestion, try to add the links from: TripAdvisor.com, Trip.Com, Google Maps
 
+## Phase 6 - Plan mode
+The current mode is called 'info' mode and a new 'plan' mode will be introduced.
+The switch could be made by 'info'/'plan' icon next to the title, on the right side. This will be display with an icon
+and the text 'switch to ... mode'.
+
+The 'Plan' mode. On this mode there are two tabs: 'Going', 'Plan'.
+
+On the 'Going' tab, list all the places which are voted by the users.
+The list is grouped by the city. Display in a table format, with columns: place name, short description, how many voters. Also include the links, like on the 'info' mode.
+
+On the 'Plan' tab. 
+For all users: display the plan. When no plan is created show the text to inform that.
+For super admin, under the plan add text box, to give instruction to create a plan.
+Super admin will give instruction to Claude to create a plan based on the votes.
+This plan will be day by day plan. Super admin can refine the plan by chatting to claude.
+
+General requirements for the plan:
+- Itinerery should include columns: time, place name, note, how to get there
+- On 'note': short description of the place, entrence ticket if any, reservation necessity if any
+- How to get there: give 2 alternatives, with metro and with taxi (Didi). For both give price estimation for 6 people.
+- Start the day on 9:00 am
+- Walking on food, is slow walk
+- Upon calculating walking to metro station, add 10 minutes (to compensate lost the way)
+- For lunch and dinner, suggest 5 places near the place we are already at. Prioritize
+  dining places that are already suggested in the list. The prices should be mixed, only 2 places
+  which are above $30 per person
+
+### Fix 1
+The toast notification for new places should be dismissed for each user when the user click on the close button.
+Right now, each time I logged in the toast notifications appear, even if I have dismissed it in the previous session.
+
 ## Deployment
 Application should be deployed on Firebase as a web host.
 The data will be stored in the Firstore from the same project.
