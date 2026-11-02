@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import Anthropic from '@anthropic-ai/sdk';
 import Markdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebase';
 import { usePlan } from '../hooks/usePlan';
@@ -75,7 +76,7 @@ function ChatMessage({ msg }) {
   return (
     <div className={`chat-msg chat-msg--${msg.role}`}>
       <div className="chat-bubble">
-        <Markdown>{msg.content.trim()}</Markdown>
+        <Markdown remarkPlugins={[remarkGfm]}>{msg.content.trim()}</Markdown>
       </div>
     </div>
   );
@@ -218,7 +219,7 @@ export default function PlanTab({ places, votersByPlace, isAdmin }) {
         {loading
           ? <p className="loading">Loading plan…</p>
           : plan?.content
-            ? <Markdown>{plan.content}</Markdown>
+            ? <Markdown remarkPlugins={[remarkGfm]}>{plan.content}</Markdown>
             : <p className="plan-empty">No plan has been created yet.{isAdmin ? ' Use the assistant below to create one.' : ' Check back later.'}</p>
         }
       </div>
