@@ -7,10 +7,14 @@ export function usePlan() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsub = onSnapshot(doc(db, 'plans', 'current'), snap => {
-      setPlan(snap.exists() ? snap.data() : null);
-      setLoading(false);
-    });
+    const unsub = onSnapshot(
+      doc(db, 'plans', 'current'),
+      snap => {
+        setPlan(snap.exists() ? snap.data() : null);
+        setLoading(false);
+      },
+      () => setLoading(false), // permission error or offline — stop spinning
+    );
     return () => unsub();
   }, []);
 

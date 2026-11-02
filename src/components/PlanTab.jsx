@@ -189,14 +189,14 @@ function AdminChat({ places, votersByPlace, onPlanSaved }) {
 export default function PlanTab({ places, votersByPlace, isAdmin }) {
   const { plan, loading, savePlan } = usePlan();
 
-  if (loading) return <p className="loading">Loading plan…</p>;
-
   return (
     <div className="plan-tab">
       <div className="plan-display">
-        {plan?.content
-          ? <Markdown>{plan.content}</Markdown>
-          : <p className="plan-empty">No plan has been created yet.{isAdmin ? ' Use the assistant below to create one.' : ' Check back later.'}</p>
+        {loading
+          ? <p className="loading">Loading plan…</p>
+          : plan?.content
+            ? <Markdown>{plan.content}</Markdown>
+            : <p className="plan-empty">No plan has been created yet.{isAdmin ? ' Use the assistant below to create one.' : ' Check back later.'}</p>
         }
       </div>
       {isAdmin && (
