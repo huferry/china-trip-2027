@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { onAuthStateChanged, signInWithPopup, signOut as firebaseSignOut } from 'firebase/auth';
+import { onAuthStateChanged, signInWithPopup, signInAnonymously, signOut as firebaseSignOut } from 'firebase/auth';
 import { doc, getDoc, setDoc, updateDoc, Timestamp } from 'firebase/firestore';
 import { auth, db, googleProvider } from './firebase';
 
@@ -33,15 +33,27 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(undefined);
   const [status, setStatus] = useState('loading');
   const [authError, setAuthError] = useState(null);
+  const [isGuest, setIsGuest] = useState(false);
 
   useEffect(() => {
     return onAuthStateChanged(auth, async (firebaseUser) => {
       if (!firebaseUser) {
         setUser(null);
+        setIsGuest(false);
         setStatus(prev => (prev === 'denied' || prev === 'invalid-invite') ? prev : 'unauthenticated');
         return;
       }
+
+      // Anonymous sign-in = guest mode
+      if (firebaseUser.isAnonymous) {
+        setUser(firebaseUser);
+        setIsGuest(true);
+        setStatus('allowed');
+        return;
+      }
+
       setUser(firebaseUser);
+      setIsGuest(false);
 
       try {
         const userSnap = await getDoc(doc(db, 'allowedUsers', firebaseUser.email));
@@ -112,14 +124,24 @@ export function AuthProvider({ children }) {
     setStatus('denied');
   }
 
+  async function signInAsGuest() {
+    setAuthError(null);
+    try {
+      await signInAnonymously(auth);
+    } catch (err) {
+      setAuthError(err.message);
+    }
+  }
+
   async function signOut() {
     await firebaseSignOut(auth);
     setUser(null);
+    setIsGuest(false);
     setStatus('unauthenticated');
   }
 
   return (
-    <AuthContext.Provider value={{ user, status, authError, signIn, signOut }}>
+    <AuthContext.Provider value={{ user, status, authError, isGuest, signIn, signInAsGuest, signOut }}>
       {children}
     </AuthContext.Provider>
   );

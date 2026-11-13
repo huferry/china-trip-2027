@@ -6,6 +6,11 @@ service cloud.firestore {
         exists(/databases/$(database)/documents/allowedUsers/$(request.auth.token.email));
     }
 
+    function isGuest() {
+      return request.auth != null &&
+        request.auth.token.firebase.sign_in_provider == 'anonymous';
+    }
+
     // Superadmin is identified by email (configurable via VITE_SUPERADMIN_EMAIL in the app;
     // hardcoded here because Firestore rules don't support environment variables)
     function isAdmin() {
@@ -13,7 +18,7 @@ service cloud.firestore {
     }
 
     match /places/{document} {
-      allow read: if isAllowed();
+      allow read: if isAllowed() || isGuest();
       allow create: if isAllowed();
       allow delete: if isAdmin();
       allow update: if false;
@@ -33,17 +38,17 @@ service cloud.firestore {
     }
 
     match /wishlists/{email} {
-      allow read: if isAllowed();
+      allow read: if isAllowed() || isGuest();
       allow write: if request.auth != null && request.auth.token.email == email;
     }
 
     match /plans/{document} {
-      allow read: if isAllowed();
+      allow read: if isAllowed() || isGuest();
       allow write: if isAdmin();
     }
 
     match /hotels/{document} {
-      allow read: if isAllowed();
+      allow read: if isAllowed() || isGuest();
       allow write: if isAdmin();
     }
 

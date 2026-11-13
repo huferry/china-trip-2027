@@ -6,6 +6,12 @@ A private trip-planning web app for our China trip in January 2027 — Shenzhen,
 
 ## Release Notes
 
+### v1.5.2
+- Phase 9: Guest mode — "Enter as guest" link on login page
+- Guests see the plan read-only: no voting, no suggestions, no Claude chat, no mode switch, no subtabs
+- Guest TTS falls back to browser speech synthesis (no Cloud TTS charges)
+- Firestore rules updated to allow anonymous users read-only access
+
 ### v1.5.1
 - Text-to-speech upgraded to Google Cloud WaveNet (en-US-Wavenet-H) for natural-sounding narration
 - Falls back to browser speech synthesis if Cloud TTS is unavailable

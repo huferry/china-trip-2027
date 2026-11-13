@@ -86,7 +86,7 @@ function DeleteBtn({ onDelete }) {
   );
 }
 
-function PlaceRow({ place, wishlist, onToggleWishlist, isAdmin, onDelete, voters }) {
+function PlaceRow({ place, wishlist, onToggleWishlist, isAdmin, isGuest, onDelete, voters }) {
   const active = wishlist?.has(place.id);
   return (
     <tr id={`place-${place.id}`} className={active ? 'row--selected' : ''}>
@@ -95,7 +95,7 @@ function PlaceRow({ place, wishlist, onToggleWishlist, isAdmin, onDelete, voters
       <td className="col-desc" data-label="Description">{place.description || ''}</td>
       <td className="col-practical" data-label="Practical">{place.practical || ''}</td>
       <td className="col-vote">
-        <WantToGoBtn placeId={place.id} wishlist={wishlist} onToggle={onToggleWishlist} />
+        {!isGuest && <WantToGoBtn placeId={place.id} wishlist={wishlist} onToggle={onToggleWishlist} />}
         {isAdmin && voters?.length > 0 && (
           <div className="voters">{voters.join(', ')}</div>
         )}
@@ -126,7 +126,7 @@ function RestaurantRow({ place, isAdmin, onDelete }) {
   );
 }
 
-function CategoryTable({ category, places, city, wishlist, onToggleWishlist, onPlaceAdded, isAdmin, onDeletePlace, votersByPlace }) {
+function CategoryTable({ category, places, city, wishlist, onToggleWishlist, onPlaceAdded, isAdmin, isGuest, onDeletePlace, votersByPlace }) {
   const [showDialog, setShowDialog] = useState(false);
   const isRestaurant = places.some(p => p.type === 'restaurant');
 
@@ -134,7 +134,7 @@ function CategoryTable({ category, places, city, wishlist, onToggleWishlist, onP
     <section className="category-section">
       <div className="category-header">
         <h3>{category}</h3>
-        <button className="suggest-btn" onClick={() => setShowDialog(true)}>+ Make suggestion</button>
+        {!isGuest && <button className="suggest-btn" onClick={() => setShowDialog(true)}>+ Make suggestion</button>}
       </div>
       {showDialog && (
         <SuggestionDialog
@@ -175,6 +175,7 @@ function CategoryTable({ category, places, city, wishlist, onToggleWishlist, onP
                   wishlist={wishlist}
                   onToggleWishlist={onToggleWishlist}
                   isAdmin={isAdmin}
+                  isGuest={isGuest}
                   onDelete={onDeletePlace}
                   voters={votersByPlace?.get(place.id)}
                 />

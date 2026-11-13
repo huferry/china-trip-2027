@@ -14,16 +14,16 @@ import ToastContainer from './components/ToastContainer';
 const CITIES = ['Shenzhen', 'Guangzhou', 'Foshan'];
 
 function App() {
-  const { user, status, signOut } = useAuth();
+  const { user, status, isGuest, signOut } = useAuth();
   const [places, setPlaces] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [activeCity, setActiveCity] = useState('Shenzhen');
   const [filter, setFilter] = useState('all');
   const [appMode, setAppMode] = useState('plan');
-  const isAdmin = user?.email === import.meta.env.VITE_SUPERADMIN_EMAIL;
-  const { items: wishlist, toggle: toggleWishlist } = useWishlist(user?.email);
-  const { toasts, dismiss: dismissToast } = useToasts(user?.email);
+  const isAdmin = !isGuest && user?.email === import.meta.env.VITE_SUPERADMIN_EMAIL;
+  const { items: wishlist, toggle: toggleWishlist } = useWishlist(isGuest ? null : user?.email);
+  const { toasts, dismiss: dismissToast } = useToasts(isGuest ? null : user?.email);
   const votersByPlace = useAllWishlists(status === 'allowed');
 
   async function deletePlace(id) {
@@ -70,15 +70,17 @@ function App() {
             <p className="subtitle">Shenzhen · Guangzhou · Foshan &nbsp;|&nbsp; Jan 2027</p>
           </div>
           <div className="header-right">
-            <button
-              className="mode-switch-btn"
-              onClick={() => setAppMode(m => m === 'info' ? 'plan' : 'info')}
-            >
-              {appMode === 'info' ? '🗺️ Switch to Plan mode' : '📋 Switch to Info mode'}
-            </button>
+            {!isGuest && (
+              <button
+                className="mode-switch-btn"
+                onClick={() => setAppMode(m => m === 'info' ? 'plan' : 'info')}
+              >
+                {appMode === 'info' ? '🗺️ Switch to Plan mode' : '📋 Switch to Info mode'}
+              </button>
+            )}
             <div className="header-user">
-              <span className="user-email">{user.email}</span>
-              <button className="signout-btn" onClick={signOut}>Sign out</button>
+              <span className="user-email">{isGuest ? 'Guest' : user.email}</span>
+              <button className="signout-btn" onClick={signOut}>{isGuest ? 'Exit' : 'Sign out'}</button>
             </div>
           </div>
         </div>
@@ -125,6 +127,7 @@ function App() {
             onToggleWishlist={toggleWishlist}
             onPlaceAdded={place => setPlaces(prev => [...prev, place])}
             isAdmin={isAdmin}
+            isGuest={isGuest}
             onDeletePlace={deletePlace}
             votersByPlace={votersByPlace}
           />
@@ -134,6 +137,7 @@ function App() {
             places={places}
             votersByPlace={votersByPlace}
             isAdmin={isAdmin}
+            isGuest={isGuest}
             user={user}
           />
         )}

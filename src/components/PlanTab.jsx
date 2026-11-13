@@ -419,7 +419,7 @@ function makePlanComponents(placeMap, onOpenStory) {
   };
 }
 
-export default function PlanTab({ places, votersByPlace, isAdmin }) {
+export default function PlanTab({ places, votersByPlace, isAdmin, isGuest }) {
   const { plan, loading, savePlan } = usePlan();
   const days = plan?.content ? parseDays(plan.content) : [];
   const [storyPlace, setStoryPlace] = useState(null);
@@ -454,6 +454,7 @@ export default function PlanTab({ places, votersByPlace, isAdmin }) {
         <StoryDialog
           stories={storyPlace.story}
           placeName={storyPlace.name}
+          isGuest={isGuest}
           onClose={() => setStoryPlace(null)}
         />
       )}

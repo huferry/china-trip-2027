@@ -153,7 +153,14 @@ When showing story, the story text should be selected by default.
 Make the app available from domain cn27.fun. This domain redirect to the firebase's hosting.
 Currently the SSO does not work.
 
-## Phase 9 - Demo 
+## Phase 9 - Guest mode
+Create a guest mode. On the login page add link 'Enter as guest'.
+As a guest the user can't modify anything, everything is read-only.
+The TTS is fallback to the robotic speech. Interaction with Claude is disabled. User can't make suggestions.
+
+### Fix 1 
+The 'Change to info' should not be available for guest. 
+'Going' and 'Plan' tab under 'Plan' mode should not be not avialable for Guest 
 
 ## Deployment
 Application should be deployed on Firebase as a web host.

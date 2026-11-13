@@ -11,7 +11,7 @@ const GoogleIcon = () => (
 );
 
 export default function LoginPage({ status }) {
-  const { signIn, authError } = useAuth();
+  const { signIn, signInAsGuest, authError } = useAuth();
   const hasInvite = new URLSearchParams(window.location.search).has('invite');
 
   let message, hint, showButton;
@@ -50,6 +50,7 @@ export default function LoginPage({ status }) {
             Sign in with Google
           </button>
         )}
+        <button className="guest-link" onClick={signInAsGuest}>Enter as guest</button>
       </div>
     </div>
   );

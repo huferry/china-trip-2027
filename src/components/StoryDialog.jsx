@@ -57,7 +57,7 @@ function getBestVoice() {
   return english[0];
 }
 
-export default function StoryDialog({ stories, placeName, onClose }) {
+export default function StoryDialog({ stories, placeName, isGuest, onClose }) {
   const [idx, setIdx] = useState(0);
   const [speaking, setSpeaking] = useState(false);
   const [voice, setVoice] = useState(null);
@@ -106,8 +106,8 @@ export default function StoryDialog({ stories, placeName, onClose }) {
       setSpeaking(false);
     };
 
-    // Try Google Cloud TTS first
-    const audio = await speakWithCloudTTS(story.text, onEnd).catch(() => null);
+    // Try Google Cloud TTS first (not for guests)
+    const audio = isGuest ? null : await speakWithCloudTTS(story.text, onEnd).catch(() => null);
     if (audio) {
       audioRef.current = audio;
       return;
