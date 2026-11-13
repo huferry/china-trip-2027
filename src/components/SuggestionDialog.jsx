@@ -28,10 +28,12 @@ const ADD_PLACE_TOOL = {
           source:  { type: 'string',        description: 'TripAdvisor URL for this place, or best available source URL' },
           tripcom: { type: ['string','null'], description: 'Trip.com attraction or restaurant page URL, or null if not found' },
           maps:    { type: ['string','null'], description: 'Google Maps URL using https://maps.google.com/?q=lat,lng format with verified coordinates, or null if not found' },
+          amap:    { type: ['string','null'], description: 'Amap (高德地图) POI page URL using https://www.amap.com/place/POI_ID format, or null if unknown' },
           photos:  { type: 'string',        description: 'Wikimedia Commons search URL for photos' },
         },
-        required: ['source', 'tripcom', 'maps', 'photos'],
+        required: ['source', 'tripcom', 'maps', 'amap', 'photos'],
       },
+      address_zh: { type: ['string','null'], description: 'Chinese street address of the place for navigation, or null if unknown' },
     },
     required: ['name', 'name_zh', 'city', 'category', 'type', 'rating', 'description', 'practical', 'links'],
   },
@@ -56,8 +58,10 @@ Your task:
    - source: TripAdvisor URL (e.g. https://www.tripadvisor.com/Attraction_Review-...) or best authoritative source
    - tripcom: Trip.com attraction page (https://www.trip.com/travel-guide/attraction/city/slug-id/) or restaurant page (https://www.trip.com/restaurant/china/city/detail/slug-id/), null if unknown
    - maps: Google Maps URL as https://maps.google.com/?q=LAT,LNG using the place's precise coordinates, null if unsure
+   - amap: Amap POI page URL as https://www.amap.com/place/POI_ID if you know the Amap POI ID, null if unknown
    - photos: Wikimedia Commons search URL: https://commons.wikimedia.org/w/index.php?search=Place+Name+City&title=Special:MediaSearch&type=image
-   Only include URLs you are confident about. Use null for tripcom/maps when unsure.`;
+   Only include URLs you are confident about. Use null for tripcom/maps/amap when unsure.
+9. For address_zh: provide the Chinese street address (e.g. "广州市海珠区阅江西路222号"), null if unsure.`;
 }
 
 function Message({ msg }) {

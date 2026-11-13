@@ -6,6 +6,13 @@ A private trip-planning web app for our China trip in January 2027 — Shenzhen,
 
 ## Release Notes
 
+### v1.4.1
+- Amap (高德地图) POI links added for 27 major attractions across Shenzhen, Guangzhou, and Foshan
+- Amap icon now shows alongside TripAdvisor, Trip.com, and Google Maps on Info and Going pages
+- Plan mode cards now show place links (TripAdvisor, Trip.com, Google Maps, Amap) matched from the itinerary
+- Plan mode cards show Chinese address with a copy-to-clipboard button (for easy Didi input)
+- New suggestions now include Amap link and Chinese address fields
+
 ### v1.4.0
 - Plan mode is now the default view when opening the app
 - Plan mode is visible to all users (previously admin-only)

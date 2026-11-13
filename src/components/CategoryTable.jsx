@@ -23,6 +23,7 @@ function LinkIcon({ url }) {
     'trip.com': 'Trip.com',
     'guide.michelin.com': 'Michelin',
     'maps.google.com': 'Google Maps',
+    'amap.com': 'Amap',
   };
   const label = labels[domain] ?? domain;
   return (
@@ -43,7 +44,7 @@ function LinkIcon({ url }) {
 }
 
 function NameCell({ place }) {
-  const urls = [place.links?.source, place.links?.tripcom, place.links?.maps].filter(Boolean);
+  const urls = [place.links?.source, place.links?.tripcom, place.links?.maps, place.links?.amap].filter(Boolean);
   return (
     <span>
       {place.name}

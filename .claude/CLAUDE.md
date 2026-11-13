@@ -126,6 +126,20 @@ Make 'Plan' mode the default when user opens the application.
 Make 'Plan' visible for all users.
 Claude interaction within the 'Plan' mode still only visible for super admin.
 
+### Add 1
+Upon opening, bring up to the today's plan. When today is before the plan, or after the trip, navigate to the first day.
+
+### Add 2
+For every place create a link to Amap. This should not be the 'search' link but the link to the POI.
+This link should be added to the 'Info Page'.
+
+### Add 3
+Include links also on the 'Plan' mode.
+
+### Add 4
+On the 'Plan' mode, add a last row 'Address'. This should be the address of the place. Next to it add a copy button, to copy
+the address to clipboard. My intention is to make it easy to enter the address on Didi.
+
 ## Deployment
 Application should be deployed on Firebase as a web host.
 The data will be stored in the Firstore from the same project.

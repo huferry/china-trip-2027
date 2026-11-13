@@ -13,6 +13,7 @@ function LinkIcon({ url }) {
     'trip.com': 'Trip.com',
     'guide.michelin.com': 'Michelin',
     'maps.google.com': 'Google Maps',
+    'amap.com': 'Amap',
   };
   const label = labels[domain] ?? domain;
   return (
@@ -23,7 +24,7 @@ function LinkIcon({ url }) {
 }
 
 function PlaceLinks({ place }) {
-  const urls = [place.links?.source, place.links?.tripcom, place.links?.maps].filter(Boolean);
+  const urls = [place.links?.source, place.links?.tripcom, place.links?.maps, place.links?.amap].filter(Boolean);
   if (urls.length === 0) return null;
   return (
     <div className="place-icons">

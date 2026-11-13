@@ -1,10 +1,11 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useMemo } from 'react';
 import Anthropic from '@anthropic-ai/sdk';
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebase';
 import { usePlan } from '../hooks/usePlan';
+import { useInWindow } from '../contexts/InWindowContext';
 
 const SAVE_PLAN_TOOL = {
   name: 'save_plan',
@@ -212,16 +213,210 @@ function AdminChat({ places, votersByPlace, onPlanSaved }) {
   );
 }
 
+function parseDays(content) {
+  if (!content) return [];
+  const re = /^## (Jan \d+) \((\w+)\) — (.+)$/gm;
+  const days = [];
+  let m;
+  while ((m = re.exec(content))) {
+    const slug = m[1].toLowerCase().replace(' ', '-');
+    days.push({ label: m[1], day: m[2].slice(0, 3), slug, title: m[3] });
+  }
+  return days;
+}
+
+function DayNav({ days }) {
+  const [visible, setVisible] = useState(false);
+  const [activeSlug, setActiveSlug] = useState(null);
+
+  useEffect(() => {
+    if (!days.length) return;
+
+    function onScroll() {
+      const sentinel = document.getElementById('plan-day-nav-sentinel');
+      if (sentinel) {
+        setVisible(sentinel.getBoundingClientRect().bottom < 0);
+      }
+
+      // find active day: last heading whose top is above 80px from viewport top
+      let current = null;
+      for (const d of days) {
+        const el = document.getElementById(d.slug);
+        if (el && el.getBoundingClientRect().top < 80) current = d.slug;
+      }
+      setActiveSlug(current);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll(); // check immediately
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [days]);
+
+  if (!days.length) return null;
+
+  return (
+    <nav className={`plan-day-nav${visible ? ' plan-day-nav--visible' : ''}`}>
+      {days.map(d => (
+        <button
+          key={d.slug}
+          className={`plan-day-nav-btn${activeSlug === d.slug ? ' active' : ''}`}
+          title={`${d.label} — ${d.title}`}
+          onClick={() => {
+            const el = document.getElementById(d.slug);
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }}
+        >
+          {d.label.replace('Jan ', '')}
+        </button>
+      ))}
+    </nav>
+  );
+}
+
+function HeadingWithId({ children, ...props }) {
+  const text = String(children);
+  const m = text.match(/^(Jan \d+)/);
+  const id = m ? m[1].toLowerCase().replace(' ', '-') : undefined;
+  return <h2 id={id} {...props}>{children}</h2>;
+}
+
+function extractText(node) {
+  if (typeof node === 'string') return node;
+  if (typeof node === 'number') return String(node);
+  if (Array.isArray(node)) return node.map(extractText).join('');
+  if (node?.props?.children) return extractText(node.props.children);
+  return '';
+}
+
+function findPlaceByText(text, placeMap) {
+  if (!text) return null;
+  const t = text.trim();
+  if (!t || t.length < 2) return null;
+  // Try exact Chinese name match
+  for (const p of placeMap.values()) {
+    if (p.name_zh && t.includes(p.name_zh)) return p;
+  }
+  // Try English name match (case-insensitive, partial)
+  const lower = t.toLowerCase();
+  for (const p of placeMap.values()) {
+    if (lower.includes(p.name.toLowerCase())) return p;
+  }
+  return null;
+}
+
+const LINK_LABELS = {
+  'tripadvisor.com': 'TripAdvisor',
+  'en.wikipedia.org': 'Wikipedia',
+  'trip.com': 'Trip.com',
+  'guide.michelin.com': 'Michelin',
+  'maps.google.com': 'Google Maps',
+  'amap.com': 'Amap',
+};
+
+function PlanLinkIcon({ url }) {
+  const { openUrl } = useInWindow();
+  if (!url) return null;
+  let domain;
+  try { domain = new URL(url).hostname.replace(/^www\./, ''); } catch { return null; }
+  const label = LINK_LABELS[domain] ?? domain;
+  return (
+    <a className="place-icon-link" href={url} title={label} onClick={e => { e.preventDefault(); openUrl(url); }}>
+      <img src={`https://www.google.com/s2/favicons?domain=${domain}&sz=16`} alt={label} width="14" height="14" />
+    </a>
+  );
+}
+
+function PlanPlaceLinks({ place }) {
+  const urls = [place.links?.source, place.links?.tripcom, place.links?.maps, place.links?.amap].filter(Boolean);
+  if (!urls.length) return null;
+  return (
+    <div className="place-icons plan-place-icons">
+      {urls.map(url => <PlanLinkIcon key={url} url={url} />)}
+    </div>
+  );
+}
+
+function CopyButton({ text }) {
+  const [copied, setCopied] = useState(false);
+  const handleCopy = () => {
+    navigator.clipboard.writeText(text).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    });
+  };
+  return (
+    <button className="copy-addr-btn" onClick={handleCopy} title="Copy address for Didi">
+      {copied
+        ? <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+        : <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" /><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" /></svg>
+      }
+    </button>
+  );
+}
+
+function makePlanComponents(placeMap) {
+  return {
+    h2: HeadingWithId,
+    tr: ({ children, ...props }) => {
+      const cells = Array.isArray(children) ? children : [children];
+      // Skip header rows (th elements) and rows with fewer than 2 cells
+      const realCells = cells.filter(c => c?.props);
+      if (realCells.length < 2) return <tr {...props}>{children}</tr>;
+
+      // Extract text from 2nd cell (Place column)
+      const placeText = extractText(realCells[1]?.props?.children);
+      const place = findPlaceByText(placeText, placeMap);
+
+      if (!place) return <tr {...props}>{children}</tr>;
+
+      const hasLinks = [place.links?.source, place.links?.tripcom, place.links?.maps, place.links?.amap].some(Boolean);
+      const hasAddr = !!place.address_zh;
+
+      if (!hasLinks && !hasAddr) return <tr {...props}>{children}</tr>;
+
+      return (
+        <tr {...props} className="plan-card--has-extras">
+          {children}
+          {(hasLinks || hasAddr) && (
+            <td className="plan-card-extras">
+              {hasLinks && <PlanPlaceLinks place={place} />}
+              {hasAddr && (
+                <span className="plan-card-address">
+                  {place.address_zh}
+                  <CopyButton text={place.address_zh} />
+                </span>
+              )}
+            </td>
+          )}
+        </tr>
+      );
+    },
+  };
+}
+
 export default function PlanTab({ places, votersByPlace, isAdmin }) {
   const { plan, loading, savePlan } = usePlan();
+  const days = plan?.content ? parseDays(plan.content) : [];
+
+  const placeMap = useMemo(() => {
+    const map = new Map();
+    places.forEach(p => map.set(p.id, p));
+    return map;
+  }, [places]);
+
+  const mdComponents = useMemo(() => makePlanComponents(placeMap), [placeMap]);
 
   return (
     <div className="plan-tab">
+      <DayNav days={days} />
       <div className="plan-display">
         {loading
           ? <p className="loading">Loading plan…</p>
           : plan?.content
-            ? <Markdown remarkPlugins={[remarkGfm]}>{plan.content}</Markdown>
+            ? <>
+                <div id="plan-day-nav-sentinel" style={{ height: 1 }} />
+                <Markdown remarkPlugins={[remarkGfm]} components={mdComponents}>{plan.content}</Markdown>
+              </>
             : <p className="plan-empty">No plan has been created yet.{isAdmin ? ' Use the assistant below to create one.' : ' Check back later.'}</p>
         }
       </div>
