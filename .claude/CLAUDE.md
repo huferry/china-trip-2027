@@ -121,6 +121,11 @@ close it. The user doesn't have to switch browser tab, or close browser tab.
 When I just logged in then the votes aren't shown. I need to refreshed the page. 
 Votes are to be shown from the first time.
 
+## Phase 7 - Release Plan to all users
+Make 'Plan' mode the default when user opens the application.
+Make 'Plan' visible for all users.
+Claude interaction within the 'Plan' mode still only visible for super admin.
+
 ## Deployment
 Application should be deployed on Firebase as a web host.
 The data will be stored in the Firstore from the same project.

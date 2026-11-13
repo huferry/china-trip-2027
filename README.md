@@ -6,6 +6,11 @@ A private trip-planning web app for our China trip in January 2027 — Shenzhen,
 
 ## Release Notes
 
+### v1.4.0
+- Plan mode is now the default view when opening the app
+- Plan mode is visible to all users (previously admin-only)
+- Claude plan assistant chat remains admin-only
+
 ### v1.3.7
 - Phase 7 rework: clicking a link opens a right-side drawer panel within the app (no new tabs or popups)
 - Drawer shows site name, favicon, URL, and a prominent "Open in new tab" button
