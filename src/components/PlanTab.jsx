@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useMemo } from 'react';
+import { useState, useRef, useEffect, useMemo, useCallback } from 'react';
 import Anthropic from '@anthropic-ai/sdk';
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -6,6 +6,7 @@ import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebase';
 import { usePlan } from '../hooks/usePlan';
 import { useInWindow } from '../contexts/InWindowContext';
+import StoryDialog from './StoryDialog';
 
 const SAVE_PLAN_TOOL = {
   name: 'save_plan',
@@ -354,16 +355,25 @@ function CopyButton({ text }) {
   );
 }
 
-function makePlanComponents(placeMap) {
+function StoryIcon({ onClick }) {
+  return (
+    <button className="story-icon-btn" onClick={onClick} title="Read story">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+      </svg>
+    </button>
+  );
+}
+
+function makePlanComponents(placeMap, onOpenStory) {
   return {
     h2: HeadingWithId,
     tr: ({ children, ...props }) => {
       const cells = Array.isArray(children) ? children : [children];
-      // Skip header rows (th elements) and rows with fewer than 2 cells
       const realCells = cells.filter(c => c?.props);
       if (realCells.length < 2) return <tr {...props}>{children}</tr>;
 
-      // Extract text from 2nd cell (Place column)
       const placeText = extractText(realCells[1]?.props?.children);
       const place = findPlaceByText(placeText, placeMap);
 
@@ -371,13 +381,28 @@ function makePlanComponents(placeMap) {
 
       const hasLinks = [place.links?.source, place.links?.tripcom, place.links?.maps, place.links?.amap].some(Boolean);
       const hasAddr = !!place.address_zh;
+      const hasStory = place.story?.length > 0;
+      const hasExtras = hasLinks || hasAddr;
 
-      if (!hasLinks && !hasAddr) return <tr {...props}>{children}</tr>;
+      if (!hasExtras && !hasStory) return <tr {...props}>{children}</tr>;
+
+      // Inject story icon into the Place cell (2nd cell)
+      const enhanced = hasStory
+        ? cells.map((cell, i) => {
+            if (i !== 1 || !cell?.props) return cell;
+            return (
+              <td key="place-cell" {...(cell.props.style ? { style: cell.props.style } : {})}>
+                {cell.props.children}
+                <StoryIcon onClick={() => onOpenStory(place)} />
+              </td>
+            );
+          })
+        : children;
 
       return (
-        <tr {...props} className="plan-card--has-extras">
-          {children}
-          {(hasLinks || hasAddr) && (
+        <tr {...props} className={hasExtras ? 'plan-card--has-extras' : undefined}>
+          {enhanced}
+          {hasExtras && (
             <td className="plan-card-extras">
               {hasLinks && <PlanPlaceLinks place={place} />}
               {hasAddr && (
@@ -397,6 +422,7 @@ function makePlanComponents(placeMap) {
 export default function PlanTab({ places, votersByPlace, isAdmin }) {
   const { plan, loading, savePlan } = usePlan();
   const days = plan?.content ? parseDays(plan.content) : [];
+  const [storyPlace, setStoryPlace] = useState(null);
 
   const placeMap = useMemo(() => {
     const map = new Map();
@@ -404,7 +430,8 @@ export default function PlanTab({ places, votersByPlace, isAdmin }) {
     return map;
   }, [places]);
 
-  const mdComponents = useMemo(() => makePlanComponents(placeMap), [placeMap]);
+  const openStory = useCallback((place) => setStoryPlace(place), []);
+  const mdComponents = useMemo(() => makePlanComponents(placeMap, openStory), [placeMap, openStory]);
 
   return (
     <div className="plan-tab">
@@ -422,6 +449,13 @@ export default function PlanTab({ places, votersByPlace, isAdmin }) {
       </div>
       {isAdmin && (
         <AdminChat places={places} votersByPlace={votersByPlace} onPlanSaved={savePlan} />
+      )}
+      {storyPlace && (
+        <StoryDialog
+          stories={storyPlace.story}
+          placeName={storyPlace.name}
+          onClose={() => setStoryPlace(null)}
+        />
       )}
     </div>
   );

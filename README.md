@@ -6,6 +6,14 @@ A private trip-planning web app for our China trip in January 2027 — Shenzhen,
 
 ## Release Notes
 
+### v1.5.0
+- Phase 8: Story feature — places with stories show a book icon in plan cards
+- Clicking the story icon opens a dialog with the full narrative text
+- Navigate between multiple stories per place with prev/next arrows
+- Read-aloud button uses text-to-speech (prefers premium/enhanced system voices)
+- Keyboard support: Escape to close, arrow keys to navigate stories
+- Chinese addresses added for all 106 places in the database
+
 ### v1.4.1
 - Amap (高德地图) POI links added for 27 major attractions across Shenzhen, Guangzhou, and Foshan
 - Amap icon now shows alongside TripAdvisor, Trip.com, and Google Maps on Info and Going pages

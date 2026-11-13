@@ -140,6 +140,12 @@ Include links also on the 'Plan' mode.
 On the 'Plan' mode, add a last row 'Address'. This should be the address of the place. Next to it add a copy button, to copy
 the address to clipboard. My intention is to make it easy to enter the address on Didi.
 
+## Phase 8 - Story
+Some places have stories. For these places in 'Plan' mode, right next to the title, add the 'Story' icon.
+When opened, it will open a popup dialog. On this dialog display the text of the story, underneath it navigation
+to the next or previous story of that place. Right next to the navigations, the speak icon. When the speak icon is
+clicked then the text will be audibly read.
+
 ## Deployment
 Application should be deployed on Firebase as a web host.
 The data will be stored in the Firstore from the same project.
