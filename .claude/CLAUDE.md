@@ -146,6 +146,15 @@ When opened, it will open a popup dialog. On this dialog display the text of the
 to the next or previous story of that place. Right next to the navigations, the speak icon. When the speak icon is
 clicked then the text will be audibly read.
 
+### Add 1
+When showing story, the story text should be selected by default.
+
+### Fix 2 - Enable cn27.fun
+Make the app available from domain cn27.fun. This domain redirect to the firebase's hosting.
+Currently the SSO does not work.
+
+## Phase 9 - Demo 
+
 ## Deployment
 Application should be deployed on Firebase as a web host.
 The data will be stored in the Firstore from the same project.

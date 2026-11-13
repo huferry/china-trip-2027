@@ -1,13 +1,41 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
+
+const TTS_KEY = import.meta.env.VITE_GOOGLE_TTS_KEY;
+const TTS_VOICE = 'en-US-Wavenet-H';
 
 /**
- * Pick the best English voice available on the device.
- * Preference order:
- *  1. Premium / Enhanced / Neural voices (iOS/macOS — sound natural)
- *  2. Known good quality voices (Ava, Zoe, Samantha, Karen, Daniel)
- *  3. Any real voice (skip macOS novelty voices like Boing, Bells, etc.)
- *  4. Default fallback
+ * Speak text using Google Cloud TTS (WaveNet).
+ * Returns an Audio element that can be paused/stopped.
+ * Falls back to Web Speech API if the Cloud call fails or no key is set.
  */
+async function speakWithCloudTTS(text, onEnd) {
+  if (!TTS_KEY) return null;
+
+  const res = await fetch(
+    `https://texttospeech.googleapis.com/v1/text:synthesize?key=${TTS_KEY}`,
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        input: { text },
+        voice: { languageCode: 'en-US', name: TTS_VOICE },
+        audioConfig: { audioEncoding: 'MP3', speakingRate: 0.95 },
+      }),
+    }
+  );
+
+  if (!res.ok) return null;
+
+  const { audioContent } = await res.json();
+  const audio = new Audio(`data:audio/mp3;base64,${audioContent}`);
+  audio.onended = onEnd;
+  audio.onerror = onEnd;
+  audio.play();
+  return audio;
+}
+
+// --- Web Speech API fallback ---
+
 const NOVELTY = /\b(albert|bad news|bahh|bells|boing|bubbles|cellos|good news|hysterical|jester|organ|superstar|trinoids|whisper|wobble|zarvox|ralph|fred)\b/i;
 const PREFERRED = /\b(ava|zoe|samantha|karen|daniel|moira|tessa|serena|kate)\b/i;
 
@@ -16,20 +44,16 @@ function getBestVoice() {
   const english = voices.filter(v => v.lang.startsWith('en'));
   if (!english.length) return null;
 
-  // 1. Premium/Enhanced/Neural voices (best quality on Apple devices)
   const premium = english.find(v =>
     /premium|enhanced|natural|neural/i.test(v.name)
   );
   if (premium) return premium;
 
-  // 2. Known good-quality voice names
   const real = english.filter(v => !NOVELTY.test(v.name));
   const preferred = real.find(v => PREFERRED.test(v.name));
   if (preferred) return preferred;
 
-  // 3. Any non-novelty voice
   if (real.length) return real[0];
-
   return english[0];
 }
 
@@ -37,18 +61,24 @@ export default function StoryDialog({ stories, placeName, onClose }) {
   const [idx, setIdx] = useState(0);
   const [speaking, setSpeaking] = useState(false);
   const [voice, setVoice] = useState(null);
+  const audioRef = useRef(null);
 
   const story = stories[idx];
   const hasPrev = idx > 0;
   const hasNext = idx < stories.length - 1;
 
   const stopSpeech = useCallback(() => {
+    // Stop Cloud TTS audio
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current = null;
+    }
+    // Stop Web Speech API
     speechSynthesis.cancel();
     setSpeaking(false);
   }, []);
 
   useEffect(() => {
-    // Voices may load asynchronously (especially on Chrome)
     function loadVoice() {
       setVoice(getBestVoice());
     }
@@ -56,15 +86,34 @@ export default function StoryDialog({ stories, placeName, onClose }) {
     speechSynthesis.addEventListener('voiceschanged', loadVoice);
     return () => {
       speechSynthesis.cancel();
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
       speechSynthesis.removeEventListener('voiceschanged', loadVoice);
     };
   }, []);
 
-  function toggleSpeak() {
+  async function toggleSpeak() {
     if (speaking) {
       stopSpeech();
       return;
     }
+
+    setSpeaking(true);
+    const onEnd = () => {
+      audioRef.current = null;
+      setSpeaking(false);
+    };
+
+    // Try Google Cloud TTS first
+    const audio = await speakWithCloudTTS(story.text, onEnd).catch(() => null);
+    if (audio) {
+      audioRef.current = audio;
+      return;
+    }
+
+    // Fallback to Web Speech API
     const utter = new SpeechSynthesisUtterance(story.text);
     utter.lang = 'en-US';
     utter.rate = 0.95;
@@ -72,7 +121,6 @@ export default function StoryDialog({ stories, placeName, onClose }) {
     utter.onend = () => setSpeaking(false);
     utter.onerror = () => setSpeaking(false);
     speechSynthesis.speak(utter);
-    setSpeaking(true);
   }
 
   function handleKey(e) {

@@ -6,6 +6,11 @@ A private trip-planning web app for our China trip in January 2027 — Shenzhen,
 
 ## Release Notes
 
+### v1.5.1
+- Text-to-speech upgraded to Google Cloud WaveNet (en-US-Wavenet-H) for natural-sounding narration
+- Falls back to browser speech synthesis if Cloud TTS is unavailable
+- Custom domain cn27.fun added as authorized domain for Firebase Auth
+
 ### v1.5.0
 - Phase 8: Story feature — places with stories show a book icon in plan cards
 - Clicking the story icon opens a dialog with the full narrative text
