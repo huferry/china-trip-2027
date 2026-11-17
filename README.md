@@ -2,9 +2,20 @@
 
 A private trip-planning web app for our China trip in January 2027 — Shenzhen, Guangzhou, and Foshan.
 
-**Live:** https://huferry-china-trip.web.app
+**Demo:** https://chine-trip-demo.web.app — open to any Google account, AI capped at 3 calls/hour
+
+![Demo QR code](docs/qr-demo.png)
 
 ## Release Notes
+
+### v1.6.0
+- Phase 10: Demo mode on separate Firebase project (chine-trip-demo) — open to any Google account, no invite needed
+- AI capped at 3 calls/hour per user in demo mode; uses Haiku model to keep costs low
+- Admin can backup the database via Claude chat: "backup database"
+- Admin can restore the database via Claude chat: "restore-database"
+- Database snapshots stored in Firestore `snapshots/latest`; backup script seeds demo from main project if empty
+- Firebase config reorganised into `firebase/` folder; Firestore rules/indexes into `firestore/` folder
+- `.gitignore` extended to block any filename containing key, secret, password, credentials
 
 ### v1.5.2
 - Phase 9: Guest mode — "Enter as guest" link on login page
@@ -104,6 +115,20 @@ Requires `./service-account.json` (Firebase service account key, git-ignored).
 
 ## Deployment
 
+**Full mode** (huferry-china-trip):
 ```sh
-npx firebase-tools deploy --only hosting --project huferry-china-trip
+npx firebase-tools deploy --only hosting --project huferry-china-trip --config firebase/firebase.json
 ```
+
+**Demo mode** (chine-trip-demo):
+```sh
+# First, create .env.demo from .env.demo.example and fill in demo project credentials
+# Optionally run a database backup first:
+npm run backup
+
+npm run deploy:demo
+```
+
+The demo deploy builds with `VITE_DEMO_MODE=true` and deploys to the `chine-trip-demo` Firebase project using `firebase.demo.json` (which references `firestore.demo.rules`).
+
+**Demo service account:** save the demo project service account as `service-account.demo.json` (git-ignored) for `npm run backup`.

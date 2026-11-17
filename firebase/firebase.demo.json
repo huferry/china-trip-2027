@@ -1,8 +1,7 @@
 {
   "hosting": {
-    "public": "dist",
+    "public": "../dist",
     "ignore": [
-      "firebase.json",
       "**/.*",
       "**/node_modules/**"
     ],
@@ -14,7 +13,7 @@
     ]
   },
   "firestore": {
-    "rules": "firestore.rules",
-    "indexes": "firestore.indexes.json"
+    "rules": "../firestore/firestore.demo.rules",
+    "indexes": "../firestore/firestore.indexes.json"
   }
 }

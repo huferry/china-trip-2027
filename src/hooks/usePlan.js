@@ -2,11 +2,12 @@ import { useState, useEffect } from 'react';
 import { doc, onSnapshot, setDoc, Timestamp } from 'firebase/firestore';
 import { db } from '../firebase';
 
-export function usePlan() {
+export function usePlan(ready = true) {
   const [plan, setPlan] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (!ready) return;
     const unsub = onSnapshot(
       doc(db, 'plans', 'current'),
       snap => {
@@ -16,7 +17,7 @@ export function usePlan() {
       () => setLoading(false), // permission error or offline — stop spinning
     );
     return () => unsub();
-  }, []);
+  }, [ready]);
 
   async function savePlan(content) {
     await setDoc(doc(db, 'plans', 'current'), { content, updatedAt: Timestamp.now() });

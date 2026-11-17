@@ -162,6 +162,22 @@ The TTS is fallback to the robotic speech. Interaction with Claude is disabled. 
 The 'Change to info' should not be available for guest. 
 'Going' and 'Plan' tab under 'Plan' mode should not be not avialable for Guest 
 
+## Phase 10 - Demo mode
+Create a 'Demo' mode. A demo mode is:
+- Limit the AI interaction to 3 per hour
+- Save the current copy of the database in the database self
+- Database can be restore by Claude command 'restore-database' (new)
+- Anyone can log in with Google account, without invitation
+
+The deployment on Kingston is the 'full' mode. The deployment on Firebase is also the 'full' mode.
+The demo application will be deployed on another Firebase project. This demo project 
+is: https://console.firebase.google.com/project/chine-trip-demo/overview
+The main project (Kingston and Firebase 1) should be intact.
+Mention on the README.md, the link to the Demo-site, and add herefore a QR code.
+
+### Add 1 - Lowest model
+For the AI interaction in Demo mode, use the lowest (cheapest model from Claude).
+
 ## Deployment
 Application should be deployed on Firebase as a web host.
 The data will be stored in the Firstore from the same project.

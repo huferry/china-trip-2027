@@ -2,11 +2,16 @@ import { useState, useRef, useEffect, useMemo, useCallback } from 'react';
 import Anthropic from '@anthropic-ai/sdk';
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, doc, getDoc, setDoc, addDoc, deleteDoc, writeBatch, Timestamp } from 'firebase/firestore';
 import { db } from '../firebase';
 import { usePlan } from '../hooks/usePlan';
+import { useAuth } from '../auth';
 import { useInWindow } from '../contexts/InWindowContext';
 import StoryDialog from './StoryDialog';
+import { isDemoMode } from '../config';
+import { checkAiUsage } from '../hooks/useAiUsage';
+
+const AI_MODEL = isDemoMode ? 'claude-haiku-4-5-20251001' : 'claude-opus-4-6';
 
 const SAVE_PLAN_TOOL = {
   name: 'save_plan',
@@ -18,6 +23,18 @@ const SAVE_PLAN_TOOL = {
     },
     required: ['content'],
   },
+};
+
+const BACKUP_DATABASE_TOOL = {
+  name: 'backup_database',
+  description: 'Save a snapshot of the current database (places, plan, hotels) to Firestore for later restoration.',
+  input_schema: { type: 'object', properties: {} },
+};
+
+const RESTORE_DATABASE_TOOL = {
+  name: 'restore_database',
+  description: 'Restore the database from the latest snapshot. Replaces all current places, the plan, and hotels.',
+  input_schema: { type: 'object', properties: {} },
 };
 
 function buildSystemPrompt(places, votersByPlace, hotels) {
@@ -75,6 +92,79 @@ const client = new Anthropic({
   dangerouslyAllowBrowser: true,
 });
 
+async function backupDatabase() {
+  const [placesSnap, hotelsSnap, planSnap] = await Promise.all([
+    getDocs(collection(db, 'places')),
+    getDocs(collection(db, 'hotels')),
+    getDoc(doc(db, 'plans', 'current')),
+  ]);
+
+  const places = placesSnap.docs.map(d => ({ id: d.id, ...d.data() }));
+  const hotels = hotelsSnap.docs.map(d => ({ id: d.id, ...d.data() }));
+  const plan = planSnap.exists() ? planSnap.data() : null;
+
+  const snapshotId = `snapshot-${Date.now()}`;
+  await setDoc(doc(db, 'snapshots', snapshotId), {
+    createdAt: Timestamp.now(),
+    places,
+    hotels,
+    plan,
+  });
+  // Also update "latest" pointer
+  await setDoc(doc(db, 'snapshots', 'latest'), {
+    createdAt: Timestamp.now(),
+    places,
+    hotels,
+    plan,
+  });
+  return { snapshotId, placesCount: places.length };
+}
+
+async function restoreDatabase() {
+  const latestSnap = await getDoc(doc(db, 'snapshots', 'latest'));
+  if (!latestSnap.exists()) throw new Error('No snapshot found. Run a backup first.');
+
+  const { places, hotels, plan } = latestSnap.data();
+
+  // Delete all existing places
+  const currentPlaces = await getDocs(collection(db, 'places'));
+  const CHUNK = 400;
+  for (let i = 0; i < currentPlaces.docs.length; i += CHUNK) {
+    const batch = writeBatch(db);
+    currentPlaces.docs.slice(i, i + CHUNK).forEach(d => batch.delete(d.ref));
+    await batch.commit();
+  }
+
+  // Restore places from snapshot
+  for (let i = 0; i < places.length; i += CHUNK) {
+    const batch = writeBatch(db);
+    places.slice(i, i + CHUNK).forEach(({ id, ...data }) => {
+      batch.set(doc(db, 'places', id), data);
+    });
+    await batch.commit();
+  }
+
+  // Restore hotels
+  const currentHotels = await getDocs(collection(db, 'hotels'));
+  if (currentHotels.docs.length > 0) {
+    const batch = writeBatch(db);
+    currentHotels.docs.forEach(d => batch.delete(d.ref));
+    await batch.commit();
+  }
+  if (hotels.length > 0) {
+    const batch = writeBatch(db);
+    hotels.forEach(({ id, ...data }) => batch.set(doc(db, 'hotels', id), data));
+    await batch.commit();
+  }
+
+  // Restore plan
+  if (plan) {
+    await setDoc(doc(db, 'plans', 'current'), plan);
+  }
+
+  return { placesRestored: places.length };
+}
+
 function ChatMessage({ msg }) {
   if (typeof msg.content !== 'string' || !msg.content.trim()) return null;
   return (
@@ -87,8 +177,11 @@ function ChatMessage({ msg }) {
 }
 
 function AdminChat({ places, votersByPlace, onPlanSaved }) {
+  const { user } = useAuth();
   const [displayMessages, setDisplayMessages] = useState([
-    { role: 'assistant', content: 'I can create or refine the trip plan. Tell me what you need — for example: "Create the plan" or "Adjust day 3 to include more time at Canton Tower".' },
+    { role: 'assistant', content: isDemoMode
+      ? 'I can create or refine the trip plan, and backup/restore the database. Try: "Create the plan", "backup database", or "restore-database".'
+      : 'I can create or refine the trip plan. Tell me what you need — for example: "Create the plan" or "Adjust day 3 to include more time at Canton Tower".' },
   ]);
   const [apiMessages, setApiMessages] = useState([]);
   const [input, setInput] = useState('');
@@ -122,6 +215,12 @@ function AdminChat({ places, votersByPlace, onPlanSaved }) {
     setLoading(true);
     setError(null);
     try {
+      const usage = await checkAiUsage(user.uid);
+      if (!usage.allowed) {
+        setError(`AI limit reached (3 per hour in demo mode). Try again in ${usage.resetInMinutes} minute${usage.resetInMinutes !== 1 ? 's' : ''}.`);
+        setLoading(false);
+        return;
+      }
       await runTurn(newApiMessages);
     } catch (err) {
       setError(err.message);
@@ -131,11 +230,15 @@ function AdminChat({ places, votersByPlace, onPlanSaved }) {
   }
 
   async function runTurn(messages) {
+    const tools = isDemoMode
+      ? [SAVE_PLAN_TOOL, BACKUP_DATABASE_TOOL, RESTORE_DATABASE_TOOL]
+      : [SAVE_PLAN_TOOL];
+
     const response = await client.messages.create({
-      model: 'claude-opus-4-6',
+      model: AI_MODEL,
       max_tokens: 8096,
       system: buildSystemPrompt(places, votersByPlace, hotels),
-      tools: [SAVE_PLAN_TOOL],
+      tools,
       messages,
     });
 
@@ -150,25 +253,45 @@ function AdminChat({ places, votersByPlace, onPlanSaved }) {
     }
 
     const toolUse = response.content.find(b => b.type === 'tool_use');
-    if (toolUse && toolUse.name === 'save_plan') {
-      let toolResult;
+    if (!toolUse) {
+      setApiMessages(prev => [...prev, { role: 'assistant', content: response.content }]);
+      return;
+    }
+
+    let toolResult;
+    if (toolUse.name === 'save_plan') {
       try {
         await onPlanSaved(toolUse.input.content);
         toolResult = { type: 'tool_result', tool_use_id: toolUse.id, content: 'Plan saved successfully.' };
       } catch (err) {
         toolResult = { type: 'tool_result', tool_use_id: toolUse.id, content: `Error: ${err.message}`, is_error: true };
       }
-
-      const nextMessages = [
-        ...messages,
-        { role: 'assistant', content: response.content },
-        { role: 'user', content: [toolResult] },
-      ];
-      setApiMessages(nextMessages);
-      await runTurn(nextMessages);
+    } else if (toolUse.name === 'backup_database') {
+      try {
+        const { snapshotId, placesCount } = await backupDatabase();
+        toolResult = { type: 'tool_result', tool_use_id: toolUse.id, content: `Backup saved as "${snapshotId}" (${placesCount} places).` };
+      } catch (err) {
+        toolResult = { type: 'tool_result', tool_use_id: toolUse.id, content: `Error: ${err.message}`, is_error: true };
+      }
+    } else if (toolUse.name === 'restore_database') {
+      try {
+        const { placesRestored } = await restoreDatabase();
+        toolResult = { type: 'tool_result', tool_use_id: toolUse.id, content: `Database restored from latest snapshot (${placesRestored} places).` };
+      } catch (err) {
+        toolResult = { type: 'tool_result', tool_use_id: toolUse.id, content: `Error: ${err.message}`, is_error: true };
+      }
     } else {
       setApiMessages(prev => [...prev, { role: 'assistant', content: response.content }]);
+      return;
     }
+
+    const nextMessages = [
+      ...messages,
+      { role: 'assistant', content: response.content },
+      { role: 'user', content: [toolResult] },
+    ];
+    setApiMessages(nextMessages);
+    await runTurn(nextMessages);
   }
 
   function handleKey(e) {
@@ -420,7 +543,8 @@ function makePlanComponents(placeMap, onOpenStory) {
 }
 
 export default function PlanTab({ places, votersByPlace, isAdmin, isGuest }) {
-  const { plan, loading, savePlan } = usePlan();
+  const { status } = useAuth();
+  const { plan, loading, savePlan } = usePlan(status === 'allowed');
   const days = plan?.content ? parseDays(plan.content) : [];
   const [storyPlace, setStoryPlace] = useState(null);
 

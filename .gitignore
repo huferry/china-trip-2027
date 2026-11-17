@@ -1,7 +1,19 @@
 node_modules/
 dist/
 .env
+.env.demo
 *.local
 invitations/
-service-account.json
 .firebase/
+
+# Sensitive files — any filename containing these words
+*service-account*
+*app-key*
+*appkey*
+*api-key*
+*apikey*
+*private-key*
+*privatekey*
+*secret*
+*password*
+*credentials*

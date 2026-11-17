@@ -1,14 +1,18 @@
 {
   "name": "china-trip-new",
   "private": true,
-  "version": "1.5.2",
+  "version": "1.6.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "create-invite-url": "node scripts/create-invite.mjs"
+    "create-invite-url": "node scripts/create-invite.mjs",
+    "dev:demo": "vite --mode demo",
+    "build:demo": "vite build --mode demo",
+    "backup": "node scripts/backup-database.mjs",
+    "deploy:demo": "npm run build:demo && firebase deploy --project demo --config firebase/firebase.demo.json"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.3.0",

@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import { onAuthStateChanged, signInWithPopup, signInAnonymously, signOut as firebaseSignOut } from 'firebase/auth';
 import { doc, getDoc, setDoc, updateDoc, Timestamp } from 'firebase/firestore';
 import { auth, db, googleProvider } from './firebase';
+import { isDemoMode } from './config';
 
 // status: 'loading' | 'unauthenticated' | 'allowed' | 'denied' | 'invalid-invite'
 const AuthContext = createContext(null);
@@ -71,6 +72,17 @@ export function AuthProvider({ children }) {
         return;
       }
 
+      // Demo mode: auto-admit any Google account (no invite needed)
+      if (isDemoMode) {
+        await setDoc(doc(db, 'allowedUsers', firebaseUser.email), {
+          addedAt: Timestamp.now(),
+          displayName: firebaseUser.displayName || '',
+          demo: true,
+        });
+        setStatus('allowed');
+        return;
+      }
+
       // Already authenticated but not yet in allowedUsers — try auto-redeem if invite in URL
       const inviteToken = getInviteToken();
       if (inviteToken) {
@@ -103,6 +115,17 @@ export function AuthProvider({ children }) {
 
     const userSnap = await getDoc(doc(db, 'allowedUsers', email));
     if (userSnap.exists()) {
+      setStatus('allowed');
+      return;
+    }
+
+    // Demo mode: auto-admit any Google account
+    if (isDemoMode) {
+      await setDoc(doc(db, 'allowedUsers', email), {
+        addedAt: Timestamp.now(),
+        displayName: result.user.displayName || '',
+        demo: true,
+      });
       setStatus('allowed');
       return;
     }
