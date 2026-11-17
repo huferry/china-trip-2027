@@ -1,13 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
-import Anthropic from '@anthropic-ai/sdk';
 import Markdown from 'react-markdown';
 import { collection, addDoc, Timestamp } from 'firebase/firestore';
 import { db } from '../firebase';
 import { useAuth } from '../auth';
-import { checkAiUsage } from '../hooks/useAiUsage';
-import { isDemoMode } from '../config';
-
-const AI_MODEL = isDemoMode ? 'claude-haiku-4-5-20251001' : 'claude-opus-4-6';
+import { callClaude } from '../services/claudeApi';
 
 const INITIAL_MESSAGE = "Name the place you want to suggest. Describe it as clearly as possible — mention the name, location, and a small description if you can.";
 
@@ -81,11 +77,6 @@ function Message({ msg }) {
   );
 }
 
-const client = new Anthropic({
-  apiKey: import.meta.env.VITE_ANTHROPIC_API_KEY,
-  dangerouslyAllowBrowser: true,
-});
-
 export default function SuggestionDialog({ city, category, existingPlaces, onClose, onPlaceAdded }) {
   const { user } = useAuth();
   // displayMessages: what we show in the UI
@@ -121,12 +112,6 @@ export default function SuggestionDialog({ city, category, existingPlaces, onClo
     setAddError(null);
 
     try {
-      const usage = await checkAiUsage(user.uid);
-      if (!usage.allowed) {
-        setAddError(`AI limit reached (3 per hour in demo mode). Try again in ${usage.resetInMinutes} minute${usage.resetInMinutes !== 1 ? 's' : ''}.`);
-        setLoading(false);
-        return;
-      }
       await runTurn(newApiMessages);
     } catch (err) {
       setAddError(err.message);
@@ -136,8 +121,7 @@ export default function SuggestionDialog({ city, category, existingPlaces, onClo
   }
 
   async function runTurn(messages) {
-    const response = await client.messages.create({
-      model: AI_MODEL,
+    const response = await callClaude({
       max_tokens: 1024,
       system: buildSystemPrompt(city, category, existingPlaces),
       tools: [ADD_PLACE_TOOL],

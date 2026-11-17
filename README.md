@@ -8,6 +8,11 @@ A private trip-planning web app for our China trip in January 2027 — Shenzhen,
 
 ## Release Notes
 
+### v1.6.1 (2026-11-17)
+- Security: Anthropic API key moved server-side to a Firebase Cloud Function — no longer exposed in the browser bundle
+- Rate limiting and model selection now enforced server-side (not bypassable by extracting the key)
+- Removed `@anthropic-ai/sdk` from browser dependencies
+
 ### v1.6.0
 - Phase 10: Demo mode on separate Firebase project (chine-trip-demo) — open to any Google account, no invite needed
 - AI capped at 3 calls/hour per user in demo mode; uses Haiku model to keep costs low

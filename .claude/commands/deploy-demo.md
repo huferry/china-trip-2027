@@ -2,8 +2,9 @@ Build and deploy the China Trip app to the demo Firebase project (chine-trip-dem
 
 Steps:
 1. Verify `.env.demo` exists. If not, tell the user to create it from `.env.demo.example` and stop.
-2. Verify `service-account.demo.json` exists. If not, warn the user (needed for backup) but continue.
-3. Run `npm run backup` to snapshot the current demo database before deploying (requires `service-account.demo.json`). Skip with a warning if the service account is missing.
-4. Run `npx vite build --mode demo --outDir firebase/dist` and confirm it succeeds.
-5. Run `npx firebase-tools deploy --project demo --config firebase/firebase.demo.json`
-6. Report the hosting URL (https://chine-trip-demo.web.app) when done.
+2. Verify `functions/.env.demo` exists. If not, tell the user to create it from `functions/.env.example` and stop.
+3. Verify `service-account.demo.json` exists. If not, warn the user (needed for backup) but continue.
+4. Run `npm run backup` to snapshot the current demo database before deploying (requires `service-account.demo.json`). Skip with a warning if the service account is missing.
+5. Run `npm run build:demo` and confirm it succeeds.
+6. Run `npx firebase-tools deploy --project demo --config firebase/firebase.demo.json`
+7. Report the hosting URL (https://chine-trip-demo.web.app) when done.

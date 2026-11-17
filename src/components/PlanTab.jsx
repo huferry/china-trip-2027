@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect, useMemo, useCallback } from 'react';
-import Anthropic from '@anthropic-ai/sdk';
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { collection, getDocs, doc, getDoc, setDoc, addDoc, deleteDoc, writeBatch, Timestamp } from 'firebase/firestore';
@@ -9,9 +8,7 @@ import { useAuth } from '../auth';
 import { useInWindow } from '../contexts/InWindowContext';
 import StoryDialog from './StoryDialog';
 import { isDemoMode } from '../config';
-import { checkAiUsage } from '../hooks/useAiUsage';
-
-const AI_MODEL = isDemoMode ? 'claude-haiku-4-5-20251001' : 'claude-opus-4-6';
+import { callClaude } from '../services/claudeApi';
 
 const SAVE_PLAN_TOOL = {
   name: 'save_plan',
@@ -86,11 +83,6 @@ WORKFLOW — follow this strictly:
 2. Only call save_plan AFTER the user explicitly confirms (e.g. "yes", "go ahead", "looks good").
 3. For refinements to an existing plan, briefly state what you will change and confirm before saving.`;
 }
-
-const client = new Anthropic({
-  apiKey: import.meta.env.VITE_ANTHROPIC_API_KEY,
-  dangerouslyAllowBrowser: true,
-});
 
 async function backupDatabase() {
   const [placesSnap, hotelsSnap, planSnap] = await Promise.all([
@@ -215,12 +207,6 @@ function AdminChat({ places, votersByPlace, onPlanSaved }) {
     setLoading(true);
     setError(null);
     try {
-      const usage = await checkAiUsage(user.uid);
-      if (!usage.allowed) {
-        setError(`AI limit reached (3 per hour in demo mode). Try again in ${usage.resetInMinutes} minute${usage.resetInMinutes !== 1 ? 's' : ''}.`);
-        setLoading(false);
-        return;
-      }
       await runTurn(newApiMessages);
     } catch (err) {
       setError(err.message);
@@ -234,8 +220,7 @@ function AdminChat({ places, votersByPlace, onPlanSaved }) {
       ? [SAVE_PLAN_TOOL, BACKUP_DATABASE_TOOL, RESTORE_DATABASE_TOOL]
       : [SAVE_PLAN_TOOL];
 
-    const response = await client.messages.create({
-      model: AI_MODEL,
+    const response = await callClaude({
       max_tokens: 8096,
       system: buildSystemPrompt(places, votersByPlace, hotels),
       tools,
