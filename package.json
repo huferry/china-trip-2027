@@ -12,7 +12,7 @@
     "dev:demo": "vite --mode demo",
     "build:demo": "vite build --mode demo",
     "backup": "node scripts/backup-database.mjs",
-    "deploy:demo": "npm run build:demo && firebase deploy --project demo --config firebase/firebase.demo.json"
+    "deploy:demo": "npx vite build --mode demo --outDir firebase/dist && npx firebase-tools deploy --project demo --config firebase/firebase.demo.json"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.3.0",
