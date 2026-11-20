@@ -1,0 +1,83 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isAllowed() {
+      return request.auth != null &&
+        exists(/databases/$(database)/documents/allowedUsers/$(request.auth.token.email));
+    }
+
+    function isGuest() {
+      return request.auth != null &&
+        request.auth.token.firebase.sign_in_provider == 'anonymous';
+    }
+
+    // Superadmin is identified by email (configurable via VITE_SUPERADMIN_EMAIL in the app;
+    // hardcoded here because Firestore rules don't support environment variables)
+    function isAdmin() {
+      return request.auth != null && request.auth.token.email == 'huferry@gmail.com';
+    }
+
+    match /places/{document} {
+      allow read: if isAllowed() || isGuest();
+      allow create: if isAllowed();
+      allow delete: if isAdmin();
+      allow update: if false;
+    }
+
+    match /allowedUsers/{email} {
+      allow read: if request.auth != null;
+      // Client may add itself when redeeming a valid, unused, non-expired invite
+      allow create: if request.auth != null
+        && request.auth.token.email == email
+        && exists(/databases/$(database)/documents/invites/$(request.resource.data.inviteToken))
+        && get(/databases/$(database)/documents/invites/$(request.resource.data.inviteToken)).data.usedBy == null
+        && get(/databases/$(database)/documents/invites/$(request.resource.data.inviteToken)).data.expiresAt > request.time;
+      // Users may update their own doc to store displayName
+      allow update: if request.auth != null && request.auth.token.email == email;
+      allow delete: if false;
+    }
+
+    match /wishlists/{email} {
+      allow read: if isAllowed() || isGuest();
+      allow write: if request.auth != null && request.auth.token.email == email;
+    }
+
+    match /plans/{document} {
+      allow read: if isAllowed() || isGuest();
+      allow write: if isAdmin();
+    }
+
+    match /hotels/{document} {
+      allow read: if isAllowed() || isGuest();
+      allow write: if isAdmin();
+    }
+
+    match /invites/{token} {
+      allow read: if request.auth != null;
+      // Client may mark an invite as used (set usedBy + usedAt only)
+      allow update: if request.auth != null
+        && resource.data.usedBy == null
+        && request.resource.data.usedBy == request.auth.token.email
+        && request.resource.data.usedAt != null
+        && request.resource.data.createdAt == resource.data.createdAt
+        && request.resource.data.expiresAt == resource.data.expiresAt;
+      allow create, delete: if false;
+    }
+
+    // AI usage tracking for demo-mode rate limiting
+    match /aiUsage/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // Database snapshots for demo-mode backup/restore
+    match /snapshots/{snapshotId} {
+      allow read, write: if isAdmin();
+    }
+
+    // Plan version history
+    match /planVersions/{versionId} {
+      allow read: if isAllowed() || isGuest();
+      allow write: if isAdmin();
+    }
+  }
+}
