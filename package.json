@@ -10,7 +10,7 @@
     "preview": "vite preview",
     "create-invite-url": "node scripts/create-invite.mjs",
     "dev:demo": "vite --mode demo",
-    "build:demo": "vite build --mode demo",
+    "build:demo": "vite build --mode demo --outDir firebase/dist",
     "backup": "node scripts/backup-database.mjs",
     "deploy:demo": "npx vite build --mode demo --outDir firebase/dist && npx firebase-tools deploy --project demo --config firebase/firebase.demo.json"
   },

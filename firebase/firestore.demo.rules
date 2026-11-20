@@ -1,0 +1,63 @@
+rules_version = '2';
+// Demo project rules — open access for any Google account (no invite required)
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isAuth() {
+      return request.auth != null && !request.auth.token.firebase.sign_in_provider.matches('anonymous');
+    }
+
+    function isGuest() {
+      return request.auth != null &&
+        request.auth.token.firebase.sign_in_provider == 'anonymous';
+    }
+
+    function isAdmin() {
+      return request.auth != null && request.auth.token.email == 'huferry@gmail.com';
+    }
+
+    match /places/{document} {
+      allow read: if isAuth() || isGuest();
+      allow create: if isAuth();
+      allow update: if isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    // Demo: any Google user may add themselves (no invite check)
+    match /allowedUsers/{email} {
+      allow read: if request.auth != null;
+      allow create: if isAuth() && request.auth.token.email == email;
+      allow update: if request.auth != null && request.auth.token.email == email;
+      allow delete: if false;
+    }
+
+    match /wishlists/{email} {
+      allow read: if isAuth() || isGuest();
+      allow write: if request.auth != null && request.auth.token.email == email;
+    }
+
+    match /plans/{document} {
+      allow read: if isAuth() || isGuest();
+      allow write: if isAdmin();
+    }
+
+    match /hotels/{document} {
+      allow read: if isAuth() || isGuest();
+      allow write: if isAdmin();
+    }
+
+    match /invites/{token} {
+      allow read: if isAuth();
+      allow create, update, delete: if false;
+    }
+
+    // AI usage tracking for rate limiting
+    match /aiUsage/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // Database snapshots for backup/restore
+    match /snapshots/{snapshotId} {
+      allow read, write: if isAdmin();
+    }
+  }
+}

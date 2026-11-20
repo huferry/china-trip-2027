@@ -16,7 +16,7 @@
     ]
   },
   "firestore": {
-    "rules": "../firestore/firestore.demo.rules",
-    "indexes": "../firestore/firestore.indexes.json"
+    "rules": "firestore.demo.rules",
+    "indexes": "firestore.indexes.json"
   }
 }
