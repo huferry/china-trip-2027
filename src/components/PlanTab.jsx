@@ -813,7 +813,7 @@ export default function PlanTab({ places, votersByPlace, isAdmin, isGuest }) {
     setStoryGenError(null);
     try {
       const response = await callClaude({
-        model: 'claude-sonnet-4-6-20251001',
+        model: 'claude-sonnet-4-6',
         max_tokens: 2000,
         system: `You are a travel writer creating engaging stories for a China travel app.
 Write vivid, informative stories (each 150–250 words) about places in Shenzhen, Guangzhou, and Foshan.

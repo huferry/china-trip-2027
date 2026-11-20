@@ -56,7 +56,7 @@ export const callClaude = onCall(async (request) => {
   // Allow admin to request a specific model; otherwise use env-configured default.
   const ALLOWED_MODELS = [
     'claude-haiku-4-5-20251001',
-    'claude-sonnet-4-6-20251001',
+    'claude-sonnet-4-6',
     'claude-opus-4-6',
   ];
   const model = (requestedModel && ALLOWED_MODELS.includes(requestedModel))
