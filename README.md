@@ -8,6 +8,14 @@ A private trip-planning web app for our China trip in January 2027 — Shenzhen,
 
 ## Release Notes
 
+### v1.7.0 (2026-11-20)
+- Phase 11: Day map dialog — click the map icon on any day heading to see all POIs on an interactive Leaflet map
+- Hotel shown as start and end point on each day's map (with house icon, silver styling)
+- Animated amber dashed route line connecting all POIs in order
+- Speech-balloon markers with place numbers and names
+- Dark tile style (OSM tiles with CSS inversion/desaturation)
+- Day map navigation: prev/next arrows to browse through days without closing the dialog
+
 ### v1.6.4 (2026-11-20)
 - Admin: "Add story" button appears on places without stories in the plan view (admin only)
 - Clicking prompts confirmation; Claude Sonnet then generates 1–2 stories automatically

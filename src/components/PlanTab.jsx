@@ -7,6 +7,7 @@ import { usePlan } from '../hooks/usePlan';
 import { useAuth } from '../auth';
 import { useInWindow } from '../contexts/InWindowContext';
 import StoryDialog from './StoryDialog';
+import DayMapDialog from './DayMapDialog';
 import { isDemoMode } from '../config';
 import { callClaude } from '../services/claudeApi';
 
@@ -413,6 +414,78 @@ function findPlaceByText(text, placeMap) {
   return null;
 }
 
+const SKIP_PLACE = /^(Travel|Lunch|Dinner|Return|Check|Free|Final|Breakfast|Coffee|Rest|Pack|Morning|Optional)/i;
+
+function extractDayLabels(planContent) {
+  if (!planContent) return [];
+  const matches = [...planContent.matchAll(/^## ((?:Jan|Feb|Mar) \d+) /mg)];
+  return matches.map(m => m[1]);
+}
+
+function dayLabelToDate(dayLabel) {
+  // "Jan 5" → "2027-01-05"
+  const parts = dayLabel.trim().split(' ');
+  const months = { Jan: '01', Feb: '02', Mar: '03' };
+  const mon = months[parts[0]] || '01';
+  const day = String(parseInt(parts[1], 10)).padStart(2, '0');
+  return `2027-${mon}-${day}`;
+}
+
+function findHotelsForDay(hotels, dayLabel) {
+  const date = dayLabelToDate(dayLabel);
+  // Start hotel: where you slept the night before this day
+  //   → checkIn <= date AND checkOut >= date (still at hotel at start of this day)
+  //   If two hotels match (transit day), prefer the one checking OUT today
+  const candidates = hotels.filter(h => h.checkIn <= date && h.checkOut >= date && h.lat && h.lng);
+  const startHotel = candidates.find(h => h.checkOut === date) ?? candidates[0] ?? null;
+  // End hotel: where you sleep tonight
+  //   → checkIn <= date AND checkOut > date
+  const endHotel = hotels.find(h => h.checkIn <= date && h.checkOut > date && h.lat && h.lng) ?? null;
+  return { startHotel, endHotel };
+}
+
+function extractDayPois(planContent, dayLabel, placeMap, hotels = []) {
+  if (!planContent || !dayLabel) return [];
+  const startMatch = planContent.match(new RegExp(`^## ${dayLabel} `, 'm'));
+  if (!startMatch) return [];
+  const start = startMatch.index;
+  const rest = planContent.slice(start + 1);
+  const nextMatch = rest.match(/^## Jan /m);
+  const section = planContent.slice(start, start + 1 + (nextMatch ? nextMatch.index : rest.length));
+
+  const pois = [];
+  const seen = new Set();
+  for (const line of section.split('\n')) {
+    if (!line.startsWith('|') || line.includes('---')) continue;
+    const cells = line.split('|').map(c => c.trim()).filter(Boolean);
+    if (cells.length < 2 || cells[0] === 'Time' || cells[1] === 'Place') continue;
+    const rawName = cells[1].replace(/\*\*/g, '').replace(/\[([^\]]+)\]\([^)]+\)/, '$1').trim();
+    if (rawName.length < 3 || SKIP_PLACE.test(rawName)) continue;
+    const place = findPlaceByText(rawName, placeMap);
+    if (!place || seen.has(place.id)) continue;
+    const mapsUrl = place.links?.maps;
+    if (!mapsUrl) continue;
+    const m = mapsUrl.match(/[?&]q=([-\d.]+),([-\d.]+)/);
+    if (!m) continue;
+    seen.add(place.id);
+    pois.push({ name: place.name, lat: parseFloat(m[1]), lng: parseFloat(m[2]), type: 'place' });
+  }
+
+  // Prepend start hotel, append end hotel
+  if (hotels.length > 0) {
+    const { startHotel, endHotel } = findHotelsForDay(hotels, dayLabel);
+    if (startHotel) {
+      pois.unshift({ name: startHotel.name, lat: startHotel.lat, lng: startHotel.lng, type: 'hotel' });
+    }
+    if (endHotel) {
+      const isSameAsStart = startHotel && endHotel.name === startHotel.name;
+      pois.push({ name: isSameAsStart ? `${endHotel.name} (return)` : endHotel.name, lat: endHotel.lat, lng: endHotel.lng, type: 'hotel' });
+    }
+  }
+
+  return pois;
+}
+
 const LINK_LABELS = {
   'tripadvisor.com': 'TripAdvisor',
   'en.wikipedia.org': 'Wikipedia',
@@ -498,6 +571,19 @@ function ReservationIcon() {
   );
 }
 
+function DayMapButton({ onClick }) {
+  return (
+    <button className="day-map-btn" onClick={onClick} title="View day map">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6" />
+        <line x1="8" y1="2" x2="8" y2="18" />
+        <line x1="16" y1="6" x2="16" y2="22" />
+      </svg>
+    </button>
+  );
+}
+
 function AddStoryButton({ onClick }) {
   return (
     <button className="add-story-btn" onClick={onClick} title="Add story">
@@ -544,9 +630,19 @@ function ConfirmAddStoryDialog({ place, generating, error, onConfirm, onCancel }
   );
 }
 
-function makePlanComponents(placeMap, onOpenStory, isAdmin, onAddStory) {
+function makePlanComponents(placeMap, onOpenStory, isAdmin, onAddStory, onOpenDayMap) {
   return {
-    h2: HeadingWithId,
+    h2: ({ children, ...props }) => {
+      const text = String(children);
+      const m = text.match(/^(Jan \d+)/);
+      const id = m ? m[1].toLowerCase().replace(' ', '-') : undefined;
+      return (
+        <h2 id={id} className="plan-day-heading" {...props}>
+          <span>{children}</span>
+          {m && <DayMapButton onClick={() => onOpenDayMap(m[1])} />}
+        </h2>
+      );
+    },
     tr: ({ children, ...props }) => {
       const cells = Array.isArray(children) ? children : [children];
       const realCells = cells.filter(c => c?.props);
@@ -675,6 +771,15 @@ export default function PlanTab({ places, votersByPlace, isAdmin, isGuest }) {
   const [generatingStory, setGeneratingStory] = useState(false);
   const [storyGenError, setStoryGenError] = useState(null);
   const [addedStories, setAddedStories] = useState({});
+  const [dayMapInfo, setDayMapInfo] = useState(null); // { dayLabel, pois }
+  const [hotels, setHotels] = useState([]);
+
+  useEffect(() => {
+    if (status !== 'allowed') return;
+    getDocs(collection(db, 'hotels'))
+      .then(snap => setHotels(snap.docs.map(d => d.data())))
+      .catch(() => {});
+  }, [status]);
 
   const placeMap = useMemo(() => {
     const map = new Map();
@@ -690,9 +795,15 @@ export default function PlanTab({ places, votersByPlace, isAdmin, isGuest }) {
     setStoryGenError(null);
     setPendingStoryPlace(place);
   }, []);
+  const openDayMap = useCallback((dayLabel) => {
+    const pois = extractDayPois(plan?.content, dayLabel, placeMap, hotels);
+    const allDayLabels = extractDayLabels(plan?.content);
+    const dayIndex = allDayLabels.indexOf(dayLabel);
+    setDayMapInfo({ dayLabel, pois, allDayLabels, dayIndex });
+  }, [plan?.content, placeMap, hotels]);
   const mdComponents = useMemo(
-    () => makePlanComponents(placeMap, openStory, isAdmin, openAddStory),
-    [placeMap, openStory, isAdmin, openAddStory],
+    () => makePlanComponents(placeMap, openStory, isAdmin, openAddStory, openDayMap),
+    [placeMap, openStory, isAdmin, openAddStory, openDayMap],
   );
 
   async function generateAndSaveStory() {
@@ -769,6 +880,17 @@ Practical info: ${place.practical || '(none)'}`,
           placeName={storyPlace.name}
           isGuest={isGuest}
           onClose={() => setStoryPlace(null)}
+        />
+      )}
+      {dayMapInfo && (
+        <DayMapDialog
+          pois={dayMapInfo.pois}
+          dayTitle={dayMapInfo.dayLabel}
+          onClose={() => setDayMapInfo(null)}
+          hasPrev={dayMapInfo.dayIndex > 0}
+          hasNext={dayMapInfo.dayIndex < dayMapInfo.allDayLabels.length - 1}
+          onPrev={() => openDayMap(dayMapInfo.allDayLabels[dayMapInfo.dayIndex - 1])}
+          onNext={() => openDayMap(dayMapInfo.allDayLabels[dayMapInfo.dayIndex + 1])}
         />
       )}
       {pendingStoryPlace && (
