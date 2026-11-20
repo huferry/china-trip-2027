@@ -178,6 +178,20 @@ Mention on the README.md, the link to the Demo-site, and add herefore a QR code.
 ### Add 1 - Lowest model
 For the AI interaction in Demo mode, use the lowest (cheapest model from Claude).
 
+## Phase 11 - Map
+On the beginning of each day add the 'map' icon, on the same line where the date is mentioned.
+When clicked a dialog will appear, with the map and the places to visit on that day. 
+How the map looks like, take ./docs/map-shenzhen.png for example.
+The places should be drawn at run time (since the plan can change).
+Add lines connecting from place number 1 to number 2, number 2 to number 3, etc. These should be the road line or metro line.
+Make annimation as if the line is moving.
+
+### Fix 1 
+Include hotel as starting point (number 1) and also include it as the finishing point
+
+### Add 2
+In the map dialog, add navigation to the previous and next day.
+
 ## Deployment
 Application should be deployed on Firebase as a web host.
 The data will be stored in the Firstore from the same project.
