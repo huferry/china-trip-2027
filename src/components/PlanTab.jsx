@@ -527,9 +527,70 @@ function makePlanComponents(placeMap, onOpenStory) {
   };
 }
 
+function PlanHistory({ listVersions, recallVersion }) {
+  const [versions, setVersions] = useState(null);
+  const [open, setOpen] = useState(false);
+  const [recalling, setRecalling] = useState(null);
+  const [error, setError] = useState(null);
+
+  async function load() {
+    setError(null);
+    try {
+      const vs = await listVersions();
+      setVersions(vs);
+      setOpen(true);
+    } catch (e) {
+      setError(e.message);
+    }
+  }
+
+  async function handleRecall(v) {
+    if (!window.confirm(`Restore "${v.name}"? This will replace the current plan.`)) return;
+    setRecalling(v.id);
+    setError(null);
+    try {
+      await recallVersion(v.id);
+      setOpen(false);
+    } catch (e) {
+      setError(e.message);
+    } finally {
+      setRecalling(null);
+    }
+  }
+
+  return (
+    <div className="plan-history">
+      <button className="plan-history-toggle" onClick={open ? () => setOpen(false) : load}>
+        {open ? 'Hide history' : 'Plan history'}
+      </button>
+      {error && <p className="plan-history-error">{error}</p>}
+      {open && versions && (
+        <ul className="plan-history-list">
+          {versions.length === 0 && <li className="plan-history-empty">No saved versions yet.</li>}
+          {versions.map(v => (
+            <li key={v.id} className="plan-history-item">
+              <span className="plan-history-name">{v.name || v.id}</span>
+              <span className="plan-history-date">
+                {v.createdAt ? new Date(v.createdAt.seconds * 1000).toLocaleDateString() : ''}
+              </span>
+              <button
+                className="plan-history-recall"
+                onClick={() => handleRecall(v)}
+                disabled={recalling === v.id}
+              >
+                {recalling === v.id ? 'Restoring…' : 'Restore'}
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
 export default function PlanTab({ places, votersByPlace, isAdmin, isGuest }) {
   const { status } = useAuth();
-  const { plan, loading, savePlan } = usePlan(status === 'allowed');
+  const { plan, loading, savePlan, listVersions, recallVersion } = usePlan(status === 'allowed');
   const days = plan?.content ? parseDays(plan.content) : [];
   const [storyPlace, setStoryPlace] = useState(null);
 
@@ -545,6 +606,11 @@ export default function PlanTab({ places, votersByPlace, isAdmin, isGuest }) {
   return (
     <div className="plan-tab">
       <DayNav days={days} />
+      {plan?.name && (
+        <div className="plan-version-bar">
+          <span className="plan-version-name">{plan.name}</span>
+        </div>
+      )}
       <div className="plan-display">
         {loading
           ? <p className="loading">Loading plan…</p>
@@ -557,7 +623,10 @@ export default function PlanTab({ places, votersByPlace, isAdmin, isGuest }) {
         }
       </div>
       {isAdmin && (
-        <AdminChat places={places} votersByPlace={votersByPlace} onPlanSaved={savePlan} />
+        <>
+          <PlanHistory listVersions={listVersions} recallVersion={recallVersion} />
+          <AdminChat places={places} votersByPlace={votersByPlace} onPlanSaved={savePlan} />
+        </>
       )}
       {storyPlace && (
         <StoryDialog

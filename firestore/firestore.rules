@@ -73,5 +73,11 @@ service cloud.firestore {
     match /snapshots/{snapshotId} {
       allow read, write: if isAdmin();
     }
+
+    // Plan version history
+    match /planVersions/{versionId} {
+      allow read: if isAllowed() || isGuest();
+      allow write: if isAdmin();
+    }
   }
 }

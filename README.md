@@ -8,6 +8,13 @@ A private trip-planning web app for our China trip in January 2027 — Shenzhen,
 
 ## Release Notes
 
+### v1.6.2 (2026-11-20)
+- Plan versioning: each plan is now named (e.g. "v2 - 5 days Shenzhen - 9 days Guangzhou") and displayed in the app
+- Admin history panel: list all saved plan versions and restore any version with one click
+- Each Claude-generated plan is auto-snapshotted to `planVersions` collection for full history
+- Didi prices updated throughout the plan to reflect Didi XL (7-seater) for 6 people (~1.5× standard fare)
+- Firestore rules extended to cover `planVersions` collection
+
 ### v1.6.1 (2026-11-17)
 - Security: Anthropic API key moved server-side to a Firebase Cloud Function — no longer exposed in the browser bundle
 - Rate limiting and model selection now enforced server-side (not bypassable by extracting the key)
