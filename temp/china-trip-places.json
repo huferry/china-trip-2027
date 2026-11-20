@@ -767,6 +767,102 @@
       }
     },
     {
+      "id": "sz-049",
+      "city": "Shenzhen",
+      "category": "Workshops",
+      "type": "place",
+      "name": "AI Robot & Robotics Workshop",
+      "name_zh": "人工智能机器人体验工坊",
+      "area": "OCT area",
+      "rating": 5,
+      "description": "Build your own AI robot hands-on; also robot dogs and AI art sessions. No coding or engineering experience required. Uniquely Shenzhen. English-friendly: tours run with English-speaking guides (book via GetYourGuide).",
+      "practical": "~2.5h. From $84–$93 pp (build-your-own robot); $128 pp for 3h private tour. Book via GetYourGuide. Available most days.",
+      "links": {
+        "source": "https://www.getyourguide.com/shenzhen-l188/workshops-classes-tc79/",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=robotics+workshop+Shenzhen&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "sz-050",
+      "city": "Shenzhen",
+      "category": "Workshops",
+      "type": "place",
+      "name": "Future Tech Half-Day Tour",
+      "name_zh": "未来科技半日体验",
+      "area": "OCT area",
+      "rating": 4,
+      "description": "Hands-on experience with laser engraving, exoskeletons, digital fabrication and 3D printing. Free hands-on experience of robots and laser printers. English-friendly: fully bilingual English/Mandarin guide included; bestseller on GetYourGuide with 4.9 stars.",
+      "practical": "~4h. From $49–$79 pp. 4.8★ (126 reviews). Book via GetYourGuide. Available most days.",
+      "links": {
+        "source": "https://www.getyourguide.com/shenzhen-l188/factory-workshop-tours-tc162/",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=laser+engraving+workshop+Shenzhen&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "sz-051",
+      "city": "Shenzhen",
+      "category": "Workshops",
+      "type": "place",
+      "name": "Mahjong Workshop with Market Tour & Tea",
+      "name_zh": "麻将体验工坊含市场游览与茶道",
+      "area": null,
+      "rating": 4,
+      "description": "Learn Cantonese-style mahjong, explore a traditional wet market, and enjoy tea. Great cultural immersion for first-timers. English-friendly: English-speaking instructor included; instruction fully in English.",
+      "practical": "3h (40 min market, 20 min tea, 2h mahjong). $70 pp. 5.0★. Book via GetYourGuide (Chilli Cool China).",
+      "links": {
+        "source": "https://www.getyourguide.com/shenzhen-l188/shenzhen-mahjong-workshop-with-market-tour-and-tea-t1347691/",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=mahjong+workshop&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "sz-052",
+      "city": "Shenzhen",
+      "category": "Workshops",
+      "type": "place",
+      "name": "Dim Sum Making Class with Yum Cha Lunch",
+      "name_zh": "点心制作课程含饮茶午餐",
+      "area": null,
+      "rating": 4,
+      "description": "Cook alongside a Cantonese dim sum chef in a professional kitchen; ends with a full yum cha lunch of what you made. English-friendly: class conducted in English and Chinese; small groups (max 8).",
+      "practical": "~2–2.5h. From $86–$128 pp (private from $267 for 4 pax). Typically starts 14:00. Max 8 people. Book via GetYourGuide or ToursbyLocals.",
+      "links": {
+        "source": "https://www.getyourguide.com/shenzhen-l188/workshops-classes-tc79/",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=dim+sum+making+class&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "sz-053",
+      "city": "Shenzhen",
+      "category": "Workshops",
+      "type": "place",
+      "name": "Dafen Oil Painting DIY Workshop",
+      "name_zh": "大芬油画村DIY体验",
+      "area": "Dafen, Longgang",
+      "rating": 4,
+      "description": "Paint your own oil painting at the world-famous Dafen Oil Painting Village. Beginners welcome; take your artwork home. Artists on-site to guide you. English: limited — most studio owners speak little English. Book a guided tour via GetYourGuide for an English-speaking guide.",
+      "practical": "1–2h. 80–150 RMB pp (~€10–€20) at studios in the village. Open 10:00–22:00 most shops. Free entry to village. Walk-in; no booking needed.",
+      "links": {
+        "source": "https://www.haojourney.com/destinations/shenzhen",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Dafen+Oil+Painting+Village&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
+      "id": "sz-054",
+      "city": "Shenzhen",
+      "category": "Workshops",
+      "type": "place",
+      "name": "Mission Hills Art & Crafts Factory",
+      "name_zh": "观澜湖艺工厂",
+      "area": "Mission Hills, Shenzhen",
+      "rating": 4,
+      "description": "300+ hands-on courses across 10+ craft categories: pottery, glass blowing, leather art, woodwork, metalwork, weaving, fabric art, beading, fluid art and more. Great for a half or full day. English: website is in English; on-site English support is unconfirmed — contact them before visiting to confirm.",
+      "practical": "~1–1.5h per workshop. Open 10:00–19:00 (10:00–20:00 weekends). Prices not publicly listed — contact venue or check on-site. Metro Line 4 to Mission Hills Station (Exit A). Book in advance recommended.",
+      "links": {
+        "source": "https://www.missionhillschina.com/en/mhmaker/",
+        "photos": "https://commons.wikimedia.org/w/index.php?search=Mission+Hills+Shenzhen+crafts&title=Special:MediaSearch&type=image"
+      }
+    },
+    {
       "id": "gz-001",
       "city": "Guangzhou",
       "category": "Iconic buildings & viewpoints",

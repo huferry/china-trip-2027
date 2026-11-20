@@ -8,6 +8,12 @@ A private trip-planning web app for our China trip in January 2027 — Shenzhen,
 
 ## Release Notes
 
+### v1.6.3 (2026-11-20)
+- Plan view: added payment icon (💰) next to places with paid entry
+- Plan view: added reservation icon (📅) next to places requiring booking/reservation
+- Fixed story icon visibility: now properly displays when place has stories
+- Both icons appear inline with place title for quick visual reference
+
 ### v1.6.2 (2026-11-20)
 - Plan versioning: each plan is now named (e.g. "v2 - 5 days Shenzhen - 9 days Guangzhou") and displayed in the app
 - Admin history panel: list all saved plan versions and restore any version with one click

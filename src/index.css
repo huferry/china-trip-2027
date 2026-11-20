@@ -1312,6 +1312,26 @@ body {
   opacity: 1;
 }
 
+/* Place title with badges (payment, reservation, story icons) */
+.place-title-with-badges {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.payment-icon,
+.reservation-icon {
+  display: inline-flex;
+  color: var(--accent);
+  opacity: 0.8;
+  transition: opacity 0.15s;
+}
+
+.payment-icon:hover,
+.reservation-icon:hover {
+  opacity: 1;
+}
+
 /* Story dialog overlay */
 .story-overlay {
   position: fixed;

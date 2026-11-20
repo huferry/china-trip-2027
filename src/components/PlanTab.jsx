@@ -474,6 +474,30 @@ function StoryIcon({ onClick }) {
   );
 }
 
+function PaymentIcon() {
+  return (
+    <span className="payment-icon" title="Paid entry">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="1" />
+        <path d="M12 1v6m0 6v6M4.22 4.22l4.24 4.24m5.08 0l4.24-4.24M1 12h6m6 0h6m-1.78 7.78l-4.24-4.24m-5.08 0l-4.24 4.24" />
+      </svg>
+    </span>
+  );
+}
+
+function ReservationIcon() {
+  return (
+    <span className="reservation-icon" title="Reservation required">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+        <line x1="16" y1="2" x2="16" y2="6" />
+        <line x1="8" y1="2" x2="8" y2="6" />
+        <line x1="3" y1="10" x2="21" y2="10" />
+      </svg>
+    </span>
+  );
+}
+
 function makePlanComponents(placeMap, onOpenStory) {
   return {
     h2: HeadingWithId,
@@ -489,19 +513,25 @@ function makePlanComponents(placeMap, onOpenStory) {
 
       const hasLinks = [place.links?.source, place.links?.tripcom, place.links?.maps, place.links?.amap].some(Boolean);
       const hasAddr = !!place.address_zh;
-      const hasStory = place.story?.length > 0;
+      const hasStory = place.stories?.length > 0;
+      const hasPayment = place.needs_payment;
+      const hasReservation = place.needs_reservation;
       const hasExtras = hasLinks || hasAddr;
 
-      if (!hasExtras && !hasStory) return <tr {...props}>{children}</tr>;
+      if (!hasExtras && !hasStory && !hasPayment && !hasReservation) return <tr {...props}>{children}</tr>;
 
-      // Inject story icon into the Place cell (2nd cell)
-      const enhanced = hasStory
+      // Inject icons into the Place cell (2nd cell)
+      const enhanced = (hasStory || hasPayment || hasReservation)
         ? cells.map((cell, i) => {
             if (i !== 1 || !cell?.props) return cell;
             return (
               <td key="place-cell" {...(cell.props.style ? { style: cell.props.style } : {})}>
-                {cell.props.children}
-                <StoryIcon onClick={() => onOpenStory(place)} />
+                <span className="place-title-with-badges">
+                  {cell.props.children}
+                  {hasPayment && <PaymentIcon />}
+                  {hasReservation && <ReservationIcon />}
+                  {hasStory && <StoryIcon onClick={() => onOpenStory(place)} />}
+                </span>
               </td>
             );
           })
@@ -630,7 +660,7 @@ export default function PlanTab({ places, votersByPlace, isAdmin, isGuest }) {
       )}
       {storyPlace && (
         <StoryDialog
-          stories={storyPlace.story}
+          stories={storyPlace.stories}
           placeName={storyPlace.name}
           isGuest={isGuest}
           onClose={() => setStoryPlace(null)}
