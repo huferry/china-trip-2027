@@ -8,6 +8,10 @@ A private trip-planning web app for our China trip in January 2027 — Shenzhen,
 
 ## Release Notes
 
+### v1.7.1 (2026-11-20)
+- Fixed story generation 500 error: corrected Claude model ID (`claude-sonnet-4-6`)
+- Fixed deployment: build now outputs to `firebase/dist` so deploys always pick up the latest build
+
 ### v1.7.0 (2026-11-20)
 - Phase 11: Day map dialog — click the map icon on any day heading to see all POIs on an interactive Leaflet map
 - Hotel shown as start and end point on each day's map (with house icon, silver styling)
