@@ -50,11 +50,21 @@ export const callClaude = onCall(async (request) => {
     }
   }
 
-  const { system, messages, tools, max_tokens } = request.data;
+  const { system, messages, tools, max_tokens, model: requestedModel } = request.data;
   const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
+  // Allow admin to request a specific model; otherwise use env-configured default.
+  const ALLOWED_MODELS = [
+    'claude-haiku-4-5-20251001',
+    'claude-sonnet-4-6-20251001',
+    'claude-opus-4-6',
+  ];
+  const model = (requestedModel && ALLOWED_MODELS.includes(requestedModel))
+    ? requestedModel
+    : AI_MODEL;
+
   const response = await client.messages.create({
-    model: AI_MODEL,
+    model,
     max_tokens: max_tokens || 1024,
     system,
     ...(tools?.length ? { tools } : {}),

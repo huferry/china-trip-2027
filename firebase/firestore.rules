@@ -21,7 +21,7 @@ service cloud.firestore {
       allow read: if isAllowed() || isGuest();
       allow create: if isAllowed();
       allow delete: if isAdmin();
-      allow update: if false;
+      allow update: if isAdmin();
     }
 
     match /allowedUsers/{email} {

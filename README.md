@@ -8,6 +8,14 @@ A private trip-planning web app for our China trip in January 2027 — Shenzhen,
 
 ## Release Notes
 
+### v1.6.4 (2026-11-20)
+- Admin: "Add story" button appears on places without stories in the plan view (admin only)
+- Clicking prompts confirmation; Claude Sonnet then generates 1–2 stories automatically
+- Animated spinner shown while stories are being generated
+- Story dialog opens automatically when generation completes
+- Fixed Firestore rules to allow admin to update places (required for saving stories)
+- Cloud Function now accepts an optional model override for story generation
+
 ### v1.6.3 (2026-11-20)
 - Plan view: added payment icon (💰) next to places with paid entry
 - Plan view: added reservation icon (📅) next to places requiring booking/reservation

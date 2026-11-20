@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, useMemo, useCallback } from 'react';
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { collection, getDocs, doc, getDoc, setDoc, addDoc, deleteDoc, writeBatch, Timestamp } from 'firebase/firestore';
+import { collection, getDocs, doc, getDoc, setDoc, addDoc, deleteDoc, writeBatch, updateDoc, Timestamp } from 'firebase/firestore';
 import { db } from '../firebase';
 import { usePlan } from '../hooks/usePlan';
 import { useAuth } from '../auth';
@@ -498,7 +498,53 @@ function ReservationIcon() {
   );
 }
 
-function makePlanComponents(placeMap, onOpenStory) {
+function AddStoryButton({ onClick }) {
+  return (
+    <button className="add-story-btn" onClick={onClick} title="Add story">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="10" />
+        <line x1="12" y1="8" x2="12" y2="16" />
+        <line x1="8" y1="12" x2="16" y2="12" />
+      </svg>
+    </button>
+  );
+}
+
+function StorySpinner() {
+  return (
+    <div className="story-spinner-wrap">
+      <svg className="story-spinner" viewBox="0 0 50 50" width="48" height="48">
+        <circle className="story-spinner-track" cx="25" cy="25" r="20" fill="none" strokeWidth="4" />
+        <circle className="story-spinner-arc" cx="25" cy="25" r="20" fill="none" strokeWidth="4" strokeLinecap="round" />
+      </svg>
+      <span className="story-spinner-label">Conjuring stories…</span>
+    </div>
+  );
+}
+
+function ConfirmAddStoryDialog({ place, generating, error, onConfirm, onCancel }) {
+  return (
+    <div className="confirm-story-overlay" onClick={generating ? undefined : onCancel}>
+      <div className="confirm-story-dialog" onClick={e => e.stopPropagation()}>
+        {generating ? (
+          <StorySpinner />
+        ) : (
+          <>
+            <p className="confirm-story-title">Generate stories for <strong>{place.name}</strong>?</p>
+            <p className="confirm-story-sub">Claude Sonnet will research and write 1–2 stories about this place.</p>
+            {error && <p className="confirm-story-error">{error}</p>}
+            <div className="confirm-story-actions">
+              <button className="dialog-btn-secondary" onClick={onCancel}>Cancel</button>
+              <button className="dialog-btn-primary" onClick={onConfirm}>Yes, generate</button>
+            </div>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function makePlanComponents(placeMap, onOpenStory, isAdmin, onAddStory) {
   return {
     h2: HeadingWithId,
     tr: ({ children, ...props }) => {
@@ -516,12 +562,13 @@ function makePlanComponents(placeMap, onOpenStory) {
       const hasStory = place.stories?.length > 0;
       const hasPayment = place.needs_payment;
       const hasReservation = place.needs_reservation;
+      const showAddStory = isAdmin && !hasStory;
       const hasExtras = hasLinks || hasAddr;
 
-      if (!hasExtras && !hasStory && !hasPayment && !hasReservation) return <tr {...props}>{children}</tr>;
+      if (!hasExtras && !hasStory && !hasPayment && !hasReservation && !showAddStory) return <tr {...props}>{children}</tr>;
 
       // Inject icons into the Place cell (2nd cell)
-      const enhanced = (hasStory || hasPayment || hasReservation)
+      const enhanced = (hasStory || hasPayment || hasReservation || showAddStory)
         ? cells.map((cell, i) => {
             if (i !== 1 || !cell?.props) return cell;
             return (
@@ -531,6 +578,7 @@ function makePlanComponents(placeMap, onOpenStory) {
                   {hasPayment && <PaymentIcon />}
                   {hasReservation && <ReservationIcon />}
                   {hasStory && <StoryIcon onClick={() => onOpenStory(place)} />}
+                  {showAddStory && <AddStoryButton onClick={() => onAddStory(place)} />}
                 </span>
               </td>
             );
@@ -623,15 +671,72 @@ export default function PlanTab({ places, votersByPlace, isAdmin, isGuest }) {
   const { plan, loading, savePlan, listVersions, recallVersion } = usePlan(status === 'allowed');
   const days = plan?.content ? parseDays(plan.content) : [];
   const [storyPlace, setStoryPlace] = useState(null);
+  const [pendingStoryPlace, setPendingStoryPlace] = useState(null);
+  const [generatingStory, setGeneratingStory] = useState(false);
+  const [storyGenError, setStoryGenError] = useState(null);
+  const [addedStories, setAddedStories] = useState({});
 
   const placeMap = useMemo(() => {
     const map = new Map();
-    places.forEach(p => map.set(p.id, p));
+    places.forEach(p => {
+      const override = addedStories[p.id];
+      map.set(p.id, override ? { ...p, stories: override } : p);
+    });
     return map;
-  }, [places]);
+  }, [places, addedStories]);
 
   const openStory = useCallback((place) => setStoryPlace(place), []);
-  const mdComponents = useMemo(() => makePlanComponents(placeMap, openStory), [placeMap, openStory]);
+  const openAddStory = useCallback((place) => {
+    setStoryGenError(null);
+    setPendingStoryPlace(place);
+  }, []);
+  const mdComponents = useMemo(
+    () => makePlanComponents(placeMap, openStory, isAdmin, openAddStory),
+    [placeMap, openStory, isAdmin, openAddStory],
+  );
+
+  async function generateAndSaveStory() {
+    if (!pendingStoryPlace) return;
+    const place = pendingStoryPlace;
+    setGeneratingStory(true);
+    setStoryGenError(null);
+    try {
+      const response = await callClaude({
+        model: 'claude-sonnet-4-6-20251001',
+        max_tokens: 2000,
+        system: `You are a travel writer creating engaging stories for a China travel app.
+Write vivid, informative stories (each 150–250 words) about places in Shenzhen, Guangzhou, and Foshan.
+Focus on history, legends, cultural significance, or interesting facts that bring the place to life.
+Return ONLY a valid JSON array with this structure — no other text, no markdown code fences:
+[{"title":"...", "text":"..."}, ...]
+Write 1–2 stories per place. Use plain paragraphs in the text field (no markdown).`,
+        messages: [{
+          role: 'user',
+          content: `Write stories for this place:
+Name: ${place.name}
+Chinese name: ${place.name_zh || '(none)'}
+City: ${place.city}
+Description: ${place.description || '(none)'}
+Practical info: ${place.practical || '(none)'}`,
+        }],
+      });
+
+      const textContent = response.content?.find(b => b.type === 'text')?.text?.trim() || '';
+      const jsonMatch = textContent.match(/\[[\s\S]*\]/);
+      if (!jsonMatch) throw new Error('Could not parse stories from Claude response.');
+      const stories = JSON.parse(jsonMatch[0]);
+      if (!Array.isArray(stories) || stories.length === 0) throw new Error('No stories returned.');
+
+      await updateDoc(doc(db, 'places', place.id), { stories });
+      setAddedStories(prev => ({ ...prev, [place.id]: stories }));
+      setPendingStoryPlace(null);
+      setStoryPlace({ ...place, stories });
+    } catch (err) {
+      setStoryGenError(err.message);
+    } finally {
+      setGeneratingStory(false);
+    }
+  }
 
   return (
     <div className="plan-tab">
@@ -664,6 +769,15 @@ export default function PlanTab({ places, votersByPlace, isAdmin, isGuest }) {
           placeName={storyPlace.name}
           isGuest={isGuest}
           onClose={() => setStoryPlace(null)}
+        />
+      )}
+      {pendingStoryPlace && (
+        <ConfirmAddStoryDialog
+          place={pendingStoryPlace}
+          generating={generatingStory}
+          error={storyGenError}
+          onConfirm={generateAndSaveStory}
+          onCancel={() => { if (!generatingStory) { setPendingStoryPlace(null); setStoryGenError(null); } }}
         />
       )}
     </div>

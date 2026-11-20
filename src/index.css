@@ -1317,6 +1317,7 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  width: 100%;
 }
 
 .payment-icon,
@@ -1330,6 +1331,114 @@ body {
 .payment-icon:hover,
 .reservation-icon:hover {
   opacity: 1;
+}
+
+/* Add story button (admin only, right-aligned) */
+.add-story-btn {
+  background: none;
+  border: 1px dashed var(--border);
+  border-radius: 50%;
+  padding: 2px;
+  cursor: pointer;
+  color: var(--text-muted);
+  opacity: 0.5;
+  transition: opacity 0.15s, color 0.15s, border-color 0.15s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.add-story-btn:hover {
+  opacity: 1;
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* Confirm add story dialog */
+.confirm-story-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.confirm-story-dialog {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px 28px;
+  max-width: 420px;
+  width: 100%;
+}
+
+.confirm-story-title {
+  margin: 0 0 6px;
+  font-size: 1rem;
+  color: var(--text);
+}
+
+.confirm-story-sub {
+  margin: 0 0 16px;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.confirm-story-error {
+  margin: 0 0 12px;
+  font-size: 0.88rem;
+  color: #e05050;
+}
+
+.confirm-story-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+/* Story generation spinner */
+.story-spinner-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 0;
+}
+
+.story-spinner {
+  animation: spinner-rotate 1.4s linear infinite;
+}
+
+.story-spinner-track {
+  stroke: var(--border);
+}
+
+.story-spinner-arc {
+  stroke: var(--accent);
+  stroke-dasharray: 80 120;
+  animation: spinner-dash 1.4s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.story-spinner-label {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+@keyframes spinner-rotate {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spinner-dash {
+  0%   { stroke-dasharray: 1 200; stroke-dashoffset: 0; }
+  50%  { stroke-dasharray: 89 200; stroke-dashoffset: -35px; }
+  100% { stroke-dasharray: 89 200; stroke-dashoffset: -124px; }
 }
 
 /* Story dialog overlay */
